@@ -147,14 +147,72 @@ body {
 }
 @media (min-width: 641px) { .tag .short { display: none; } }
 
+/* Password gate (cosmetic: deters casual visitors, not real security) */
+.gate { display: none; }
+html.locked .page { display: none; }
+html.locked .gate {
+  display: flex; min-height: 80vh; align-items: center; justify-content: center;
+  padding-block: 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.gate form { width: 100%; max-width: 340px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.gate h1 { font-family: var(--display); font-size: 22px; font-weight: 700; margin: 0; }
+.gate label { color: var(--muted); font-size: 13px; }
+.gate input { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; width: 100%; }
+.gate input:focus-visible, .gate button:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
+.gate button { font: inherit; font-weight: 700; color: var(--on-accent); background: var(--accent); border: 0; border-radius: 6px; padding: 10px 12px; cursor: pointer; }
+.gate .err { color: var(--sun); font-size: 13px; margin: 0; min-height: 1.4em; }
+
 @media print {
   body { background: #fff; }
   .day, .detail { break-inside: avoid; }
 }
 </style>
 
+<script>
+try { if (localStorage.getItem("japan2027-unlocked") !== "1") document.documentElement.classList.add("locked"); }
+catch (e) { document.documentElement.classList.add("locked"); }
+</script>
 </head>
 <body style="margin:0">
+<div class="gate" id="gate">
+  <form id="gate-form" autocomplete="off">
+    <h1>2027 Japan Spring Trip</h1>
+    <label for="gate-pw">Enter the password to view this page</label>
+    <input id="gate-pw" type="password" autocapitalize="none" autocorrect="off" spellcheck="false">
+    <button type="submit">Open</button>
+    <p class="err" id="gate-err" role="alert"></p>
+  </form>
+</div>
+<script>
+(function () {
+  var HASH = "59ae856cd788d0f57e39fdd66d421ba930cd89be4682de3aa36c22a2021a710d";
+  var form = document.getElementById("gate-form"), pw = document.getElementById("gate-pw"), err = document.getElementById("gate-err");
+  function sha(text) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+    });
+  }
+  function check(v) {
+    if (window.crypto && crypto.subtle) return sha(v).then(function (h) { return h === HASH; });
+    return Promise.resolve(btoa(v) === "amFwYW4=");
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    check(pw.value.trim().toLowerCase()).then(function (ok) {
+      if (ok) {
+        try { localStorage.setItem("japan2027-unlocked", "1"); } catch (x) {}
+        document.documentElement.classList.remove("locked");
+      } else {
+        err.textContent = "That password is not right. Try again.";
+        pw.select();
+      }
+    });
+  });
+  if (document.documentElement.classList.contains("locked")) pw.focus();
+})();
+</script>
 <main class="page">
   <header class="head">
     <div>

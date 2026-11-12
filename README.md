@@ -13,3 +13,4 @@ Live page: https://bobbydigitaldev.com/Japan2027/
 ## Status log
 
 - 2026-11-12: Dashboard started. Two-week calendar (Sun Feb 28 to Sat Mar 13, Sunday start) with the wedding day and the Osaka hotel stay (Mar 6 to 8). Repo created and published with GitHub Pages.
+- 2026-11-12: Added a password prompt to the page. It is cosmetic only: the check runs in the browser and the page content is still in the public source, so it deters casual visitors but is not real protection. The browser remembers a correct entry.
