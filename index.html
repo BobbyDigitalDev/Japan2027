@@ -168,13 +168,14 @@ body {
 .dot.stay { background: var(--k-stay); } .dot.onsen { background: var(--k-onsen); } .dot.road { background: var(--k-road); }
 #map { height: 540px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); z-index: 0; }
 .map-msg { color: var(--muted); margin: 0; padding: 16px; }
-.pin { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.95; }
+#map .leaflet-overlay-pane { --k-town: #4b5375; --k-sight: #2e8b57; --k-food: #c77a12; --k-stay: #2f5d8a; --k-onsen: #c2452d; --k-road: #8a6d3b; }
+.pin { stroke: #fff; stroke-width: 1.5; fill-opacity: 0.95; }
 .pin-town { fill: var(--k-town); } .pin-sight { fill: var(--k-sight); } .pin-food { fill: var(--k-food); }
 .pin-stay { fill: var(--k-stay); } .pin-onsen { fill: var(--k-onsen); } .pin-road { fill: var(--k-road); }
-.pin-unchecked { stroke: var(--ink); stroke-dasharray: 2 2; }
-.fixed-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--surface); color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
-.fixed-pin.wed { background: var(--accent); color: var(--on-accent); }
-.fixed-pin.hotel { background: var(--stay); color: var(--surface); }
+.pin-unchecked { stroke: #1c2340; stroke-dasharray: 2 2; }
+.fixed-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.fixed-pin.wed { background: #a8325e; }
+.fixed-pin.hotel { background: #2f5d8a; }
 .leaflet-container { font: inherit; }
 .leaflet-container .leaflet-control-attribution { background: var(--surface); color: var(--muted); font-size: 11px; opacity: 0.9; }
 .leaflet-container .leaflet-control-attribution a { color: var(--stay); }
@@ -435,17 +436,11 @@ catch (e) { document.documentElement.classList.add("locked"); }
     map = L.map(el, { scrollWheelZoom: false });
     map.on("click", function () { map.scrollWheelZoom.enable(); });
     el.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
-    var mq = window.matchMedia("(prefers-color-scheme: dark)"), tiles = null;
-    function isDark() { var t = document.documentElement.getAttribute("data-theme"); return t ? t === "dark" : mq.matches; }
-    function setTiles() {
-      if (tiles) map.removeLayer(tiles);
-      tiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/" + (isDark() ? "dark_all" : "voyager") + "/{z}/{x}/{y}{r}.png", {
-        maxZoom: 19, subdomains: "abcd",
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-      }).addTo(map);
-    }
-    setTiles();
-    if (mq.addEventListener) mq.addEventListener("change", setTiles);
+    // Esri World Topo: English labels, no key needed. The map stays light in both themes, so pins use the light palette.
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 18,
+      attribution: 'Tiles &copy; Esri and its data providers, including &copy; OpenStreetMap contributors'
+    }).addTo(map);
     placed.forEach(function (p) {
       markers[p.id] = L.circleMarker([p.lat, p.lon], { radius: 7, className: "pin pin-" + p.kind + (p.chk ? "" : " pin-unchecked") }).bindPopup(popup(p), { maxWidth: 300 });
     });
