@@ -6,8 +6,9 @@
 <title>2027 Japan Spring Trip</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
-/* Layout: a two-week strip (Mon to Sun, twice) leads the page; the selected day's detail sits directly under it. */
+/* Layout: a two-week strip (Sun to Sat, twice) leads the page; the selected day's detail sits directly under it; the research map follows. */
 :root {
   --bg: #f5f6fa;
   --surface: #ffffff;
@@ -19,6 +20,7 @@
   --stay: #2f5d8a;        /* hotel stay */
   --sat: #2b5fa8;         /* Japanese calendars print Saturday blue */
   --sun: #b3303a;         /* and Sunday red */
+  --k-town: #4b5375; --k-sight: #2e8b57; --k-food: #c77a12; --k-stay: #2f5d8a; --k-onsen: #c2452d; --k-road: #8a6d3b;
   --display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   --body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
 }
@@ -26,12 +28,14 @@
   :root:not([data-theme="light"]) {
     --bg: #12151f; --surface: #1b1f2d; --ink: #e8eaf3; --muted: #9aa1bb; --line: #2c3246;
     --accent: #e0709a; --on-accent: #1d0c15; --stay: #7fb0e0; --sat: #86b2f0; --sun: #f08a90;
+    --k-town: #aab2d6; --k-sight: #6fcf9a; --k-food: #f0b256; --k-stay: #7fb0e0; --k-onsen: #f08a70; --k-road: #cfae78;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #12151f; --surface: #1b1f2d; --ink: #e8eaf3; --muted: #9aa1bb; --line: #2c3246;
   --accent: #e0709a; --on-accent: #1d0c15; --stay: #7fb0e0; --sat: #86b2f0; --sun: #f08a90;
+    --k-town: #aab2d6; --k-sight: #6fcf9a; --k-food: #f0b256; --k-stay: #7fb0e0; --k-onsen: #f08a70; --k-road: #cfae78;
   color-scheme: dark;
 }
 
@@ -147,6 +151,56 @@ body {
 }
 @media (min-width: 641px) { .tag .short { display: none; } }
 
+/* Map of researched places */
+.places { display: flex; flex-direction: column; gap: 12px; }
+.places-head h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
+.places-head p { color: var(--muted); margin: 2px 0 0; font-size: 14px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.chip { appearance: none; font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip:hover { border-color: var(--muted); }
+.chip:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
+.chip[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.chip[aria-pressed="false"] { color: var(--muted); }
+.chip[aria-pressed="false"] .dot { opacity: 0.25; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.dot.town { background: var(--k-town); } .dot.sight { background: var(--k-sight); } .dot.food { background: var(--k-food); }
+.dot.stay { background: var(--k-stay); } .dot.onsen { background: var(--k-onsen); } .dot.road { background: var(--k-road); }
+#map { height: 540px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); z-index: 0; }
+.map-msg { color: var(--muted); margin: 0; padding: 16px; }
+.pin { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.95; }
+.pin-town { fill: var(--k-town); } .pin-sight { fill: var(--k-sight); } .pin-food { fill: var(--k-food); }
+.pin-stay { fill: var(--k-stay); } .pin-onsen { fill: var(--k-onsen); } .pin-road { fill: var(--k-road); }
+.pin-unchecked { stroke: var(--ink); stroke-dasharray: 2 2; }
+.fixed-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--surface); color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.fixed-pin.wed { background: var(--accent); color: var(--on-accent); }
+.fixed-pin.hotel { background: var(--stay); color: var(--surface); }
+.leaflet-container { font: inherit; }
+.leaflet-container .leaflet-control-attribution { background: var(--surface); color: var(--muted); font-size: 11px; opacity: 0.9; }
+.leaflet-container .leaflet-control-attribution a { color: var(--stay); }
+.leaflet-bar a { background: var(--surface); color: var(--ink); border-bottom-color: var(--line); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
+.leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.45; }
+.pop h3 { font-family: var(--display); font-size: 16px; margin: 0 0 2px; }
+.pop .pm { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
+.pop ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.pop a { color: var(--stay); white-space: nowrap; }
+.pop .cn { color: var(--muted); border-top: 1px solid var(--line); margin: 8px 0 0; padding-top: 6px; }
+.pop .warn { color: var(--sun); font-weight: 700; }
+.map-note { color: var(--muted); font-size: 13px; margin: 0; }
+.plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; align-items: start; }
+.plist details { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; min-width: 0; }
+.plist summary { cursor: pointer; font-weight: 700; }
+.plist summary span { color: var(--muted); font-weight: 500; margin-left: 6px; }
+.plist ul { list-style: none; margin: 8px 0 4px; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.pbtn { appearance: none; font: inherit; font-size: 14px; color: var(--ink); background: none; border: 0; padding: 4px 0; text-align: left; cursor: pointer; display: flex; gap: 8px; align-items: baseline; width: 100%; }
+.pbtn:hover { color: var(--stay); }
+.pbtn:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
+.pbtn .dot { position: relative; top: 0; }
+.pbtn.off { color: var(--muted); cursor: default; }
+.pbtn small { color: var(--muted); }
+@media (max-width: 640px) { #map { height: 400px; } }
+
 /* Password gate (cosmetic: deters casual visitors, not real security) */
 .gate { display: none; }
 html.locked .page { display: none; }
@@ -166,7 +220,9 @@ html.locked .gate {
 
 @media print {
   body { background: #fff; }
-  .day, .detail { break-inside: avoid; }
+  .day, .detail, .plist details { break-inside: avoid; }
+  .filters { display: none; }
+  .plist details > ul { display: flex !important; }
 }
 </style>
 
@@ -243,7 +299,24 @@ catch (e) { document.documentElement.classList.add("locked"); }
   </section>
 
   <section class="detail" id="detail" aria-live="polite"></section>
+
+  <section class="places" aria-labelledby="places-h">
+    <div class="places-head">
+      <h2 id="places-h">Places from the research</h2>
+      <p id="places-sub">Places covered in Abroad in Japan videos. Select a pin for the note and a link to that moment in the video.</p>
+    </div>
+    <div class="filters">
+      <ul class="chips" id="area-chips" aria-label="Filter by area"></ul>
+      <ul class="chips" id="kind-chips" aria-label="Filter by type"></ul>
+    </div>
+    <div id="map" role="region" aria-label="Map of researched places"></div>
+    <p class="map-note">Pin positions come from Google Places (checked Nov 12, 2026). A dashed outline means the name is not confirmed yet. Opening days and hours have not been checked for March 2027.</p>
+    <div class="plist" id="plist"></div>
+  </section>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="places.js"></script>
 
 <script>
 (function () {
@@ -326,6 +399,121 @@ catch (e) { document.documentElement.classList.add("locked"); }
     document.getElementById("countdown").innerHTML =
       "<strong>" + days + "</strong>" + (days === 1 ? "day" : "days") + " to the wedding · Sun, March 7 at 11:00 JST";
   }
+})();
+</script>
+<script>
+(function () {
+  var P = window.PLACES || [];
+  var KINDS = [["town", "Towns"], ["sight", "Sights"], ["food", "Food"], ["stay", "Stays"], ["onsen", "Onsen"], ["road", "Roads and trails"]];
+  var KLABEL = { town: "Town", sight: "Sight", food: "Food", stay: "Stay", onsen: "Onsen", road: "Road or trail" };
+  var AREAS = [["all", "All places"], ["corridor", "Tokyo to Osaka corridor"], ["loop", "Osaka loop"]];
+  var VENUE = { lat: 34.7060708, lon: 135.502467 }, HOTEL = { lat: 34.7018509, lon: 135.4917871 };
+  var area = "all", kindsOn = {};
+  KINDS.forEach(function (k) { kindsOn[k[0]] = true; });
+
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function stamp(link) {
+    var m = /[?&]t=(\d+)s/.exec(link); if (!m) return "Watch";
+    var s = Number(m[1]), h = Math.floor(s / 3600), mm = Math.floor((s % 3600) / 60), ss = ("0" + (s % 60)).slice(-2);
+    return "Watch at " + (h ? h + ":" + ("0" + mm).slice(-2) : mm) + ":" + ss;
+  }
+  function popup(p) {
+    return '<div class="pop"><h3>' + esc(p.name) + '</h3><p class="pm">' + esc(p.pref) + " · " + KLABEL[p.kind] +
+      (p.chk ? "" : ' · <span class="warn">name not confirmed</span>') + "</p><ul>" +
+      p.m.map(function (m) { return "<li>" + esc(m.n) + ' <a href="' + esc(m.l) + '" target="_blank" rel="noopener" title="' + esc(m.t) + '">' + stamp(m.l) + "</a></li>"; }).join("") +
+      "</ul>" + (p.cn ? '<p class="cn">' + esc(p.cn) + "</p>" : "") + "</div>";
+  }
+  function visible(p) { return kindsOn[p.kind] && (area === "all" || p.route === area || p.route === "both"); }
+
+  var placed = P.filter(function (p) { return p.lat != null; });
+  document.getElementById("places-sub").textContent = placed.length + " of " + P.length +
+    " places from Abroad in Japan videos are on the map. Select a pin for the note and a link to that moment in the video.";
+
+  var map = null, markers = {};
+  var el = document.getElementById("map");
+  if (window.L) {
+    map = L.map(el, { scrollWheelZoom: false });
+    map.on("click", function () { map.scrollWheelZoom.enable(); });
+    el.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
+    var mq = window.matchMedia("(prefers-color-scheme: dark)"), tiles = null;
+    function isDark() { var t = document.documentElement.getAttribute("data-theme"); return t ? t === "dark" : mq.matches; }
+    function setTiles() {
+      if (tiles) map.removeLayer(tiles);
+      tiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/" + (isDark() ? "dark_all" : "voyager") + "/{z}/{x}/{y}{r}.png", {
+        maxZoom: 19, subdomains: "abcd",
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+    }
+    setTiles();
+    if (mq.addEventListener) mq.addEventListener("change", setTiles);
+    placed.forEach(function (p) {
+      markers[p.id] = L.circleMarker([p.lat, p.lon], { radius: 7, className: "pin pin-" + p.kind + (p.chk ? "" : " pin-unchecked") }).bindPopup(popup(p), { maxWidth: 300 });
+    });
+    function fixed(pt, cls, glyph, html) {
+      L.marker([pt.lat, pt.lon], { icon: L.divIcon({ className: "", html: '<span class="fixed-pin ' + cls + '">' + glyph + "</span>", iconSize: [26, 26], iconAnchor: [13, 13] }), zIndexOffset: 1000, title: html.replace(/<[^>]+>/g, " ") })
+        .bindPopup('<div class="pop">' + html + "</div>").addTo(map);
+    }
+    fixed(HOTEL, "hotel", "H", '<h3>Hotel Hankyu Gran Respire Osaka</h3><p class="pm">Stay · March 6 to 8</p>');
+    fixed(VENUE, "wed", "♥", '<h3>Wedding venue: Bleu Grace Osaka</h3><p class="pm">Sunday, March 7 at 11:00 JST</p>');
+  } else {
+    el.innerHTML = '<p class="map-msg">The map could not load. The place list below still works.</p>';
+  }
+
+  function refresh(fit) {
+    var pts = [];
+    placed.forEach(function (p) {
+      var on = visible(p), m = markers[p.id];
+      if (m) { if (on) { m.addTo(map); if (p.route !== "out") pts.push([p.lat, p.lon]); } else map.removeLayer(m); }
+      var b = document.getElementById("pb-" + p.id); if (b) b.parentNode.hidden = !on;
+    });
+    P.forEach(function (p) { if (p.lat == null) { var b = document.getElementById("pb-" + p.id); if (b) b.parentNode.hidden = !visible(p); } });
+    if (map && fit) { pts.push([VENUE.lat, VENUE.lon]); map.fitBounds(pts, { padding: [28, 28], maxZoom: 12 }); }
+  }
+
+  function chip(parent, label, pressed, dot, fn) {
+    var li = document.createElement("li"), b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", String(pressed));
+    b.innerHTML = (dot ? '<span class="dot ' + dot + '"></span>' : "") + esc(label);
+    b.addEventListener("click", function () { fn(b); });
+    li.appendChild(b); parent.appendChild(li); return b;
+  }
+  var areaBtns = [];
+  AREAS.forEach(function (a) {
+    areaBtns.push(chip(document.getElementById("area-chips"), a[1], a[0] === area, null, function (b) {
+      area = a[0]; areaBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); refresh(true);
+    }));
+  });
+  KINDS.forEach(function (k) {
+    var n = P.filter(function (p) { return p.kind === k[0]; }).length;
+    chip(document.getElementById("kind-chips"), k[1] + " " + n, true, k[0], function (b) {
+      kindsOn[k[0]] = !kindsOn[k[0]]; b.setAttribute("aria-pressed", String(kindsOn[k[0]])); refresh(false);
+    });
+  });
+
+  // Place list, grouped by region in the order the data gives
+  var list = document.getElementById("plist"), regs = [];
+  P.forEach(function (p) { if (regs.indexOf(p.reg) < 0) regs.push(p.reg); });
+  regs.forEach(function (r, i) {
+    var ps = P.filter(function (p) { return p.reg === r; });
+    var d = document.createElement("details"); d.open = i < 3;
+    d.innerHTML = "<summary>" + esc(r) + "<span>" + ps.length + "</span></summary>";
+    var ul = document.createElement("ul");
+    ps.forEach(function (p) {
+      var li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.id = "pb-" + p.id; b.className = "pbtn" + (p.lat == null ? " off" : "");
+      b.innerHTML = '<span class="dot ' + p.kind + '"></span><span>' + esc(p.name) + (p.lat == null ? " <small>(not on the map yet)</small>" : "") + "</span>";
+      if (p.lat != null && map) b.addEventListener("click", function () {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        map.setView([p.lat, p.lon], Math.max(map.getZoom(), 12));
+        markers[p.id].openPopup();
+      });
+      else if (p.lat == null) b.title = p.cn || "No confirmed location yet";
+      li.appendChild(b); ul.appendChild(li);
+    });
+    d.appendChild(ul); list.appendChild(d);
+  });
+
+  refresh(true);
 })();
 </script>
 </body>
