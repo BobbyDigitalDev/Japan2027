@@ -151,6 +151,36 @@ body {
 }
 @media (min-width: 641px) { .tag .short { display: none; } }
 
+/* Road trip options */
+.tag.route { font-weight: 700; }
+.tag.drive { color: var(--muted); font-variant-numeric: tabular-nums; }
+.draft { color: var(--muted); font-size: 13px; margin: 0; }
+.plink { appearance: none; font: inherit; color: var(--stay); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-align: left; }
+.plink:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
+.routes { display: flex; flex-direction: column; gap: 12px; }
+.rcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.rcard { appearance: none; font: inherit; color: var(--ink); text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.rcard:hover { border-color: var(--muted); }
+.rcard:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
+.rcard[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.rcard .rn { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rcard .rt { font-family: var(--display); font-size: 17px; font-weight: 700; line-height: 1.25; }
+.rcard .rg { color: var(--muted); font-size: 13px; margin: 0; }
+.rstats { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 2px 18px; margin: 4px 0 0; font-variant-numeric: tabular-nums; }
+.rstats dt { font-size: 11px; color: var(--muted); grid-row: 2; }
+.rstats dd { margin: 0; font-weight: 700; grid-row: 1; }
+.rdetail { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+.rdetail[hidden] { display: none; }
+.rdetail h3 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
+.rdetail h3 span { color: var(--muted); font-weight: 500; font-size: 15px; margin-left: 8px; }
+.rdetail .arrive { margin: 0; }
+.rdetail .items .meta + .meta { margin-top: 4px; }
+.caveats { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+.caveats a { color: var(--stay); }
+.route-case { stroke: #fff; stroke-width: 7; stroke-opacity: 0.9; fill: none; }
+.route-line { stroke: #1c2340; stroke-width: 3.5; fill: none; }
+.night-pin { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #1c2340; color: #fff; border: 2px solid #fff; font-size: 12px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+
 /* Map of researched places */
 .places { display: flex; flex-direction: column; gap: 12px; }
 .places-head h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
@@ -223,6 +253,7 @@ html.locked .gate {
   body { background: #fff; }
   .day, .detail, .plist details { break-inside: avoid; }
   .filters { display: none; }
+  .rcard[aria-pressed="false"] { display: none; }
   .plist details > ul { display: flex !important; }
 }
 </style>
@@ -301,6 +332,16 @@ catch (e) { document.documentElement.classList.add("locked"); }
 
   <section class="detail" id="detail" aria-live="polite"></section>
 
+  <section class="routes" aria-labelledby="routes-h">
+    <div class="places-head">
+      <h2 id="routes-h">Road trip options</h2>
+      <p>Draft options for Feb 28 to Mar 6, after a rest night on arrival. Nothing is booked. Choose one to see it on the calendar and the map.</p>
+    </div>
+    <div class="rcards" id="rcards"></div>
+    <div class="rdetail" id="rdetail" hidden></div>
+    <p class="map-note" id="rsource"></p>
+  </section>
+
   <section class="places" aria-labelledby="places-h">
     <div class="places-head">
       <h2 id="places-h">Places from the research</h2>
@@ -318,6 +359,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="places.js"></script>
+<script src="routes.js"></script>
 
 <script>
 (function () {
@@ -352,13 +394,18 @@ catch (e) { document.documentElement.classList.add("locked"); }
   var cal = document.getElementById("cal");
   var detail = document.getElementById("detail");
   var buttons = {};
+  var routePlans = {};   // day key -> { tags: [...], items: [...] } from the selected road trip option
+  var current = 7;
 
   function showDay(d) {
     var i = d % 7;
-    var p = plans[d];
+    var p = plans[d], rp = routePlans[d];
+    var items = (rp ? rp.items : []).concat(p ? p.items : []);
+    current = d;
     var html = "<h3>" + DOW[i] + ", " + label(d) + "<span>" + DOW_JP[i] + "</span></h3>";
-    if (p) {
-      html += '<ul class="items">' + p.items.map(function (it) {
+    if (rp && rp.draft) html += '<p class="draft">' + rp.draft + "</p>";
+    if (items.length) {
+      html += '<ul class="items">' + items.map(function (it) {
         return '<li><div class="when">' + it.when + '</div><div><div class="what">' + it.what +
                '</div><p class="meta">' + it.meta + "</p></div></li>";
       }).join("") + "</ul>";
@@ -369,18 +416,21 @@ catch (e) { document.documentElement.classList.add("locked"); }
     for (var k in buttons) buttons[k].setAttribute("aria-pressed", String(Number(k) === d));
   }
 
-  for (var d = 0; d <= 13; d++) {
+  function build() {
+   cal.innerHTML = "";
+   for (var d = 0; d <= 13; d++) {
     (function (d) {
       var i = d % 7;
-      var p = plans[d];
+      var p = plans[d], rp = routePlans[d];
       var b = document.createElement("button");
       b.type = "button";
       b.id = "day-" + d;
       b.className = "day" + (i === 6 ? " sat" : "") + (i === 0 ? " sun" : "") + (p && p.wedding ? " wedding" : "");
       b.setAttribute("aria-pressed", "false");
-      b.setAttribute("aria-label", DOW[i] + ", " + label(d) + (p ? ", " + p.items[0].what : ", open"));
-      var tags = p
-        ? p.tags.map(function (t) {
+      b.setAttribute("aria-label", DOW[i] + ", " + label(d) + (rp ? ", " + rp.aria : "") + (p ? ", " + p.items[0].what : (rp ? "" : ", open")));
+      var tl = (rp ? rp.tags : []).concat(p ? p.tags : []);
+      var tags = tl.length
+        ? tl.map(function (t) {
             return '<span class="tag ' + t.cls + '"><span class="long">' + t.long + '</span><span class="short">' + t.short + "</span></span>";
           }).join("")
         : '<span class="tag open">Open</span>';
@@ -390,9 +440,16 @@ catch (e) { document.documentElement.classList.add("locked"); }
       buttons[d] = b;
       cal.appendChild(b);
     })(d);
+   }
   }
 
+  build();
   showDay(7);
+  // Hook for the road trip options: pass a map of day key -> { tags, items, aria, draft }, or null to clear.
+  window.dash = {
+    setRoute: function (rp) { routePlans = rp || {}; build(); showDay(current); },
+    showDay: function (d) { showDay(d); document.getElementById("cal").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  };
 
   // Days until the ceremony: 11:00 JST on March 7, 2027 is 02:00 UTC.
   var days = Math.ceil((Date.UTC(2027, 2, 7, 2, 0) - Date.now()) / 86400000);
@@ -473,10 +530,11 @@ catch (e) { document.documentElement.classList.add("locked"); }
     li.appendChild(b); parent.appendChild(li); return b;
   }
   var areaBtns = [];
+  function setArea(v, fit) {
+    area = v; areaBtns.forEach(function (x, i) { x.setAttribute("aria-pressed", String(AREAS[i][0] === v)); }); refresh(fit);
+  }
   AREAS.forEach(function (a) {
-    areaBtns.push(chip(document.getElementById("area-chips"), a[1], a[0] === area, null, function (b) {
-      area = a[0]; areaBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); refresh(true);
-    }));
+    areaBtns.push(chip(document.getElementById("area-chips"), a[1], a[0] === area, null, function () { setArea(a[0], true); }));
   });
   KINDS.forEach(function (k) {
     var n = P.filter(function (p) { return p.kind === k[0]; }).length;
@@ -497,18 +555,124 @@ catch (e) { document.documentElement.classList.add("locked"); }
       var li = document.createElement("li"), b = document.createElement("button");
       b.type = "button"; b.id = "pb-" + p.id; b.className = "pbtn" + (p.lat == null ? " off" : "");
       b.innerHTML = '<span class="dot ' + p.kind + '"></span><span>' + esc(p.name) + (p.lat == null ? " <small>(not on the map yet)</small>" : "") + "</span>";
-      if (p.lat != null && map) b.addEventListener("click", function () {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        map.setView([p.lat, p.lon], Math.max(map.getZoom(), 12));
-        markers[p.id].openPopup();
-      });
+      if (p.lat != null && map) b.addEventListener("click", function () { focus(p.id); });
       else if (p.lat == null) b.title = p.cn || "No confirmed location yet";
       li.appendChild(b); ul.appendChild(li);
     });
     d.appendChild(ul); list.appendChild(d);
   });
 
+  function focus(id) {
+    var p = null; P.forEach(function (x) { if (x.id === id) p = x; });
+    if (!p || p.lat == null || !map) return;
+    if (!visible(p)) { kindsOn[p.kind] = true; setArea("all", false); }
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    map.setView([p.lat, p.lon], Math.max(map.getZoom(), 12));
+    markers[p.id].openPopup();
+  }
+
+  // Selected road trip option: road line, numbered overnight markers, arrival marker
+  var routeLayer = null;
+  function showRoute(r) {
+    if (!map) return;
+    if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+    if (!r) { setArea("all", true); return; }
+    routeLayer = L.layerGroup();
+    var lines = r.days.filter(function (d) { return d.line.length; }).map(function (d) { return d.line; });
+    L.polyline(lines, { className: "route-case", interactive: false }).addTo(routeLayer);
+    L.polyline(lines, { className: "route-line", interactive: false }).addTo(routeLayer);
+    function pin(at, glyph, html) {
+      L.marker(at, { icon: L.divIcon({ className: "", html: '<span class="night-pin">' + glyph + "</span>", iconSize: [24, 24], iconAnchor: [12, 12] }), zIndexOffset: 500, title: html.replace(/<[^>]+>/g, " ") })
+        .bindPopup('<div class="pop">' + html + "</div>").addTo(routeLayer);
+    }
+    pin([r.start.lat, r.start.lon], "✈", "<h3>Arrival</h3><p class=\"pm\">" + esc(r.arrive) + "</p>");
+    var seen = {};
+    r.days.forEach(function (d, i) {
+      if (!d.at || i === 6) return;
+      var k = d.at.join(","); if (seen[k]) return; seen[k] = 1;
+      pin(d.at, String(i + 1), "<h3>Night " + (i + 1) + ": " + esc(d.night) + "</h3><p class=\"pm\">" + esc(window.ROUTE_DATES[i]) + "</p>");
+    });
+    routeLayer.addTo(map);
+    setArea(r.area, false);
+    map.fitBounds(L.polyline(lines).getBounds(), { padding: [30, 30] });
+  }
+  window.mapApi = { focus: focus, showRoute: showRoute };
+
   refresh(true);
+})();
+</script>
+
+<script>
+(function () {
+  var R = window.ROUTES || [], M = window.ROUTES_META || {};
+  var DATES = window.ROUTE_DATES = ["Sun, Feb 28", "Mon, Mar 1", "Tue, Mar 2", "Wed, Mar 3", "Thu, Mar 4", "Fri, Mar 5", "Sat, Mar 6"];
+  var names = {}; (window.PLACES || []).forEach(function (p) { names[p.id] = p.name; });
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function hm(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + " h" : "") + (h && r ? " " : "") + (r || !h ? r + " min" : ""); }
+  function links(ids) {
+    return ids.map(function (id) { return '<button type="button" class="plink" data-pid="' + id + '">' + esc(names[id] || "Place " + id) + "</button>"; }).join(" · ");
+  }
+  function path(d) { return d.legs.length ? esc(d.legs[0].from) + d.legs.map(function (l) { return " → " + esc(l.to); }).join("") : esc(d.stay) + " (no driving)"; }
+
+  function dayPlans(r) {
+    var out = {};
+    r.days.forEach(function (d, i) {
+      var items = d.legs.map(function (l) { return { when: "Drive", what: esc(l.from) + " to " + esc(l.to), meta: hm(l.min) + " · " + l.km + " km, without traffic or breaks" }; });
+      if (!d.legs.length) items.push({ when: "No driving", what: esc(d.stay), meta: esc(d.note) });
+      items.push({ when: "Places", what: "From the research", meta: links(d.stops) });
+      if (i < 6) items.push({ when: "Overnight", what: esc(d.night), meta: (d.legs.length ? esc(d.note) + " " : "") + "Hotel not researched yet." });
+      else items.push({ when: "Plan", what: "Return the car", meta: esc(d.note) });
+      out[i] = {
+        draft: "Draft from " + esc(r.name) + ": " + esc(r.title) + ". Not booked.",
+        aria: r.name + ", night in " + d.night + (d.min ? ", " + hm(d.min) + " driving" : ", no driving"),
+        tags: [{ cls: "route", long: esc(i < 6 ? d.night : "Drive to Osaka"), short: esc(d.short) },
+               { cls: "drive", long: d.min ? hm(d.min) + " drive" : "No driving", short: "" }],
+        items: items
+      };
+    });
+    return out;
+  }
+
+  var cards = document.getElementById("rcards"), detail = document.getElementById("rdetail"), btns = {};
+  function select(id) {
+    var r = null; R.forEach(function (x) { if (x.id === id) r = x; });
+    for (var k in btns) btns[k].setAttribute("aria-pressed", String(k === (r ? r.id : "none")));
+    try { localStorage.setItem("japan2027-route", r ? r.id : "none"); } catch (e) {}
+    if (window.dash) window.dash.setRoute(r ? dayPlans(r) : null);
+    if (window.mapApi) window.mapApi.showRoute(r);
+    detail.hidden = !r;
+    if (!r) { detail.innerHTML = ""; return; }
+    detail.innerHTML = "<h3>" + esc(r.name) + "<span>" + esc(r.title) + "</span></h3>" +
+      '<p class="arrive">' + esc(r.arrive) + "</p>" +
+      '<ul class="items">' + r.days.map(function (d, i) {
+        return '<li><div class="when">' + DATES[i] + '</div><div><div class="what">' + path(d) + '</div>' +
+          '<p class="meta">' + (d.min ? hm(d.min) + " driving · " + d.km + " km · " : "") + (i < 6 ? "Night: " + esc(d.night) : "Hotel check-in, Osaka") + "</p>" +
+          '<p class="meta">' + esc(d.note) + "</p>" +
+          '<p class="meta">' + links(d.stops) + "</p></div></li>";
+      }).join("") + "</ul>" +
+      '<ul class="caveats">' + r.caveats.map(function (c) { return "<li>" + c + "</li>"; }).join("") + "</ul>";
+  }
+  function card(id, html) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "rcard"; b.setAttribute("aria-pressed", "false"); b.innerHTML = html;
+    b.addEventListener("click", function () { select(id); });
+    btns[id] = b; cards.appendChild(b);
+  }
+  R.forEach(function (r) {
+    card(r.id, '<span class="rn">' + esc(r.name) + '</span><span class="rt">' + esc(r.title) + '</span><p class="rg">' + esc(r.tagline) + "</p>" +
+      '<dl class="rstats"><dd>' + hm(r.totalMin) + "</dd><dt>total driving</dt><dd>" + r.totalKm + " km</dd><dt>distance</dt><dd>" + hm(r.longestMin) + "</dd><dt>longest day</dt></dl>");
+  });
+  card("none", '<span class="rn">No route</span><span class="rt">Places only</span><p class="rg">Clear the calendar and show every researched place.</p>');
+
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest ? e.target.closest(".plink") : null;
+    if (t && window.mapApi) window.mapApi.focus(Number(t.getAttribute("data-pid")));
+  });
+  document.getElementById("rsource").textContent = "Drive times and road lines: " + (M.source || "") + ", fetched " + (M.fetched || "") +
+    ". They exclude traffic, breaks, ferries and parking, so real days will be longer. " + (M.checks || "") + " Tolls, hotels and car rental are not researched yet.";
+
+  var saved = "none"; try { saved = localStorage.getItem("japan2027-route") || "none"; } catch (e) {}
+  select(saved);
 })();
 </script>
 </body>
