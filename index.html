@@ -192,17 +192,19 @@ body {
 .chip:focus-visible { outline: 2px solid var(--stay); outline-offset: 2px; }
 .chip[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
 .chip[aria-pressed="false"] { color: var(--muted); }
-.chip[aria-pressed="false"] .dot { opacity: 0.25; }
+.chip[aria-pressed="false"] .ico { opacity: 0.3; }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .dot.town { background: var(--k-town); } .dot.sight { background: var(--k-sight); } .dot.food { background: var(--k-food); }
 .dot.stay { background: var(--k-stay); } .dot.onsen { background: var(--k-onsen); } .dot.road { background: var(--k-road); }
 #map { height: 540px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); z-index: 0; }
 .map-msg { color: var(--muted); margin: 0; padding: 16px; }
-#map .leaflet-overlay-pane { --k-town: #4b5375; --k-sight: #2e8b57; --k-food: #c77a12; --k-stay: #2f5d8a; --k-onsen: #c2452d; --k-road: #8a6d3b; }
-.pin { stroke: #fff; stroke-width: 1.5; fill-opacity: 0.95; }
-.pin-town { fill: var(--k-town); } .pin-sight { fill: var(--k-sight); } .pin-food { fill: var(--k-food); }
-.pin-stay { fill: var(--k-stay); } .pin-onsen { fill: var(--k-onsen); } .pin-road { fill: var(--k-road); }
-.pin-unchecked { stroke: #1c2340; stroke-dasharray: 2 2; }
+.ppin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2px solid var(--kc); font-size: 14px; line-height: 1; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .15s; }
+.ppin.town { --kc: #4b5375; } .ppin.sight { --kc: #2e8b57; } .ppin.food { --kc: #c77a12; }
+.ppin.stay { --kc: #2f5d8a; } .ppin.onsen { --kc: #c2452d; } .ppin.road { --kc: #8a6d3b; }
+.ppin.unchecked { border-style: dashed; }
+#map.far .ppin { transform: scale(0.72); }
+.ico { font-size: 14px; line-height: 1; flex: none; width: 18px; text-align: center; }
+.plist-h { font-family: var(--display); font-size: 17px; font-weight: 700; margin: 8px 0 0; }
 .fixed-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
 .fixed-pin.wed { background: #a8325e; }
 .fixed-pin.hotel { background: #2f5d8a; }
@@ -338,21 +340,22 @@ catch (e) { document.documentElement.classList.add("locked"); }
       <p>Draft options for Feb 28 to Mar 6, after a rest night on arrival. Nothing is booked. Choose one to see it on the calendar and the map.</p>
     </div>
     <div class="rcards" id="rcards"></div>
-    <div class="rdetail" id="rdetail" hidden></div>
-    <p class="map-note" id="rsource"></p>
   </section>
 
   <section class="places" aria-labelledby="places-h">
     <div class="places-head">
-      <h2 id="places-h">Places from the research</h2>
-      <p id="places-sub">Places covered in Abroad in Japan videos. Select a pin for the note and a link to that moment in the video.</p>
+      <h2 id="places-h">Map</h2>
+      <p id="places-sub">Places covered in Abroad in Japan videos. Select an icon for the note and a link to that moment in the video.</p>
     </div>
     <div class="filters">
       <ul class="chips" id="area-chips" aria-label="Filter by area"></ul>
       <ul class="chips" id="kind-chips" aria-label="Filter by type"></ul>
     </div>
     <div id="map" role="region" aria-label="Map of researched places"></div>
-    <p class="map-note">Pin positions come from Google Places (checked Nov 12, 2026). A dashed outline means the name is not confirmed yet. Opening days and hours have not been checked for March 2027.</p>
+    <p class="map-note">Pin positions come from Google Places (checked Nov 12, 2026). Icons show the type of place. A dashed ring means the name is not confirmed yet. Opening days and hours have not been checked for March 2027.</p>
+    <div class="rdetail" id="rdetail" hidden></div>
+    <p class="map-note" id="rsource"></p>
+    <h3 class="plist-h">All researched places</h3>
     <div class="plist" id="plist"></div>
   </section>
 </main>
@@ -463,6 +466,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 (function () {
   var P = window.PLACES || [];
   var KINDS = [["town", "Towns"], ["sight", "Sights"], ["food", "Food"], ["stay", "Stays"], ["onsen", "Onsen"], ["road", "Roads and trails"]];
+  var ICON = { town: "🏘️", sight: "⛩️", food: "🍜", stay: "🛏️", onsen: "♨️", road: "🛣️" };
   var KLABEL = { town: "Town", sight: "Sight", food: "Food", stay: "Stay", onsen: "Onsen", road: "Road or trail" };
   var AREAS = [["all", "All places"], ["corridor", "Tokyo to Osaka corridor"], ["loop", "Osaka loop"]];
   var VENUE = { lat: 34.7060708, lon: 135.502467 }, HOTEL = { lat: 34.7018509, lon: 135.4917871 };
@@ -485,13 +489,14 @@ catch (e) { document.documentElement.classList.add("locked"); }
 
   var placed = P.filter(function (p) { return p.lat != null; });
   document.getElementById("places-sub").textContent = placed.length + " of " + P.length +
-    " places from Abroad in Japan videos are on the map. Select a pin for the note and a link to that moment in the video.";
+    " places from Abroad in Japan videos are on the map. Select an icon for the note and a link to that moment in the video.";
 
   var map = null, markers = {};
   var el = document.getElementById("map");
   if (window.L) {
     map = L.map(el, { scrollWheelZoom: false });
     map.on("click", function () { map.scrollWheelZoom.enable(); });
+    map.on("zoomend", function () { el.classList.toggle("far", map.getZoom() < 9); });
     el.addEventListener("mouseleave", function () { map.scrollWheelZoom.disable(); });
     // Esri World Topo: English labels, no key needed. The map stays light in both themes, so pins use the light palette.
     L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
@@ -499,7 +504,10 @@ catch (e) { document.documentElement.classList.add("locked"); }
       attribution: 'Tiles &copy; Esri and its data providers, including &copy; OpenStreetMap contributors'
     }).addTo(map);
     placed.forEach(function (p) {
-      markers[p.id] = L.circleMarker([p.lat, p.lon], { radius: 7, className: "pin pin-" + p.kind + (p.chk ? "" : " pin-unchecked") }).bindPopup(popup(p), { maxWidth: 300 });
+      markers[p.id] = L.marker([p.lat, p.lon], {
+        icon: L.divIcon({ className: "", html: '<span class="ppin ' + p.kind + (p.chk ? "" : " unchecked") + '">' + ICON[p.kind] + "</span>", iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -10] }),
+        title: p.name, alt: KLABEL[p.kind] + ": " + p.name
+      }).bindPopup(popup(p), { maxWidth: 300 });
     });
     function fixed(pt, cls, glyph, html) {
       L.marker([pt.lat, pt.lon], { icon: L.divIcon({ className: "", html: '<span class="fixed-pin ' + cls + '">' + glyph + "</span>", iconSize: [26, 26], iconAnchor: [13, 13] }), zIndexOffset: 1000, title: html.replace(/<[^>]+>/g, " ") })
@@ -525,7 +533,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
   function chip(parent, label, pressed, dot, fn) {
     var li = document.createElement("li"), b = document.createElement("button");
     b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", String(pressed));
-    b.innerHTML = (dot ? '<span class="dot ' + dot + '"></span>' : "") + esc(label);
+    b.innerHTML = (dot ? '<span class="ico" aria-hidden="true">' + ICON[dot] + "</span>" : "") + esc(label);
     b.addEventListener("click", function () { fn(b); });
     li.appendChild(b); parent.appendChild(li); return b;
   }
@@ -554,7 +562,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     ps.forEach(function (p) {
       var li = document.createElement("li"), b = document.createElement("button");
       b.type = "button"; b.id = "pb-" + p.id; b.className = "pbtn" + (p.lat == null ? " off" : "");
-      b.innerHTML = '<span class="dot ' + p.kind + '"></span><span>' + esc(p.name) + (p.lat == null ? " <small>(not on the map yet)</small>" : "") + "</span>";
+      b.innerHTML = '<span class="ico" aria-hidden="true" title="' + KLABEL[p.kind] + '">' + ICON[p.kind] + "</span><span>" + esc(p.name) + (p.lat == null ? " <small>(not on the map yet)</small>" : "") + "</span>";
       if (p.lat != null && map) b.addEventListener("click", function () { focus(p.id); });
       else if (p.lat == null) b.title = p.cn || "No confirmed location yet";
       li.appendChild(b); ul.appendChild(li);
