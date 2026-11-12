@@ -203,6 +203,8 @@ body {
 .ppin.stay { --kc: #2f5d8a; } .ppin.onsen { --kc: #c2452d; } .ppin.road { --kc: #8a6d3b; }
 .ppin.unchecked { border-style: dashed; }
 #map.far .ppin { transform: scale(0.72); }
+.bino { width: 16px; height: 16px; display: block; }
+.ico .bino { display: inline-block; vertical-align: -3px; }
 .ico { font-size: 14px; line-height: 1; flex: none; width: 18px; text-align: center; }
 .plist-h { font-family: var(--display); font-size: 17px; font-weight: 700; margin: 8px 0 0; }
 .fixed-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 13px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
@@ -466,7 +468,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 (function () {
   var P = window.PLACES || [];
   var KINDS = [["town", "Towns"], ["sight", "Sights"], ["food", "Food"], ["stay", "Stays"], ["onsen", "Onsen"], ["road", "Roads and trails"]];
-  var ICON = { town: "🏘️", sight: "⛩️", food: "🍜", stay: "🛏️", onsen: "♨️", road: "🛣️" };
+  var ICON = { town: "🏘️", sight: "<svg class=\"bino\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"#2e8b57\" d=\"M5 4h4a1 1 0 0 1 1 1v3h4V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2.2l2.6 7.4A4.8 4.8 0 1 1 13.2 17v-4h-2.4v4A4.8 4.8 0 1 1 1.4 14.6L4 7.2V5a1 1 0 0 1 1-1z\"/><circle cx=\"6\" cy=\"16.6\" r=\"2.6\" fill=\"#fff\"/><circle cx=\"18\" cy=\"16.6\" r=\"2.6\" fill=\"#fff\"/></svg>", food: "🍜", stay: "🛏️", onsen: "♨️", road: "🛣️" };
   var KLABEL = { town: "Town", sight: "Sight", food: "Food", stay: "Stay", onsen: "Onsen", road: "Road or trail" };
   var AREAS = [["all", "All places"], ["corridor", "Tokyo to Osaka corridor"], ["loop", "Osaka loop"]];
   var VENUE = { lat: 34.7060708, lon: 135.502467 }, HOTEL = { lat: 34.7018509, lon: 135.4917871 };
