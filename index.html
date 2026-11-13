@@ -181,6 +181,39 @@ body {
 .route-line { stroke: #1c2340; stroke-width: 3.5; fill: none; }
 .night-pin { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #1c2340; color: #fff; border: 2px solid #fff; font-size: 12px; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
 
+/* Costs and hotel picks */
+.rcost { margin: 2px 0 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rcost b { color: var(--ink); }
+.costs { display: flex; flex-direction: column; gap: 12px; }
+.costs h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
+.costs .sub { color: var(--muted); margin: 2px 0 0; font-size: 14px; }
+.tscroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.ctable { border-collapse: collapse; width: 100%; min-width: 640px; font-variant-numeric: tabular-nums; }
+.ctable th, .ctable td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ctable thead th { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.ctable tbody tr:last-child th, .ctable tbody tr:last-child td { border-bottom: 0; }
+.ctable tbody th { font-weight: 700; }
+.ctable tbody th small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+.ctable td.num { font-weight: 700; }
+.ctable td.todo { color: var(--muted); font-size: 13px; }
+.findings { margin: 0; padding-left: 18px; font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+.findings li span { color: var(--muted); }
+.hstay { margin-top: 8px; border-top: 1px dashed var(--line); padding-top: 8px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hhead { margin: 0; font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+.hhead b { color: var(--ink); letter-spacing: 0; font-size: 13px; }
+.hpicks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.hpicks li { display: grid; grid-template-columns: 62px 1fr; gap: 10px; min-width: 0; }
+.hpicks .tier { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.hpicks a { color: var(--stay); font-weight: 700; text-underline-offset: 3px; }
+.hpicks .hr { color: var(--muted); font-size: 13px; display: block; }
+.hpicks .price { margin: 1px 0 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.hpicks .price b { font-weight: 700; }
+.hpicks .fine { margin: 1px 0 0; font-size: 12.5px; color: var(--muted); }
+.hnote { font-size: 12.5px; color: var(--muted); }
+.hnote summary { cursor: pointer; }
+.hnote p { margin: 4px 0 0; }
+.rdetail .arrive + .hstay { margin-top: 0; }
+
 /* Map of researched places */
 .places { display: flex; flex-direction: column; gap: 12px; }
 .places-head h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
@@ -258,6 +291,7 @@ html.locked .gate {
   .day, .detail, .plist details { break-inside: avoid; }
   .filters { display: none; }
   .rcard[aria-pressed="false"] { display: none; }
+  .hnote > p { display: block !important; }
   .plist details > ul { display: flex !important; }
 }
 </style>
@@ -344,6 +378,15 @@ catch (e) { document.documentElement.classList.add("locked"); }
     <div class="rcards" id="rcards"></div>
   </section>
 
+  <section class="costs" aria-labelledby="costs-h">
+    <div>
+      <h2 id="costs-h">Costs so far</h2>
+      <p class="sub" id="costs-sub"></p>
+    </div>
+    <div class="tscroll"><table class="ctable" id="ctable"></table></div>
+    <ul class="findings" id="findings"></ul>
+  </section>
+
   <section class="places" aria-labelledby="places-h">
     <div class="places-head">
       <h2 id="places-h">Map</h2>
@@ -365,6 +408,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="places.js"></script>
 <script src="routes.js"></script>
+<script src="hotels.js"></script>
 
 <script>
 (function () {
@@ -622,6 +666,43 @@ catch (e) { document.documentElement.classList.add("locked"); }
   function links(ids) {
     return ids.map(function (id) { return '<button type="button" class="plink" data-pid="' + id + '">' + esc(names[id] || "Place " + id) + "</button>"; }).join(" · ");
   }
+  var H = window.HOTELS || {}, HM = window.HOTELS_META || {};
+  var TIER = { lower: "Lower", middle: "Middle", higher: "Higher" };
+  function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+  function md(iso) { var m = ["Jan", "Feb", "Mar"][Number(iso.slice(5, 7)) - 1]; return m + " " + Number(iso.slice(8, 10)); }
+  function cap(t) { t = String(t); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function pickRow(p, s) {
+    return '<li><span class="tier">' + (s.picks.length === 1 ? "Only pick" : TIER[p.tier]) + '</span><div>' +
+      '<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.name) + '</a> ' +
+      '<span class="hr">' + p.stars + "-star · " + Number(p.rating).toFixed(1) + " (" + p.reviews.toLocaleString("en-US") + " reviews)</span>" +
+      '<p class="price"><b>' + usd(p.total) + "</b> total with taxes" + (s.nights > 1 ? " for " + s.nights + " nights" : "") +
+      " · " + usd(p.nightly) + " a night before taxes" + (p.member ? " · member price" : "") + "</p>" +
+      '<p class="fine">' + esc(p.room) + "</p>" +
+      '<p class="fine">Parking: ' + esc(p.parking) + "</p>" +
+      '<p class="fine">Free cancellation: ' + esc(p.cancel) + "</p></div></li>";
+  }
+  function stayBlock(s, lead) {
+    if (!s) return "";
+    return '<div class="hstay"><p class="hhead">' + (lead || "Hotels") + ": <b>" + esc(s.stop) + "</b> · " + md(s.checkIn) + " to " + md(s.checkOut) +
+      " · " + s.qualifying + " qualifying · " + (s.reread ? "prices read twice, matched" : "prices read once") + "</p>" +
+      '<ul class="hpicks">' + s.picks.map(function (p) { return pickRow(p, s); }).join("") + "</ul>" +
+      (s.problems ? '<details class="hnote"><summary>Search notes and caveats</summary><p>' + esc(s.problems) + "</p></details>" : "") + "</div>";
+  }
+  // Hotel blocks for route day i (0 = Feb 28). A two-night stay shows its picks on the first night only.
+  function dayHotels(r, i) {
+    var h = H[r.id]; if (!h || i > 5) return "";
+    var key = h.nights[i], s = h.stays[key];
+    if (i > 0 && h.nights[i - 1] === key) return '<p class="meta">Second night of the same stay.</p>';
+    return stayBlock(s) + (h.alts[key] || []).map(function (k) { return stayBlock(h.stays[k], "Alternative"); }).join("");
+  }
+  function daySummary(r, i) {
+    var h = H[r.id]; if (!h || i > 5) return "Hotel not researched yet.";
+    var key = h.nights[i], s = h.stays[key];
+    if (i > 0 && h.nights[i - 1] === key) return "Second night of the same stay.";
+    return "Hotel picks: " + s.picks.map(function (p) { return esc(p.name) + " " + usd(p.total); }).join(" · ") +
+      (s.nights > 1 ? " (totals for " + s.nights + " nights)" : "") + ". Details are in the route breakdown under the map.";
+  }
+
   function path(d) { return d.legs.length ? esc(d.legs[0].from) + d.legs.map(function (l) { return " → " + esc(l.to); }).join("") : esc(d.stay) + " (no driving)"; }
 
   function dayPlans(r) {
@@ -630,7 +711,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       var items = d.legs.map(function (l) { return { when: "Drive", what: esc(l.from) + " to " + esc(l.to), meta: hm(l.min) + " · " + l.km + " km, without traffic or breaks" }; });
       if (!d.legs.length) items.push({ when: "No driving", what: esc(d.stay), meta: esc(d.note) });
       items.push({ when: "Places", what: "From the research", meta: links(d.stops) });
-      if (i < 6) items.push({ when: "Overnight", what: esc(d.night), meta: (d.legs.length ? esc(d.note) + " " : "") + "Hotel not researched yet." });
+      if (i < 6) items.push({ when: "Overnight", what: esc(d.night), meta: (d.legs.length ? esc(d.note) + " " : "") + daySummary(r, i) });
       else items.push({ when: "Plan", what: "Return the car", meta: esc(d.note) });
       out[i] = {
         draft: "Draft from " + esc(r.name) + ": " + esc(r.title) + ". Not booked.",
@@ -654,11 +735,12 @@ catch (e) { document.documentElement.classList.add("locked"); }
     if (!r) { detail.innerHTML = ""; return; }
     detail.innerHTML = "<h3>" + esc(r.name) + "<span>" + esc(r.title) + "</span></h3>" +
       '<p class="arrive">' + esc(r.arrive) + "</p>" +
+      (H[r.id] ? stayBlock(H[r.id].stays[H[r.id].arrive], "Arrival night hotels") : "") +
       '<ul class="items">' + r.days.map(function (d, i) {
         return '<li><div class="when">' + DATES[i] + '</div><div><div class="what">' + path(d) + '</div>' +
           '<p class="meta">' + (d.min ? hm(d.min) + " driving · " + d.km + " km · " : "") + (i < 6 ? "Night: " + esc(d.night) : "Hotel check-in, Osaka") + "</p>" +
           '<p class="meta">' + esc(d.note) + "</p>" +
-          '<p class="meta">' + links(d.stops) + "</p></div></li>";
+          '<p class="meta">' + links(d.stops) + "</p>" + dayHotels(r, i) + "</div></li>";
       }).join("") + "</ul>" +
       '<ul class="caveats">' + r.caveats.map(function (c) { return "<li>" + c + "</li>"; }).join("") + "</ul>";
   }
@@ -670,16 +752,54 @@ catch (e) { document.documentElement.classList.add("locked"); }
   }
   R.forEach(function (r) {
     card(r.id, '<span class="rn">' + esc(r.name) + '</span><span class="rt">' + esc(r.title) + '</span><p class="rg">' + esc(r.tagline) + "</p>" +
-      '<dl class="rstats"><dd>' + hm(r.totalMin) + "</dd><dt>total driving</dt><dd>" + r.totalKm + " km</dd><dt>distance</dt><dd>" + hm(r.longestMin) + "</dd><dt>longest day</dt></dl>");
+      '<dl class="rstats"><dd>' + hm(r.totalMin) + "</dd><dt>total driving</dt><dd>" + r.totalKm + " km</dd><dt>distance</dt><dd>" + hm(r.longestMin) + "</dd><dt>longest day</dt></dl>" +
+      (H[r.id] ? H[r.id].totals.map(function (t) {
+        return '<p class="rcost">Hotels, 7 nights' + (t.label ? " (" + esc(t.label) + ")" : "") + ": <b>" + usd(t.lower) + "</b> to <b>" + usd(t.higher) + "</b></p>";
+      }).join("") : ""));
   });
   card("none", '<span class="rn">No route</span><span class="rt">Places only</span><p class="rg">Clear the calendar and show every researched place.</p>');
+
+  // Costs so far: one row per route (Route A has three rows, one per choice for the Narai-juku night).
+  (function () {
+    var rows = "";
+    R.forEach(function (r) {
+      var h = H[r.id]; if (!h) return;
+      h.totals.forEach(function (t) {
+        rows += "<tr><th scope=\"row\">" + esc(r.name) + (t.label ? "<small>" + esc(t.label) + "</small>" : "") + "</th>" +
+          "<td>" + hm(r.totalMin) + " · " + r.totalKm + " km</td><td>" + hm(r.longestMin) + "</td>" +
+          '<td class="num">' + usd(t.lower) + '</td><td class="num">' + usd(t.middle) + '</td><td class="num">' + usd(t.higher) + "</td>" +
+          '<td class="todo">Not researched yet</td></tr>';
+      });
+    });
+    document.getElementById("ctable").innerHTML =
+      "<thead><tr><th scope=\"col\">Route</th><th scope=\"col\">Driving</th><th scope=\"col\">Longest day</th>" +
+      "<th scope=\"col\">Hotels, lower picks</th><th scope=\"col\">Hotels, middle picks</th><th scope=\"col\">Hotels, higher picks</th>" +
+      "<th scope=\"col\">Car, tolls, fuel, flights</th></tr></thead><tbody>" + rows + "</tbody>";
+    document.getElementById("costs-sub").textContent = "Hotels only, for the 7 nights from Feb 27 to Mar 6, 2 adults in 1 room, US dollars with taxes. Source: " +
+      (HM.source || "") + ", read " + (HM.read || "") + ". Nothing is booked. Select a route above to see the hotels night by night under the map.";
+    function pk(rid, key, tier) { var out = null; ((H[rid] || {}).stays || {})[key] && H[rid].stays[key].picks.forEach(function (p) { if (p.tier === tier) out = p; }); return out; }
+    var f = [];
+    var byaku = pk("A", "A2", "lower"), morino = pk("A", "A2b", "lower"), shio = pk("A", "A2c", "lower");
+    if (byaku && morino && shio) f.push("<b>Route A turns on one night.</b> Narai-juku has a single qualifying hotel, " + esc(byaku.name) + " at " + usd(byaku.total) +
+      " with dinner and breakfast. Sleeping nearby instead costs " + usd(morino.total) + " in Kiso-Fukushima or from " + usd(shio.total) + " in Shiojiri, 13 to 16 miles away.");
+    var kl = pk("C", "C3", "lower"), kh = pk("C", "C3", "higher"), km = pk("C", "C3", "middle");
+    if (kl && kh && km) f.push("<b>Route C has the least driving but is not the cheapest.</b> Two nights in Kinosaki Onsen cost " + usd(Math.min(kl.total, km.total, kh.total)) + " to " + usd(Math.max(kl.total, km.total, kh.total)) + " whichever pick you take.");
+    var rc = pk("C", "C2", "higher"), ra = pk("A", "A6", "higher"), inv = [], seen = {};
+    for (var rid in H) for (var key in H[rid].stays) { var hi = pk(rid, key, "higher"), mi = pk(rid, key, "middle"); if (hi && mi && hi.total < mi.total && !seen[key]) { seen[key] = 1; inv.push(esc(H[rid].stays[key].stop.split(",")[0].split(" (")[0])); } }
+    if (rc && ra) f.push("<b>The higher tier is a rating tier, not a price tier.</b> It takes the best-rated 4-star hotel, so one ryokan, " + esc(rc.name) + " in Kyoto, adds " +
+      usd(ra.total) + " to Route A and " + usd(rc.total) + " (two nights) to Route C." + (inv.length ? " At " + inv.join(" and ") + " the higher pick costs less than the middle one." : ""));
+    f.push("<b>These are signed-in prices.</b> <span>The browser was signed in to a hotels.com account. Some room cards are labelled Member Price and others show a higher standard price struck through, so a signed-out visitor may see more.</span>");
+    f.push("<b>How well checked.</b> <span>Route A and the first five Route B stops were read twice on the same day and every price matched. The last two Route B stops and all of Route C were read once, because hotels.com then showed a bot check.</span>");
+    f.push("<b>Not in the totals.</b> <span>Hotel parking (500 to 2,000 yen a night where the hotel charges for it), car rental including the one-way fee for Route A, tolls, fuel and flights.</span>");
+    document.getElementById("findings").innerHTML = f.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+  })();
 
   document.addEventListener("click", function (e) {
     var t = e.target.closest ? e.target.closest(".plink") : null;
     if (t && window.mapApi) window.mapApi.focus(Number(t.getAttribute("data-pid")));
   });
   document.getElementById("rsource").textContent = "Drive times and road lines: " + (M.source || "") + ", fetched " + (M.fetched || "") +
-    ". They exclude traffic, breaks, ferries and parking, so real days will be longer. " + (M.checks || "") + " Tolls, hotels and car rental are not researched yet.";
+    ". They exclude traffic, breaks, ferries and parking, so real days will be longer. " + (M.checks || "") + " Tolls, fuel and car rental are not researched yet.";
 
   var saved = "none"; try { saved = localStorage.getItem("japan2027-route") || "none"; } catch (e) {}
   select(saved);
