@@ -1,0 +1,201 @@
+{
+  "key": "C",
+  "route": "Route C, shorter Kansai loop",
+  "read_at": "2026-11-13T11:30:00-05:00",
+  "calculator": "NEXCO Drive Plaza highway toll and route search (driveplaza.com/dp/SearchQuick)",
+  "calculator_url": "https://www.driveplaza.com/dp/SearchQuick",
+  "vehicle_class": "Light vehicles, etc. (the site's own label for kei cars; carType=0)",
+  "payment_columns": "Regular price (cash), ETC tolls, ETC2.0 tolls, as shown by the site",
+  "leg_method": "Each leg was searched between two expressway interchanges that I chose to match the stops, on the date that leg falls on in the Route C plan, departing 09:00. Interchanges are my assumptions, not a recorded drive. 'Route 1' is the first route the site lists.",
+  "legs": [
+    {
+      "leg": "L1",
+      "from": "Osaka Umeda",
+      "to": "Nara (Koriyama IC, Nishi-Meihan)",
+      "from_ic_name_used": "梅田",
+      "to_ic_name_used": "郡山(西名阪道)",
+      "search_date_time": "2027-02-28T09:00",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 2230,
+          "etc_toll": 1380,
+          "etc2_toll": 1380,
+          "time": "0:39",
+          "km": 42.5
+        },
+        {
+          "route": 2,
+          "regular_price": 2690,
+          "etc_toll": 1650,
+          "etc2_toll": 1650,
+          "time": "0:39",
+          "km": 46.1
+        },
+        {
+          "route": 3,
+          "regular_price": 2870,
+          "etc_toll": 1910,
+          "etc2_toll": 1910,
+          "time": "0:48",
+          "km": 56.3
+        }
+      ]
+    },
+    {
+      "leg": "L2",
+      "from": "Nara (Koriyama IC)",
+      "to": "Kyoto (Kyoto Minami IC)",
+      "from_ic_name_used": "郡山(西名阪道)",
+      "to_ic_name_used": "京都南",
+      "search_date_time": "2027-03-01T09:00",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1470,
+          "etc_toll": 1470,
+          "etc2_toll": 1470,
+          "time": "1:02",
+          "km": 54.4
+        },
+        {
+          "route": 2,
+          "regular_price": 2830,
+          "etc_toll": 2690,
+          "etc2_toll": 2690,
+          "time": "1:04",
+          "km": 79.4
+        },
+        {
+          "route": 3,
+          "regular_price": 2150,
+          "etc_toll": 2140,
+          "etc2_toll": 2140,
+          "time": "1:00",
+          "km": 78.6
+        }
+      ]
+    },
+    {
+      "leg": "L3",
+      "from": "Kyoto (Kyoto Minami IC)",
+      "to": "Kinosaki area (Toyooka-Izushi IC)",
+      "from_ic_name_used": "京都南",
+      "to_ic_name_used": "豊岡出石",
+      "search_date_time": "2027-03-03T09:00",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 2790,
+          "etc_toll": 2790,
+          "etc2_toll": 2790,
+          "time": "2:14",
+          "km": 172.5
+        },
+        {
+          "route": 2,
+          "regular_price": 2790,
+          "etc_toll": 2790,
+          "etc2_toll": 2790,
+          "time": "2:15",
+          "km": 171.4
+        },
+        {
+          "route": 3,
+          "regular_price": 3620,
+          "etc_toll": 3450,
+          "etc2_toll": 3450,
+          "time": "2:25",
+          "km": 178.8
+        }
+      ]
+    },
+    {
+      "leg": "L4",
+      "from": "Kinosaki area (Toyooka-Izushi IC)",
+      "to": "Himeji (Sanyo Himeji East IC)",
+      "from_ic_name_used": "豊岡出石",
+      "to_ic_name_used": "山陽姫路東",
+      "search_date_time": "2027-03-05T09:00",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1050,
+          "etc_toll": 1050,
+          "etc2_toll": 1050,
+          "time": "1:23",
+          "km": 90.4
+        },
+        {
+          "route": 2,
+          "regular_price": 1590,
+          "etc_toll": 1590,
+          "etc2_toll": 1590,
+          "time": "1:48",
+          "km": 122.6
+        },
+        {
+          "route": 3,
+          "regular_price": 2420,
+          "etc_toll": 2420,
+          "etc2_toll": 2420,
+          "time": "2:04",
+          "km": 163.0
+        }
+      ]
+    },
+    {
+      "leg": "L5",
+      "from": "Himeji (Sanyo Himeji East IC)",
+      "to": "Osaka Umeda (via Kobe)",
+      "from_ic_name_used": "山陽姫路東",
+      "to_ic_name_used": "梅田",
+      "search_date_time": "2027-03-06T09:00",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3400,
+          "etc_toll": 2050,
+          "etc2_toll": 2050,
+          "time": "1:03",
+          "km": 86.3
+        },
+        {
+          "route": 2,
+          "regular_price": 4290,
+          "etc_toll": 2680,
+          "etc2_toll": 2680,
+          "time": "1:16",
+          "km": 104.9
+        },
+        {
+          "route": 3,
+          "regular_price": 2420,
+          "etc_toll": 2120,
+          "etc2_toll": 2120,
+          "time": "1:48",
+          "km": 115.4
+        }
+      ]
+    }
+  ],
+  "estimate_yen": {
+    "etc_using_route_1_each_leg": 8740,
+    "etc_lowest_route_each_leg": 8740,
+    "etc_highest_route_each_leg": 13150,
+    "cash_using_route_1_each_leg": 10940
+  },
+  "estimate_label": "Estimate, computed by code from the site's figures. Not a quote.",
+  "not_included": [
+    "Local-road driving between stops (Nara to Kyoto if done on free roads, the Lake Biwa shrine detour, Maiko and Kobe stops, city driving in Kyoto)",
+    "Parking",
+    "Any toll on legs not searched",
+    "Hyogo Prefecture Road Public Corporation discounts on the Bantan Rengo road, which the site says it does not reflect"
+  ],
+  "problems": "Legs use assumed interchanges. Osaka city ramps such as Dojima and Morinomiya returned 'search unsuccessful' (half interchanges), so Umeda was used for Osaka. Names Suita, Higashi-Osaka, Kobe, Sannomiya and Nishinomiya were not recognised. A flat-rate pass for foreign visitors has not been checked yet.",
+  "pass": null,
+  "fuel": {
+    "status": "not done",
+    "reason": "No official Wagon R fuel economy figure or official petrol price retrieved yet"
+  }
+}
