@@ -1,0 +1,267 @@
+{
+  "key": "B",
+  "route": "Route B, loop west of Osaka",
+  "read_at": "2026-11-13T11:50:00-05:00",
+  "calculator": "NEXCO Drive Plaza highway toll and route search (driveplaza.com/dp/SearchQuick)",
+  "calculator_url": "https://www.driveplaza.com/dp/SearchQuick",
+  "vehicle_class": "Light vehicles, etc. (the site's own label for kei cars)",
+  "payment_columns": "Regular price (cash), ETC tolls, ETC2.0 tolls, as shown by the site. Bobby will rent an ETC card with the car, so the ETC column applies.",
+  "leg_method": "Each leg was searched between two expressway interchanges chosen to match the stops, on the date that leg falls on in the plan, departing 09:00. Interchanges are my assumptions, not a recorded drive. 'Route 1' is the first route the site lists. Roads for Route 1 were read from the site's route detail.",
+  "estimate_label": "Estimate, computed by code from the site's figures. Not a quote.",
+  "pass": null,
+  "fuel": {
+    "status": "not done",
+    "reason": "No official Wagon R fuel economy figure or official petrol price retrieved yet"
+  },
+  "legs": [
+    {
+      "leg": "L1",
+      "from": "Osaka Umeda",
+      "to": "Himeji (Sanyo Himeji East IC)",
+      "from_ic_name_used": "梅田",
+      "to_ic_name_used": "山陽姫路東",
+      "search_date_time": "2027-02-28T09:00",
+      "roads_on_route_1": "Hanshin Expwy Routes 11, 1, 12 + Kinki Expwy + Chugoku Expwy + Sanyo Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 4290,
+          "etc_toll": 2680,
+          "etc2_toll": 2680,
+          "time": "1:12",
+          "km": 102.2
+        },
+        {
+          "route": 2,
+          "regular_price": 2080,
+          "etc_toll": 1910,
+          "etc2_toll": 1910,
+          "time": "1:32",
+          "km": 93.0
+        },
+        {
+          "route": 3,
+          "regular_price": 1950,
+          "etc_toll": 1950,
+          "etc2_toll": 1950,
+          "time": "1:36",
+          "km": 95.4
+        }
+      ]
+    },
+    {
+      "leg": "L2",
+      "from": "Himeji (Sanyo Himeji East IC)",
+      "to": "Onomichi (Onomichi IC)",
+      "from_ic_name_used": "山陽姫路東",
+      "to_ic_name_used": "尾道",
+      "search_date_time": "2027-03-01T09:00",
+      "roads_on_route_1": "Sanyo Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3380,
+          "etc_toll": 3380,
+          "etc2_toll": 3380,
+          "time": "1:49",
+          "km": 164.6
+        },
+        {
+          "route": 2,
+          "regular_price": 3380,
+          "etc_toll": 3380,
+          "etc2_toll": 3380,
+          "time": "3:02",
+          "km": 251.3
+        },
+        {
+          "route": 3,
+          "regular_price": 3020,
+          "etc_toll": 3020,
+          "etc2_toll": 3020,
+          "time": "5:32",
+          "km": 380.4
+        }
+      ]
+    },
+    {
+      "leg": "L3",
+      "from": "Onomichi (Onomichi IC)",
+      "to": "Hiroshima (Hiroshima IC)",
+      "from_ic_name_used": "尾道",
+      "to_ic_name_used": "広島",
+      "search_date_time": "2027-03-02T09:00",
+      "roads_on_route_1": "Sanyo Expwy (Tadanoumi ferry side trip is on local roads and not priced)",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1700,
+          "etc_toll": 1700,
+          "etc2_toll": 1700,
+          "time": "0:53",
+          "km": 71.1
+        },
+        {
+          "route": 2,
+          "regular_price": 2580,
+          "etc_toll": 2460,
+          "etc2_toll": 2460,
+          "time": "1:42",
+          "km": 110.3
+        },
+        {
+          "route": 3,
+          "regular_price": 2080,
+          "etc_toll": 2080,
+          "etc2_toll": 2080,
+          "time": "1:43",
+          "km": 130.1
+        }
+      ]
+    },
+    {
+      "leg": "L4",
+      "from": "Hiroshima (Hiroshima IC)",
+      "to": "Miyajimaguchi area (Hatsukaichi IC)",
+      "from_ic_name_used": "広島",
+      "to_ic_name_used": "廿日市",
+      "search_date_time": "2027-03-03T09:00",
+      "roads_on_route_1": "Sanyo Expwy + Hiroshima-Iwakuni Road",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 810,
+          "etc_toll": 770,
+          "etc2_toll": 770,
+          "time": "0:18",
+          "km": 27.3
+        },
+        {
+          "route": 2,
+          "regular_price": 3950,
+          "etc_toll": 3910,
+          "etc2_toll": 3910,
+          "time": "2:45",
+          "km": 213.5
+        }
+      ]
+    },
+    {
+      "leg": "L5",
+      "from": "Miyajimaguchi area (Hatsukaichi IC)",
+      "to": "Kurashiki (Kurashiki IC)",
+      "from_ic_name_used": "廿日市",
+      "to_ic_name_used": "倉敷",
+      "search_date_time": "2027-03-04T09:00",
+      "roads_on_route_1": "Hiroshima-Iwakuni Road + Sanyo Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3380,
+          "etc_toll": 3340,
+          "etc2_toll": 3340,
+          "time": "1:48",
+          "km": 160.4
+        },
+        {
+          "route": 2,
+          "regular_price": 3700,
+          "etc_toll": 3660,
+          "etc2_toll": 3660,
+          "time": "2:28",
+          "km": 201.8
+        },
+        {
+          "route": 3,
+          "regular_price": 4600,
+          "etc_toll": 4440,
+          "etc2_toll": 4440,
+          "time": "2:38",
+          "km": 199.6
+        }
+      ]
+    },
+    {
+      "leg": "L6",
+      "from": "Kurashiki (Kurashiki IC)",
+      "to": "Kobe Nishi IC (Maiko area)",
+      "from_ic_name_used": "倉敷",
+      "to_ic_name_used": "神戸西",
+      "search_date_time": "2027-03-05T09:00",
+      "roads_on_route_1": "Sanyo Expwy + Kimi branch",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3090,
+          "etc_toll": 3090,
+          "etc2_toll": 3090,
+          "time": "1:38",
+          "km": 146.6
+        },
+        {
+          "route": 2,
+          "regular_price": 4160,
+          "etc_toll": 3030,
+          "etc2_toll": 3030,
+          "time": "1:58",
+          "km": 148.3
+        },
+        {
+          "route": 3,
+          "regular_price": 2810,
+          "etc_toll": 2810,
+          "etc2_toll": 2810,
+          "time": "2:01",
+          "km": 152.3
+        }
+      ]
+    },
+    {
+      "leg": "L7",
+      "from": "Kobe (Ikutagawa IC)",
+      "to": "Osaka Umeda",
+      "from_ic_name_used": "生田川",
+      "to_ic_name_used": "梅田",
+      "search_date_time": "2027-03-06T09:00",
+      "roads_on_route_1": "Hanshin Expwy Route 3 Kobe line + Meishin + Hanshin Route 11",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3650,
+          "etc_toll": 1610,
+          "etc2_toll": 1610,
+          "time": "0:32",
+          "km": 34.5
+        },
+        {
+          "route": 2,
+          "regular_price": 1590,
+          "etc_toll": 1160,
+          "etc2_toll": 1160,
+          "time": "0:35",
+          "km": 33.3
+        },
+        {
+          "route": 3,
+          "regular_price": 1590,
+          "etc_toll": 1090,
+          "etc2_toll": 1090,
+          "time": "0:38",
+          "km": 35.5
+        }
+      ]
+    }
+  ],
+  "estimate_yen": {
+    "etc_using_route_1_each_leg": 16570,
+    "etc_cheapest_comparable_route_each_leg": 15000,
+    "cash_using_route_1_each_leg": 20300,
+    "comparable_rule": "a listed route counts as comparable if its distance is within 15% of Route 1's; the site also lists long detours (up to 380 km) that are ignored"
+  },
+  "not_included": [
+    "Local-road driving between stops (Onomichi to Tadanoumi and back to the expressway, Hiroshima to Miyajima ferry port is priced but the ferry is not, Maiko to central Kobe, Kurashiki local driving)",
+    "Parking and ferry fares",
+    "Hyogo Prefecture Road Public Corporation discounts, which the site does not reflect"
+  ],
+  "problems": "Legs use assumed interchanges. A first try used Tarumi IC for Maiko, but the site routed Kurashiki to Awaji Island and back (6,580 yen ETC, 204 km) because Tarumi IC only connects toward Shikoku; that result was discarded and Kobe Nishi IC used. Names Suita, Kobe, Sannomiya and Nishinomiya were not recognised. The Kobe Nishi to Ikutagawa stretch (Maiko to central Kobe) is not priced. A flat-rate pass for foreign visitors has not been checked yet."
+}

@@ -1,12 +1,18 @@
 {
   "key": "C",
   "route": "Route C, shorter Kansai loop",
-  "read_at": "2026-11-13T11:30:00-05:00",
+  "read_at": "2026-11-13T11:50:00-05:00",
   "calculator": "NEXCO Drive Plaza highway toll and route search (driveplaza.com/dp/SearchQuick)",
   "calculator_url": "https://www.driveplaza.com/dp/SearchQuick",
-  "vehicle_class": "Light vehicles, etc. (the site's own label for kei cars; carType=0)",
-  "payment_columns": "Regular price (cash), ETC tolls, ETC2.0 tolls, as shown by the site",
-  "leg_method": "Each leg was searched between two expressway interchanges that I chose to match the stops, on the date that leg falls on in the Route C plan, departing 09:00. Interchanges are my assumptions, not a recorded drive. 'Route 1' is the first route the site lists.",
+  "vehicle_class": "Light vehicles, etc. (the site's own label for kei cars)",
+  "payment_columns": "Regular price (cash), ETC tolls, ETC2.0 tolls, as shown by the site. Bobby will rent an ETC card with the car, so the ETC column applies.",
+  "leg_method": "Each leg was searched between two expressway interchanges chosen to match the stops, on the date that leg falls on in the plan, departing 09:00. Interchanges are my assumptions, not a recorded drive. 'Route 1' is the first route the site lists. Roads for Route 1 were read from the site's route detail.",
+  "estimate_label": "Estimate, computed by code from the site's figures. Not a quote.",
+  "pass": null,
+  "fuel": {
+    "status": "not done",
+    "reason": "No official Wagon R fuel economy figure or official petrol price retrieved yet"
+  },
   "legs": [
     {
       "leg": "L1",
@@ -15,6 +21,7 @@
       "from_ic_name_used": "梅田",
       "to_ic_name_used": "郡山(西名阪道)",
       "search_date_time": "2027-02-28T09:00",
+      "roads_on_route_1": "Hanshin Expwy Routes 11, 1, 14 + Nishi-Meihan Expwy",
       "routes_listed_by_site": [
         {
           "route": 1,
@@ -49,6 +56,7 @@
       "from_ic_name_used": "郡山(西名阪道)",
       "to_ic_name_used": "京都南",
       "search_date_time": "2027-03-01T09:00",
+      "roads_on_route_1": "Keinawa Expwy + Shin-Meishin + Daini-Keihan + Keiji Bypass + Meishin",
       "routes_listed_by_site": [
         {
           "route": 1,
@@ -83,6 +91,7 @@
       "from_ic_name_used": "京都南",
       "to_ic_name_used": "豊岡出石",
       "search_date_time": "2027-03-03T09:00",
+      "roads_on_route_1": "Meishin + Shin-Meishin + Chugoku Expwy + Maizuru-Wakasa Expwy + Kita-Kinki Toyooka Expwy (free sections)",
       "routes_listed_by_site": [
         {
           "route": 1,
@@ -117,6 +126,7 @@
       "from_ic_name_used": "豊岡出石",
       "to_ic_name_used": "山陽姫路東",
       "search_date_time": "2027-03-05T09:00",
+      "roads_on_route_1": "Kita-Kinki Toyooka Expwy (free section) + Bantan Rengo Road",
       "routes_listed_by_site": [
         {
           "route": 1,
@@ -147,55 +157,76 @@
     {
       "leg": "L5",
       "from": "Himeji (Sanyo Himeji East IC)",
-      "to": "Osaka Umeda (via Kobe)",
+      "to": "Kobe Nishi IC (Maiko area)",
       "from_ic_name_used": "山陽姫路東",
-      "to_ic_name_used": "梅田",
+      "to_ic_name_used": "神戸西",
       "search_date_time": "2027-03-06T09:00",
+      "roads_on_route_1": "Sanyo Expwy + Kimi branch",
       "routes_listed_by_site": [
         {
           "route": 1,
-          "regular_price": 3400,
-          "etc_toll": 2050,
-          "etc2_toll": 2050,
-          "time": "1:03",
-          "km": 86.3
+          "regular_price": 1120,
+          "etc_toll": 780,
+          "etc2_toll": 780,
+          "time": "0:27",
+          "km": 44.0
         },
         {
           "route": 2,
-          "regular_price": 4290,
-          "etc_toll": 2680,
-          "etc2_toll": 2680,
-          "time": "1:16",
-          "km": 104.9
+          "regular_price": 2490,
+          "etc_toll": 1130,
+          "etc2_toll": 1130,
+          "time": "1:02",
+          "km": 71.5
+        }
+      ]
+    },
+    {
+      "leg": "L6",
+      "from": "Kobe (Ikutagawa IC)",
+      "to": "Osaka Umeda",
+      "from_ic_name_used": "生田川",
+      "to_ic_name_used": "梅田",
+      "search_date_time": "2027-03-06T09:00",
+      "roads_on_route_1": "Hanshin Expwy Route 3 Kobe line + Meishin + Hanshin Route 11",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 3650,
+          "etc_toll": 1610,
+          "etc2_toll": 1610,
+          "time": "0:32",
+          "km": 34.5
+        },
+        {
+          "route": 2,
+          "regular_price": 1590,
+          "etc_toll": 1160,
+          "etc2_toll": 1160,
+          "time": "0:35",
+          "km": 33.3
         },
         {
           "route": 3,
-          "regular_price": 2420,
-          "etc_toll": 2120,
-          "etc2_toll": 2120,
-          "time": "1:48",
-          "km": 115.4
+          "regular_price": 1590,
+          "etc_toll": 1090,
+          "etc2_toll": 1090,
+          "time": "0:38",
+          "km": 35.5
         }
       ]
     }
   ],
   "estimate_yen": {
-    "etc_using_route_1_each_leg": 8740,
-    "etc_lowest_route_each_leg": 8740,
-    "etc_highest_route_each_leg": 13150,
-    "cash_using_route_1_each_leg": 10940
+    "etc_using_route_1_each_leg": 9080,
+    "etc_cheapest_comparable_route_each_leg": 8560,
+    "cash_using_route_1_each_leg": 12310,
+    "comparable_rule": "a listed route counts as comparable if its distance is within 15% of Route 1's; the site also lists long detours (up to 380 km) that are ignored"
   },
-  "estimate_label": "Estimate, computed by code from the site's figures. Not a quote.",
   "not_included": [
-    "Local-road driving between stops (Nara to Kyoto if done on free roads, the Lake Biwa shrine detour, Maiko and Kobe stops, city driving in Kyoto)",
+    "Local-road driving between stops (Nara to Kyoto if done on free roads, the Lake Biwa shrine detour, Maiko to Kobe city, Kyoto city driving)",
     "Parking",
-    "Any toll on legs not searched",
     "Hyogo Prefecture Road Public Corporation discounts on the Bantan Rengo road, which the site says it does not reflect"
   ],
-  "problems": "Legs use assumed interchanges. Osaka city ramps such as Dojima and Morinomiya returned 'search unsuccessful' (half interchanges), so Umeda was used for Osaka. Names Suita, Higashi-Osaka, Kobe, Sannomiya and Nishinomiya were not recognised. A flat-rate pass for foreign visitors has not been checked yet.",
-  "pass": null,
-  "fuel": {
-    "status": "not done",
-    "reason": "No official Wagon R fuel economy figure or official petrol price retrieved yet"
-  }
+  "problems": "Legs use assumed interchanges. Osaka city ramps such as Dojima and Morinomiya returned 'search unsuccessful' (half interchanges), so Umeda was used. Names Suita, Higashi-Osaka, Kobe, Sannomiya and Nishinomiya were not recognised. The Himeji to Osaka day was split into Himeji East to Kobe Nishi plus Ikutagawa to Umeda because the site's direct route skips Kobe. The Kobe Nishi to Ikutagawa stretch (Maiko to central Kobe) is not priced. A flat-rate pass for foreign visitors has not been checked yet."
 }
