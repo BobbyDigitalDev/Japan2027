@@ -378,15 +378,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     <div class="rcards" id="rcards"></div>
   </section>
 
-  <section class="costs" aria-labelledby="costs-h">
-    <div>
-      <h2 id="costs-h">Costs so far</h2>
-      <p class="sub" id="costs-sub"></p>
-    </div>
-    <div class="tscroll"><table class="ctable" id="ctable"></table></div>
-    <ul class="findings" id="findings"></ul>
-  </section>
-
+  <!-- Bobby's rule: the map always sits directly below the road trip options. Put new sections after the map, never between. -->
   <section class="places" aria-labelledby="places-h">
     <div class="places-head">
       <h2 id="places-h">Map</h2>
@@ -398,6 +390,14 @@ catch (e) { document.documentElement.classList.add("locked"); }
     </div>
     <div id="map" role="region" aria-label="Map of researched places"></div>
     <p class="map-note">Pin positions come from Google Places (checked Nov 12, 2026). Icons show the type of place. A dashed ring means the name is not confirmed yet. Opening days and hours have not been checked for March 2027.</p>
+    <div class="costs" role="region" aria-labelledby="costs-h">
+      <div>
+        <h2 id="costs-h">Costs so far</h2>
+        <p class="sub" id="costs-sub"></p>
+      </div>
+      <div class="tscroll"><table class="ctable" id="ctable"></table></div>
+      <ul class="findings" id="findings"></ul>
+    </div>
     <div class="rdetail" id="rdetail" hidden></div>
     <p class="map-note" id="rsource"></p>
     <h3 class="plist-h">All researched places</h3>
@@ -700,7 +700,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     var key = h.nights[i], s = h.stays[key];
     if (i > 0 && h.nights[i - 1] === key) return "Second night of the same stay.";
     return "Hotel picks: " + s.picks.map(function (p) { return esc(p.name) + " " + usd(p.total); }).join(" · ") +
-      (s.nights > 1 ? " (totals for " + s.nights + " nights)" : "") + ". Details are in the route breakdown under the map.";
+      (s.nights > 1 ? " (totals for " + s.nights + " nights)" : "") + ". Details are in the route breakdown below the map.";
   }
 
   function path(d) { return d.legs.length ? esc(d.legs[0].from) + d.legs.map(function (l) { return " → " + esc(l.to); }).join("") : esc(d.stay) + " (no driving)"; }
@@ -776,7 +776,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       "<th scope=\"col\">Hotels, lower picks</th><th scope=\"col\">Hotels, middle picks</th><th scope=\"col\">Hotels, higher picks</th>" +
       "<th scope=\"col\">Car, tolls, fuel, flights</th></tr></thead><tbody>" + rows + "</tbody>";
     document.getElementById("costs-sub").textContent = "Hotels only, for the 7 nights from Feb 27 to Mar 6, 2 adults in 1 room, US dollars with taxes. Source: " +
-      (HM.source || "") + ", read " + (HM.read || "") + ". Nothing is booked. Select a route above to see the hotels night by night under the map.";
+      (HM.source || "") + ", read " + (HM.read || "") + ". Nothing is booked. Select a route above the map to see its hotels night by night below this table.";
     function pk(rid, key, tier) { var out = null; ((H[rid] || {}).stays || {})[key] && H[rid].stays[key].picks.forEach(function (p) { if (p.tier === tier) out = p; }); return out; }
     var f = [];
     var byaku = pk("A", "A2", "lower"), morino = pk("A", "A2b", "lower"), shio = pk("A", "A2c", "lower");
