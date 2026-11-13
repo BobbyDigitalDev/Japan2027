@@ -8,7 +8,7 @@ Live page: https://bobbydigitaldev.com/Japan2027/
 
 - `index.html` holds the page, styles and scripts. It reads three generated data files: `places.js` (places from the videos), `routes.js` (three road trip options) and `hotels.js` (hotel picks and totals). Each has a `?v=` value in its script tag; bump it when the file changes so browsers do not use a stale copy.
 - Confirmed plans live in the `plans` object in the script at the bottom of `index.html`. Days without an entry show as open.
-- `tools/build_routes.py` builds `routes.js` from OSRM route data. `tools/build_hotels.py <research/hotels folder> hotels.js` builds `hotels.js` from the research JSON files (one per stop) plus `tools/hotel_photos.json`. Totals are summed by the script, never typed. The research files and the checker live in the trip folder on Bobby's computer, not in this repo.
+- `tools/build_routes.py` builds `routes.js` from OSRM route data. `tools/build_hotels.py <research/hotels folder> hotels.js` builds `hotels.js` from the research JSON files (one per stop) plus `tools/hotel_photos.json`. Totals are summed by the script, never typed. Research files are in `research/` (hotels, cars), route and place source data in `data/`, the checker is `tools/check_research.py` and the collection rules are in `docs/RESEARCH-PROTOCOL.md`. Run `python3 tools/check_research.py` after adding research files. The repo is the working copy; the trip folder on Bobby's computer mirrors it.
 - The map stays directly below the road trip options. New sections go after the map.
 - Push to `main` and GitHub Pages redeploys.
 

@@ -1,0 +1,15 @@
+{
+  "key": "CA",
+  "company": "Nippon Rent-A-Car",
+  "site_url": "https://www.nipponrentacar.co.jp/en/nrglobal/s/",
+  "read_at": "2026-11-13T10:05:00-05:00",
+  "pickup": {"office": "Haneda Airport", "datetime": "2027-02-28T10:00", "office_hours": "not read"},
+  "return": {"office": "Osaka Umeda", "datetime": "2027-03-06T15:00", "office_hours": "not read"},
+  "page_confirms": {"pickup": "form showed Haneda Airport, 2/28/2027 (Sun) 10:00", "return": "form showed Osaka Umeda, 3/6/2027 (Sat) 15:00"},
+  "class_name": null, "example_model": null, "is_kei": null,
+  "base_price": null, "one_way_fee": null, "insurance": null, "winter_tires": null, "etc_card_rental": null,
+  "total_shown": null, "total_includes": null, "currency": "JPY", "price_source": null,
+  "one_way_allowed_for_class": "unknown",
+  "notes": "The one-way search form was filled (return-to-same-location off, Haneda Airport to Osaka Umeda, kei/standard class, US licence with international permit).",
+  "problems": "The Search button did not submit the form on three tries (button click by reference and by position, with waits up to 10 seconds); the page stayed on the search form with no error shown. Not retried further."
+}

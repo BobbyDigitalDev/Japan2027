@@ -1,0 +1,48 @@
+{
+  "key": "A2",
+  "stop": "Narai-juku",
+  "check_in": "2027-03-01",
+  "check_out": "2027-03-02",
+  "nights": 1,
+  "adults": 2,
+  "rooms": 1,
+  "site": "hotels.com",
+  "search_url": "https://www.hotels.com/Hotel-Search?rooms=1&destination=Narai-juku%2C+Shiojiri%2C+Nagano+Prefecture%2C+Japan&regionId=6347533&startDate=2027-03-01&endDate=2027-03-02&adults=2&sort=PRICE_LOW_TO_HIGH&star=30&star=40&guestRating=40",
+  "read_at": "2026-11-12T15:10:21-05:00",
+  "signed_in": true,
+  "page_confirms": {
+    "destination": "Narai-juku, Shiojiri, Nagano Prefecture, Japan",
+    "dates": "Mon, Mar 1 - Tue, Mar 2",
+    "travelers": "2 travelers, 1 room"
+  },
+  "filters_used": [
+    "Property class 3",
+    "Property class 4",
+    "Guest rating Very good 8+",
+    "Sort by price low to high"
+  ],
+  "qualifying_count": 1,
+  "picks": [
+    {
+      "tier": "lower",
+      "name": "BYAKU Narai",
+      "url": "https://www.hotels.com/ho2513385664/byaku-narai-shiojiri-japan/",
+      "stars": 4,
+      "guest_rating": 10.0,
+      "review_count": 57,
+      "room_type": "Annex 113, Semi-open-air Bath, Non Smoking",
+      "bed": "1 King Bed",
+      "price_per_night": 659.0,
+      "price_per_night_includes_taxes": false,
+      "total_with_taxes": 725.0,
+      "currency": "USD",
+      "price_source": "detail",
+      "member_price": false,
+      "free_cancellation": "yes, fully refundable before Sat Jan 30",
+      "parking": "Free uncovered onsite self parking",
+      "notes": "Address Narai 551, Shiojiri, Nagano 399-6303, inside Narai-juku. Only qualifying hotel in the town, so it is the only pick (tier label 'lower' is nominal). Rate includes dinner and breakfast (+$0). Sleeps 2. Rating shown as 10 out of 10 with 57 reviews."
+    }
+  ],
+  "fallback_of": "",
+  "problems": "Only one picks file: Narai-juku has one qualifying hotel (BYAKU Narai). Others in the town do not qualify: yama-niwa-INN hostel 0.7 mi has 4 reviews ($83/$91). Everything else listed is 8 to 19 mi away (Onsen Lodge Watari 8.4 mi, 19 reviews; Morino Hotel Kiso 8.7 mi, 8.4, 60 reviews, $118/$130). Fallbacks A2b Kiso-Fukushima and A2c Shiojiri still to search. Parking was not used as a filter for this search."
+}

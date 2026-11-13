@@ -1,0 +1,1360 @@
+[
+{
+"id": 1,
+"name": "Osaka (city)",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "town",
+"route": "loop",
+"lat": 34.702411,
+"lon": 135.495917,
+"cn": "Coordinates are Osaka Station City (Umeda), as a city centre point.",
+"m": [
+{
+"n": "Describes Osaka as grittier and friendlier than Tokyo and the easiest place to strike up a conversation with strangers.",
+"l": "https://www.youtube.com/watch?v=7efZG282TN8&t=40s",
+"t": "24 Hours in Osaka | 6 Things to do in Japan's Nightlife Capital"
+},
+{
+"n": "Days 10 to 11 of his 14-day plan. Calls it his favourite city and says it is at its best after dark.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2439s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 2,
+"name": "Dotonbori, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6686471,
+"lon": 135.5030983,
+"cn": "",
+"m": [
+{
+"n": "The canal-side billboards at night are his favourite spot in Japan. Says the area around it is the best place to stay in Osaka. Street food all around.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2468s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 3,
+"name": "Amerikamura, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6719318,
+"lon": 135.4988498,
+"cn": "Coordinates are the neighbourhood centre.",
+"m": [
+{
+"n": "Youth-culture district where people hang out and drink outdoors. They were invited over by local students within minutes.",
+"l": "https://www.youtube.com/watch?v=7efZG282TN8&t=211s",
+"t": "24 Hours in Osaka | 6 Things to do in Japan's Nightlife Capital"
+}
+]
+},
+{
+"id": 4,
+"name": "Osaka Castle",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6872571,
+"lon": 135.5258546,
+"cn": "",
+"m": [
+{
+"n": "Impressive scale, moat and gardens, but the inside is a modern museum with a lift. The queue to go up can be long.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2585s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 5,
+"name": "Shinsekai and Tsutenkaku Tower, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6524992,
+"lon": 135.5063058,
+"cn": "Coordinates are the tower.",
+"m": [
+{
+"n": "Retro district. The tower gives a city view that includes the castle, as an alternative to queueing at the castle. Kushikatsu restaurants around it.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2645s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 6,
+"name": "Yaki Yaki Haru no Hana (okonomiyaki), Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.6863008,
+"lon": 135.4921617,
+"cn": "Matched on the Japanese name (やきやき晴の花), Kyomachibori. Closed Mondays on the map listing.",
+"m": [
+{
+"n": "Okonomiyaki cooked by a veteran chef. They had a cheese one, a gluten-free one and a noodle (modern-yaki) one. His favourite dish of the Osaka food trip.",
+"l": "https://www.youtube.com/watch?v=K2T2QJ-VaLk&t=219s",
+"t": "5 Must Try Japanese Foods in Osaka 🇯🇵"
+}
+]
+},
+{
+"id": 7,
+"name": "Tako no Tetsu (takoyaki), Umeda, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.704331,
+"lon": 135.5011177,
+"cn": "Kakuda shop. There is a second Umeda branch in KITTE Osaka (34.5006, 135.4940); the video does not say which.",
+"m": [
+{
+"n": "Sit-down place in Umeda where you cook takoyaki yourself on a grill at the table.",
+"l": "https://www.youtube.com/watch?v=K2T2QJ-VaLk&t=515s",
+"t": "5 Must Try Japanese Foods in Osaka 🇯🇵"
+}
+]
+},
+{
+"id": 8,
+"name": "Nikushou Nakata (yakiniku), Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.668085,
+"lon": 135.5009576,
+"cn": "Listed on the map as Meat Master NAKATA main store, Namba. Matched on the name and the wagyu-grilled-for-you format. Closed Mondays.",
+"m": [
+{
+"n": "High-end yakiniku where the chef grills wagyu for you. Said in the video to be on the Tabelog top-100 yakiniku list for West Japan.",
+"l": "https://www.youtube.com/watch?v=K2T2QJ-VaLk&t=714s",
+"t": "5 Must Try Japanese Foods in Osaka 🇯🇵"
+}
+]
+},
+{
+"id": 9,
+"name": "Ramen Goku, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.6478152,
+"lon": 135.5093241,
+"cn": "Near Tennoji Station.",
+"m": [
+{
+"n": "Tonkotsu ramen with three different cuts of chashu pork. Small shop that is easy to walk past.",
+"l": "https://www.youtube.com/watch?v=K2T2QJ-VaLk&t=967s",
+"t": "5 Must Try Japanese Foods in Osaka 🇯🇵"
+}
+]
+},
+{
+"id": 10,
+"name": "Kitashinchi Kushikatsu Bon, Osaka",
+"chk": 1,
+"pref": "Osaka",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.6966074,
+"lon": 135.4972251,
+"cn": "Main branch is hard to book; reviews say reserve well ahead.",
+"m": [
+{
+"n": "Upscale kushikatsu course: light batter, each skewer fried and served one at a time, including wagyu and sea urchin with caviar.",
+"l": "https://www.youtube.com/watch?v=K2T2QJ-VaLk&t=1207s",
+"t": "5 Must Try Japanese Foods in Osaka 🇯🇵"
+}
+]
+},
+{
+"id": 11,
+"name": "Iwatayama Monkey Park, Arashiyama, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 35.0113346,
+"lon": 135.6766869,
+"cn": "Listed as Arashiyama Monkey Park Iwatayama.",
+"m": [
+{
+"n": "About a 25-minute uphill walk in Arashiyama. Around 120 wild macaques roam free; visitors feed them from inside a caged hut. Good view over Kyoto.",
+"l": "https://www.youtube.com/watch?v=qYXJEx9vmi0&t=95s",
+"t": "24 Hours in Kyoto | Japan's Best Monkey Park"
+},
+{
+"n": "Repeats the visit in the 14-day plan. Warns the monkeys are wild: keep distance and avoid eye contact.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1953s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 12,
+"name": "Yokai Street, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 35.0261546,
+"lon": 135.7339724,
+"cn": "Ichijo Yokai Street. Map reviews say many shops are shut on weekdays.",
+"m": [
+{
+"n": "An ordinary shopping street where each shop displays a homemade monster figure, tied to a local folk tale about discarded household objects.",
+"l": "https://www.youtube.com/watch?v=qYXJEx9vmi0&t=340s",
+"t": "24 Hours in Kyoto | Japan's Best Monkey Park"
+}
+]
+},
+{
+"id": 13,
+"name": "Yasaka Shrine, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 35.0036559,
+"lon": 135.7785534,
+"cn": "",
+"m": [
+{
+"n": "End point of his ride into Kyoto, on the edge of the city centre. Seen at night in the rain.",
+"l": "https://www.youtube.com/watch?v=GM_vGjtFu2E&t=837s",
+"t": "I Got Lost in Kyoto with only a Paper Map"
+}
+]
+},
+{
+"id": 14,
+"name": "Fushimi Inari Taisha, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.9676945,
+"lon": 135.7791876,
+"cn": "",
+"m": [
+{
+"n": "Around 10,000 torii gates up Mount Inari (233 m). About 30 to 40 minutes to the top; the walk through the gates is the point.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1747s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 15,
+"name": "Tenryu-ji Temple, Arashiyama, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 35.0158379,
+"lon": 135.6737654,
+"cn": "",
+"m": [
+{
+"n": "Zen temple in Arashiyama with a 14th-century landscaped garden and pond. Suggested as a place to sit quietly.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1924s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 16,
+"name": "Kinkaku-ji (Golden Pavilion), Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 35.03937,
+"lon": 135.7292431,
+"cn": "",
+"m": [
+{
+"n": "Golden Pavilion. Expect a queue and a crowd for the view. They went in late afternoon sun.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1983s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 17,
+"name": "Kiyomizu-dera and Higashiyama, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.9946662,
+"lon": 135.784661,
+"cn": "Coordinates are the temple.",
+"m": [
+{
+"n": "Go about an hour before dusk. The walk up through Higashiyama past the Yasaka Pagoda and the shops is half the appeal. Wooden stage 13 m high with views over Kyoto.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2016s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 18,
+"name": "Tempura Endo Yasaka, Higashiyama, Kyoto",
+"chk": 1,
+"pref": "Kyoto",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.9989684,
+"lon": 135.7751287,
+"cn": "Two buildings (North and West) on the same street; the video does not say which. Coordinates are North.",
+"m": [
+{
+"n": "Tempura restaurant he says he visits every time he is in Kyoto. Each piece is battered and served one at a time.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1837s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 19,
+"name": "Lake Biwa (west shore, Route 161)",
+"chk": 1,
+"pref": "Shiga",
+"reg": "Kansai",
+"kind": "road",
+"route": "both",
+"lat": 35.3946798,
+"lon": 136.0261517,
+"cn": "Point is on Route 161 at Takashima.",
+"m": [
+{
+"n": "Cycled down the west shore on Route 161. Calls it the most picturesque day of that trip, with mountains visible all around the lake.",
+"l": "https://www.youtube.com/watch?v=GM_vGjtFu2E&t=538s",
+"t": "I Got Lost in Kyoto with only a Paper Map"
+}
+]
+},
+{
+"id": 20,
+"name": "Shirahige Shrine, Takashima",
+"chk": 1,
+"pref": "Shiga",
+"reg": "Kansai",
+"kind": "sight",
+"route": "both",
+"lat": 35.2745424,
+"lon": 136.0110348,
+"cn": "",
+"m": [
+{
+"n": "Shrine with a torii gate standing in the lake, right beside Route 161.",
+"l": "https://www.youtube.com/watch?v=GM_vGjtFu2E&t=451s",
+"t": "I Got Lost in Kyoto with only a Paper Map"
+}
+]
+},
+{
+"id": 21,
+"name": "Nara Park and Todai-ji",
+"chk": 1,
+"pref": "Nara",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6889851,
+"lon": 135.8398158,
+"cn": "Coordinates are Todai-ji.",
+"m": [
+{
+"n": "About 1,200 deer in the park; they bow for crackers and get pushy. Todai-ji holds a 49 ft bronze Buddha in one of the largest wooden buildings in the world.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2296s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 22,
+"name": "Kasuga Taisha, Nara",
+"chk": 1,
+"pref": "Nara",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.6815454,
+"lon": 135.8484719,
+"cn": "",
+"m": [
+{
+"n": "Shrine with about 3,000 lanterns. They are only lit twice a year, in February and August.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2406s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 23,
+"name": "Nakatanidou (yomogi mochi), Nara",
+"chk": 1,
+"pref": "Nara",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.681943,
+"lon": 135.8288995,
+"cn": "Not named aloud in the video. Matched by the sign on screen and the map listing (mochi pounding, yomogi mochi).",
+"m": [
+{
+"n": "Famous shop where rice cakes are pounded in front of customers. Fresh yomogi mochi filled with red bean paste.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2239s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 24,
+"name": "Kobe (Kobe beef teppanyaki; restaurant not named)",
+"chk": 1,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.694659,
+"lon": 135.1949544,
+"cn": "Coordinates are Sannomiya Station as a city centre point. The restaurant is not named in the video.",
+"m": [
+{
+"n": "Teppanyaki Kobe beef. 250 g cost about 15,000 yen in 2018. The restaurant is not named.",
+"l": "https://www.youtube.com/watch?v=MWOwEWMquP8&t=87s",
+"t": "I Tried Kobe Beef for the First Time | A5 Japanese Wagyu"
+}
+]
+},
+{
+"id": 25,
+"name": "Himeji Castle",
+"chk": 1,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": 34.839449,
+"lon": 134.6939047,
+"cn": "",
+"m": [
+{
+"n": "Approach down the main street from the station with the castle in view the whole way. Explains why it survived the war and the 1995 earthquake.",
+"l": "https://www.youtube.com/watch?v=cE0RAhEsbdg&t=209s",
+"t": "Why Himeji is Japan's Greatest Castle"
+},
+{
+"n": "First stop of his west Japan route. The castle is visible the moment you leave the station. Going inside took about 30 minutes up steep stairs; he thinks it is best enjoyed from outside and the grounds.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=185s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+}
+]
+},
+{
+"id": 26,
+"name": "Amaneya (wagashi sweet shop), Himeji",
+"chk": 1,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "food",
+"route": "loop",
+"lat": 34.8307728,
+"lon": 134.6906662,
+"cn": "Himeji-North shop near the station, chosen because it is a small shop on a back street as described. A larger Amaneya is in Hirohata (34.8309, 134.6438).",
+"m": [
+{
+"n": "Small handmade Japanese sweet shop in the back streets, run by a former office worker. Fruit mochi and red-bean pancakes.",
+"l": "https://www.youtube.com/watch?v=cE0RAhEsbdg&t=405s",
+"t": "Why Himeji is Japan's Greatest Castle"
+}
+]
+},
+{
+"id": 27,
+"name": "Ako (Showa-era memorabilia museum)",
+"chk": 0,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "sight",
+"route": "loop",
+"lat": null,
+"lon": null,
+"cn": "Candidates: Ako Omocha Hakubutsukan (toy museum with Showa-era toys, signs, cars; 34.7503539, 134.3883199) and Ako Folk Culture Museum (34.74989, 134.38226). The toy museum fits the video better. Not confirmed.",
+"m": [
+{
+"n": "Stayed overnight here on the coast west of Himeji and found a museum of 1950s and 1960s memorabilia near the hotel.",
+"l": "https://www.youtube.com/watch?v=cE0RAhEsbdg&t=695s",
+"t": "Why Himeji is Japan's Greatest Castle"
+}
+]
+},
+{
+"id": 28,
+"name": "Akashi-Kaikyo Bridge",
+"chk": 1,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "road",
+"route": "loop",
+"lat": 34.6241441,
+"lon": 135.0273237,
+"cn": "Point is the Maiko waterfront viewing area.",
+"m": [
+{
+"n": "He planned to cross it to Shikoku by bicycle and found bicycles are not allowed on it.",
+"l": "https://www.youtube.com/watch?v=cE0RAhEsbdg&t=7s",
+"t": "Why Himeji is Japan's Greatest Castle"
+}
+]
+},
+{
+"id": 29,
+"name": "Kinosaki Onsen",
+"chk": 1,
+"pref": "Hyogo",
+"reg": "Kansai",
+"kind": "onsen",
+"route": "loop",
+"lat": 35.6241637,
+"lon": 134.8131005,
+"cn": "",
+"m": [
+{
+"n": "About 2 hours by train from Himeji, on the Sea of Japan side. Seven public bathhouses along a willow-lined canal with stone bridges. Known for snow crab; try the crab cream croquette.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=405s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+},
+{
+"n": "Stayed at an inn overlooking the Maruyama River with a private bath in the room, and had a kaiseki dinner with local Tajima beef. Inn not named in the captions.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=598s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+}
+]
+},
+{
+"id": 30,
+"name": "Kurashiki Bikan Historical Quarter and Kojima Jeans Street",
+"chk": 1,
+"pref": "Okayama",
+"reg": "Chugoku",
+"kind": "town",
+"route": "loop",
+"lat": 34.5957392,
+"lon": 133.7717651,
+"cn": "Coordinates are the Bikan quarter. Kojima Jeans Street is a separate area about 14 km south (34.4695944, 133.8015776).",
+"m": [
+{
+"n": "Canal-side old town with Edo-era look. Stayed in a converted wooden townhouse. The Kojima district is the birthplace of Japanese denim. He says to give it at least a full day.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=771s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+}
+]
+},
+{
+"id": 31,
+"name": "Onomichi",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "town",
+"route": "loop",
+"lat": 34.4048956,
+"lon": 133.1935549,
+"cn": "Coordinates are Onomichi Station.",
+"m": [
+{
+"n": "Start of the Shimanami Kaido. About 1 hour by train from Kurashiki.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=1165s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+}
+]
+},
+{
+"id": 32,
+"name": "Shimanami Kaido",
+"chk": 1,
+"pref": "Hiroshima / Ehime",
+"reg": "Chugoku",
+"kind": "road",
+"route": "loop",
+"lat": 34.1112396,
+"lon": 132.9759492,
+"cn": "Point is the Imabari end of the cycling road. The route runs from Onomichi (34.405, 133.194).",
+"m": [
+{
+"n": "70 km route over the Inland Sea islands with large bridges and beaches. He calls it the single best thing to do in Japan, ahead of climbing Fuji.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=1193s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+},
+{
+"n": "Cycled the full 70 km and about six bridges in one day and found it very hard. Says to set aside 1 to 2 days. Best scenery in Japan in his view.",
+"l": "https://www.youtube.com/watch?v=jVcf5iOszjc&t=715s",
+"t": "24 Hours in Japan's Inland Sea Paradise | Shimanami Kaido"
+}
+]
+},
+{
+"id": 33,
+"name": "Okunoshima (Rabbit Island)",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.30906,
+"lon": 132.9939774,
+"cn": "",
+"m": [
+{
+"n": "About 2 hours from Hiroshima city by train and boat. Covered in tame rabbits. Also has ruins of a wartime chemical weapons plant and a small Poison Gas Museum.",
+"l": "https://www.youtube.com/watch?v=3yF8Ehgj1mQ&t=60s",
+"t": "Japan's Rabbit Island: Cute Rabbits, Dark History"
+}
+]
+},
+{
+"id": 34,
+"name": "Hiroshima Peace Memorial Park, Museum and A-Bomb Dome",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.395483,
+"lon": 132.453592,
+"cn": "Coordinates are the A-Bomb Dome.",
+"m": [
+{
+"n": "Says the museum is essential viewing and the Dome is what makes the scale of the event real.",
+"l": "https://www.youtube.com/watch?v=zlpUjbQ91gE&t=51s",
+"t": "What to do in Hiroshima & Miyajima | 6 Must Try Travel Ideas"
+},
+{
+"n": "Describes the museum as disturbing by design and the one place in Hiroshima that must be visited.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=51s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 35,
+"name": "Hiroshima Orizuru Tower",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.3956868,
+"lon": 132.4547167,
+"cn": "",
+"m": [
+{
+"n": "Observation deck directly overlooking the Dome and the city. Visitors fold a paper crane and drop it into a glass wall. Rooftop bar at night.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=116s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 36,
+"name": "Okonomimura, Hiroshima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "food",
+"route": "loop",
+"lat": 34.3914342,
+"lon": 132.4619014,
+"cn": "",
+"m": [
+{
+"n": "A building of many small okonomiyaki stalls. He goes every visit and picks whichever stall is quiet. About 700 to 900 yen in 2019.",
+"l": "https://www.youtube.com/watch?v=zlpUjbQ91gE&t=304s",
+"t": "What to do in Hiroshima & Miyajima | 6 Must Try Travel Ideas"
+}
+]
+},
+{
+"id": 37,
+"name": "Okonomiyaki Mitchan Sohonten, Hiroshima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "food",
+"route": "loop",
+"lat": 34.3957125,
+"lon": 132.4635489,
+"cn": "Hatchobori main store. A second Mitchan Sohonten branch is at Hiroshima Station (34.3978, 132.4765); the video does not say which.",
+"m": [
+{
+"n": "Busy Hiroshima-style okonomiyaki restaurant where he was allowed to cook behind the counter. Layered style with crisp noodles.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=437s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 38,
+"name": "Hiroshima Castle",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.4027456,
+"lon": 132.4591055,
+"cn": "",
+"m": [
+{
+"n": "Less dramatic than Himeji, but the grounds, moat paths and trees that survived the bombing make a calm stop in the city centre.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=620s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 39,
+"name": "B Hotel, downtown Hiroshima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "stay",
+"route": "loop",
+"lat": 34.3883398,
+"lon": 132.4635457,
+"cn": "Only one B Hotel turned up in the search (Heiwa-odori). The branch in the video is not confirmed.",
+"m": [
+{
+"n": "Where they stayed downtown. Listed in the description; not discussed in detail.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=1455s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 40,
+"name": "Miyajima and Itsukushima Shrine",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.2959896,
+"lon": 132.3198285,
+"cn": "Coordinates are the shrine.",
+"m": [
+{
+"n": "About 45 minutes by boat from the city. Best at sunset. Deer will eat paper and bags. Grilled oysters with garlic butter and soy sold on the street.",
+"l": "https://www.youtube.com/watch?v=zlpUjbQ91gE&t=366s",
+"t": "What to do in Hiroshima & Miyajima | 6 Must Try Travel Ideas"
+},
+{
+"n": "40-minute ferry. Usually a rushed day trip ending in a run for the last ferry; he recommends staying overnight. Shrine looks best at high tide. Gate renovation is finished.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=685s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+},
+{
+"n": "Street food: oysters (including a cheese gratin one) and deep-fried maple-leaf cakes.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=854s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 41,
+"name": "Mount Misen, Miyajima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.2795127,
+"lon": 132.3198084,
+"cn": "",
+"m": [
+{
+"n": "Suggests arriving around 2 pm, going up the 500 m mountain for the Inland Sea panorama, then coming down for sunset at the shrine.",
+"l": "https://www.youtube.com/watch?v=zlpUjbQ91gE&t=453s",
+"t": "What to do in Hiroshima & Miyajima | 6 Must Try Travel Ideas"
+}
+]
+},
+{
+"id": 42,
+"name": "Daisho-in Temple, Miyajima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.2920462,
+"lon": 132.3184934,
+"cn": "",
+"m": [
+{
+"n": "Short walk from the shrine. 500 small jizo statues, a lantern-filled cave with 88 Buddha statues. His first visit and he was impressed.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=1086s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 43,
+"name": "Miyajima Great Rice Scoop (O-shakushi) and upstairs viewing deck",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "sight",
+"route": "loop",
+"lat": 34.2967854,
+"lon": 132.3213332,
+"cn": "Listed on the map under its Japanese name. The name of the building that houses it is not confirmed.",
+"m": [
+{
+"n": "A 7.7 m wooden rice paddle on display. Upstairs is a quiet viewing deck with a view of the pagoda, shore and mountains.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=996s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 44,
+"name": "Itsukushima Iroha Hotel, Miyajima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "stay",
+"route": "loop",
+"lat": 34.2996106,
+"lon": 132.3218496,
+"cn": "Listed on the map as Itsukushima Iroha.",
+"m": [
+{
+"n": "New hotel facing the shrine. Rooftop hot bath with a direct view of the torii gate. Kaiseki dinner with local seafood and beef. He was hosted.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=710s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 45,
+"name": "Akushu Cafe, Miyajima",
+"chk": 1,
+"pref": "Hiroshima",
+"reg": "Chugoku",
+"kind": "food",
+"route": "loop",
+"lat": null,
+"lon": null,
+"cn": "No coordinates. The map shows Akushu Restaurant inside the Itsukushima Iroha hotel on Miyajima and a separate Akushu Cafe ORGANIC in Orizuru Tower, Hiroshima. Which one serves the oysters with cheese is not resolved.",
+"m": [
+{
+"n": "Listed in the description as the place serving oysters topped with cheese and croquettes.",
+"l": "https://www.youtube.com/watch?v=EC2rOFE5TCs&t=854s",
+"t": "48 Hours in Hiroshima ⛩️ 8 Things to do in Japan's Legendary City"
+}
+]
+},
+{
+"id": 46,
+"name": "Matsuyama (Dogo Onsen, Matsuyama Castle)",
+"chk": 1,
+"pref": "Ehime",
+"reg": "Shikoku",
+"kind": "town",
+"route": "loop",
+"lat": 33.8520748,
+"lon": 132.7864098,
+"cn": "Coordinates are Dogo Onsen. Matsuyama Castle is at 33.8456, 132.7655.",
+"m": [
+{
+"n": "A short train ride from the far end of the Shimanami Kaido. Dogo Onsen and his favourite castle in Japan.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=1223s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+},
+{
+"n": "Names it one of his favourite cities after finishing the ride into Shikoku.",
+"l": "https://www.youtube.com/watch?v=jVcf5iOszjc&t=744s",
+"t": "24 Hours in Japan's Inland Sea Paradise | Shimanami Kaido"
+}
+]
+},
+{
+"id": 47,
+"name": "Nakasendo trail, Kiso Valley",
+"chk": 1,
+"pref": "Nagano / Gifu",
+"reg": "Chubu",
+"kind": "road",
+"route": "corridor",
+"lat": 35.5392066,
+"lon": 137.5845964,
+"cn": "Coordinates are Magome Pass, on the Magome to Tsumago section.",
+"m": [
+{
+"n": "Old mountain road between Tokyo and Kyoto. Walking it takes about five days; they drove instead and covered three villages over two nights.",
+"l": "https://www.youtube.com/watch?v=VY5uZWFc_UQ&t=25s",
+"t": "I Escaped to Japan's HIDDEN Mountain Village 🇯🇵 48Hrs Walking the Nakasendo"
+},
+{
+"n": "Walked about 100 km over 3 days through about eight post towns, from Nakatsugawa to Narai-juku. Calls it the most beautiful place in Japan.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=58s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 48,
+"name": "Narai-juku",
+"chk": 1,
+"pref": "Nagano",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 35.9682997,
+"lon": 137.8145375,
+"cn": "",
+"m": [
+{
+"n": "Long street of dark wooden buildings. His one complaint: cars drive down the main street every few seconds. Looks good in rain.",
+"l": "https://www.youtube.com/watch?v=VY5uZWFc_UQ&t=56s",
+"t": "I Escaped to Japan's HIDDEN Mountain Village 🇯🇵 48Hrs Walking the Nakasendo"
+},
+{
+"n": "The largest post town, with the most shops and restaurants. An ice cream shop claims John Lennon praised it; rated 6 out of 10.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=2059s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 49,
+"name": "BYAKU Narai (inn), Narai-juku",
+"chk": 1,
+"pref": "Nagano",
+"reg": "Chubu",
+"kind": "stay",
+"route": "corridor",
+"lat": 35.9661978,
+"lon": 137.8121098,
+"cn": "Main building. A separate annex building is about 3 minutes on foot (35.9673, 137.8134).",
+"m": [
+{
+"n": "200-year-old inn on the main street with a garden hidden behind a wall. Dinner included local mushrooms and bear hot pot.",
+"l": "https://www.youtube.com/watch?v=VY5uZWFc_UQ&t=344s",
+"t": "I Escaped to Japan's HIDDEN Mountain Village 🇯🇵 48Hrs Walking the Nakasendo"
+}
+]
+},
+{
+"id": 50,
+"name": "Magome",
+"chk": 1,
+"pref": "Gifu",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 35.5315174,
+"lon": 137.5717516,
+"cn": "",
+"m": [
+{
+"n": "43rd of 69 stations. Streams run through the streets. Chestnut sweets at a cafe. Restaurants took cash only and there were no ATMs.",
+"l": "https://www.youtube.com/watch?v=VY5uZWFc_UQ&t=740s",
+"t": "I Escaped to Japan's HIDDEN Mountain Village 🇯🇵 48Hrs Walking the Nakasendo"
+},
+{
+"n": "His favourite town on the trail; compares it to Kyoto in the mountains, though it can feel like a theme park. Oyaki dumplings for lunch.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=369s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 51,
+"name": "Tsumago",
+"chk": 1,
+"pref": "Nagano",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 35.5775876,
+"lon": 137.5956667,
+"cn": "",
+"m": [
+{
+"n": "Best preserved and most remote of the three. Feels lived-in. They rented a whole old house with a garden.",
+"l": "https://www.youtube.com/watch?v=VY5uZWFc_UQ&t=865s",
+"t": "I Escaped to Japan's HIDDEN Mountain Village 🇯🇵 48Hrs Walking the Nakasendo"
+},
+{
+"n": "Arrived after 5 pm and found the whole town shut. Cables are buried and there are no modern signs.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=931s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 52,
+"name": "Kiso-Fukushima",
+"chk": 1,
+"pref": "Nagano",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 35.8440023,
+"lon": 137.6933476,
+"cn": "Coordinates are Kiso-Fukushima Station.",
+"m": [
+{
+"n": "Quieter than Magome and Tsumago, with a river through town and a 1960s feel. Reached by a 40-minute train ride up the valley.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=1634s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 53,
+"name": "Torii Pass (Yabuhara to Narai-juku)",
+"chk": 0,
+"pref": "Nagano",
+"reg": "Chubu",
+"kind": "sight",
+"route": "corridor",
+"lat": null,
+"lon": null,
+"cn": "Two searches returned only the general Nakasendo route. Needs another source.",
+"m": [
+{
+"n": "His favourite section: tall cedars, small shrines, a cold spring, and a view down onto Narai-juku at the end.",
+"l": "https://www.youtube.com/watch?v=pKHAjwR-RB0&t=1801s",
+"t": "I Hiked 72Hrs to Japan’s Most Isolated Mountain Village 🇯🇵 The Nakasendo"
+}
+]
+},
+{
+"id": 54,
+"name": "Kanazawa (city)",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 36.5780443,
+"lon": 136.6481714,
+"cn": "Coordinates are Kanazawa Station as a city centre point.",
+"m": [
+{
+"n": "A five-course street food brunch at the city market, including sake-flavoured ice cream. Most of this transcript is low-quality captions.",
+"l": "https://www.youtube.com/watch?v=It338b61dU8&t=4s",
+"t": "Eating BRUNCH at a Japanese Market | Kanazawa Street Food"
+},
+{
+"n": "Days 4 to 5 of the 14-day plan, 2 hours from Tokyo by bullet train. Mid-sized city known for crafts, food and gold leaf.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=692s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 55,
+"name": "Omicho Market, Kanazawa",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "food",
+"route": "corridor",
+"lat": 36.5717335,
+"lon": 136.6558651,
+"cn": "",
+"m": [
+{
+"n": "Possibly his favourite market in Japan. Grilled eel skewer for 500 yen, seafood bowls, crab, fresh fruit juice.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=843s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 56,
+"name": "Higashi Chaya district, Kanazawa",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "sight",
+"route": "corridor",
+"lat": 36.572534,
+"lon": 136.6664397,
+"cn": "",
+"m": [
+{
+"n": "Largest of three old teahouse districts, with latticed wooden fronts. Gold-leaf-covered ice cream.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=901s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 57,
+"name": "Oyama Shrine, Kanazawa",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "sight",
+"route": "corridor",
+"lat": 36.5660731,
+"lon": 136.6554249,
+"cn": "",
+"m": [
+{
+"n": "Shrine with an unusual European-looking gate designed by a Dutch architect. Near the old samurai district, good for an evening walk.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1046s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 58,
+"name": "Kenroku-en garden, Kanazawa",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "sight",
+"route": "corridor",
+"lat": 36.5621278,
+"lon": 136.6626515,
+"cn": "",
+"m": [
+{
+"n": "One of the three famous gardens of Japan. They ran out of time but he says it is worth a visit.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1075s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 59,
+"name": "Kanazawa Kaiten Sushi KIRARI, near Kanazawa Station",
+"chk": 1,
+"pref": "Ishikawa",
+"reg": "Chubu",
+"kind": "food",
+"route": "corridor",
+"lat": 36.5782984,
+"lon": 136.646042,
+"cn": "Sign on screen reads KIRARI. Map reviews mention the bullet-train delivery.",
+"m": [
+{
+"n": "Sushi from the nearby port delivered to the seat on a model bullet train. Includes gold-leaf sushi.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1105s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 60,
+"name": "Shirakawa-go",
+"chk": 1,
+"pref": "Gifu",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 36.2550982,
+"lon": 136.9022991,
+"cn": "Coordinates are the Gassho-zukuri Minka-en open-air museum in Ogimachi village.",
+"m": [
+{
+"n": "Between Kanazawa and Takayama. Steep thatched farmhouses built for heavy snow, still lived in. Custard pudding shop.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1201s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 61,
+"name": "Takayama (old town, Showa-kan Museum, Hida Folk Village)",
+"chk": 1,
+"pref": "Gifu",
+"reg": "Chubu",
+"kind": "town",
+"route": "corridor",
+"lat": 36.1413161,
+"lon": 137.2596227,
+"cn": "Coordinates are Sanmachi Suji. Showa-kan is 36.1440, 137.2599; Hida Folk Village is 36.1325, 137.2351.",
+"m": [
+{
+"n": "Possibly his favourite town. About 50 minutes past Shirakawa-go. Old town with sake brewery and Hida beef skewers. Riverside room.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1350s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+},
+{
+"n": "Showa-kan Museum is his favourite museum in Japan. Hida Folk Village, a 5-minute taxi from the station, is the easy alternative to Shirakawa-go. About 3 hours by train on to Kyoto.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=1494s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 62,
+"name": "Hakone (Owakudani, ropeway, Lake Ashi, Hakone Shrine)",
+"chk": 1,
+"pref": "Kanagawa",
+"reg": "Kanto",
+"kind": "onsen",
+"route": "corridor",
+"lat": 35.2436011,
+"lon": 139.0197304,
+"cn": "Coordinates are Owakudani. Lake Ashi is 35.2096, 139.0035; Hakone Shrine is 35.2048, 139.0254.",
+"m": [
+{
+"n": "One-night hot spring stop about an hour from Tokyo. Ryokan with a balcony bath and a 12-dish kaiseki dinner.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2765s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+},
+{
+"n": "Owakudani volcanic valley by ropeway or by car, with a Fuji view on a clear day. Black eggs, 500 yen. Lakeside torii gate at Hakone Shrine.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=2968s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+},
+{
+"n": "They rented a car at Odawara Station and drove 45 minutes up. He says it is also easy without a car.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=3083s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 63,
+"name": "Kamakura (Great Buddha, Hokoku-ji bamboo grove, Komachi-dori)",
+"chk": 1,
+"pref": "Kanagawa",
+"reg": "Kanto",
+"kind": "town",
+"route": "corridor",
+"lat": 35.3168145,
+"lon": 139.5357442,
+"cn": "Coordinates are the Great Buddha (Kotoku-in). Hokoku-ji is 35.3198, 139.5689; Komachi-dori is 35.3217, 139.5525.",
+"m": [
+{
+"n": "Day trip 45 minutes from Tokyo. Great Buddha; a quiet bamboo grove behind a Zen temple with matcha served; shopping street with curry bread.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=180s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 64,
+"name": "Yokohama (Minato Mirai, Cup Noodles Museum, Chinatown)",
+"chk": 1,
+"pref": "Kanagawa",
+"reg": "Kanto",
+"kind": "town",
+"route": "corridor",
+"lat": 35.4600798,
+"lon": 139.6324577,
+"cn": "Coordinates are Minatomirai. Cup Noodles Museum is 35.4555, 139.6389; Chinatown is 35.4431, 139.6441.",
+"m": [
+{
+"n": "20 minutes on from Kamakura. Waterfront district, Cup Noodles Museum, and Chinatown at night for dumplings.",
+"l": "https://www.youtube.com/watch?v=DBVAAnq1dHo&t=459s",
+"t": "How to Spend 14 Days in JAPAN 🇯🇵 Ultimate Travel Itinerary"
+}
+]
+},
+{
+"id": 65,
+"name": "Ikaho Onsen",
+"chk": 1,
+"pref": "Gunma",
+"reg": "Kanto",
+"kind": "onsen",
+"route": "corridor",
+"lat": 36.4981947,
+"lon": 138.9165884,
+"cn": "Coordinates are the stone steps.",
+"m": [
+{
+"n": "Overnight stop driving from Tokyo towards the Sea of Japan coast. 365 stone steps lined with shops and cafes, shrine at the top, retro arcade games. Some abandoned buildings but lively.",
+"l": "https://www.youtube.com/watch?v=hVKm1l8cT2E&t=735s",
+"t": "We Drove to Japan's 1960's Hot Spring Town ♨️"
+}
+]
+},
+{
+"id": 66,
+"name": "Museum near Ikaho, probably the Ikaho Toy, Doll and Car Museum",
+"chk": 0,
+"pref": "Gunma",
+"reg": "Kanto",
+"kind": "sight",
+"route": "corridor",
+"lat": 36.4637501,
+"lon": 138.9691358,
+"cn": "Not named in the video or its description. The map listing fits (toys, classic cars, retro items, near Ikaho) but there is no second source.",
+"m": [
+{
+"n": "Large collection of over 10,000 American toys, posters and cars from the 20th century. Odd but impressive.",
+"l": "https://www.youtube.com/watch?v=hVKm1l8cT2E&t=454s",
+"t": "We Drove to Japan's 1960's Hot Spring Town ♨️"
+}
+]
+},
+{
+"id": 67,
+"name": "Fukuoka (Nakasu yatai stalls, Canal City Hakata, Nanzo-in reclining Buddha)",
+"chk": 1,
+"pref": "Fukuoka",
+"reg": "Kyushu",
+"kind": "town",
+"route": "out",
+"lat": 33.5906696,
+"lon": 130.4079063,
+"cn": "Coordinates are the Nakasu food stalls. Out of range for this trip.",
+"m": [
+{
+"n": "End of his west Japan route. Riverside food stalls fill by 6:30 pm, so arrive by 6. Out of range for this trip.",
+"l": "https://www.youtube.com/watch?v=hcI2M8GdXEc&t=1371s",
+"t": "21 Days in Japan 🇯🇵 Himeji to Fukuoka | Ultimate Japan Travel Guide"
+}
+]
+}
+]

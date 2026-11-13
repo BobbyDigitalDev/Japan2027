@@ -1,0 +1,48 @@
+{
+  "key": "A2b",
+  "stop": "Kiso-Fukushima (fallback for Narai-juku)",
+  "check_in": "2027-03-01",
+  "check_out": "2027-03-02",
+  "nights": 1,
+  "adults": 2,
+  "rooms": 1,
+  "site": "hotels.com",
+  "search_url": "https://www.hotels.com/Hotel-Search?rooms=1&destination=Fukushima%2C+Kiso%2C+Nagano+Prefecture%2C+Japan&regionId=553248635975861769&startDate=2027-03-01&endDate=2027-03-02&adults=2&sort=PRICE_LOW_TO_HIGH&star=30&star=40&guestRating=40",
+  "read_at": "2026-11-12T15:11:35-05:00",
+  "signed_in": true,
+  "page_confirms": {
+    "destination": "Fukushima, Kiso, Nagano Prefecture, Japan",
+    "dates": "Mon, Mar 1 - Tue, Mar 2",
+    "travelers": "2 travelers, 1 room"
+  },
+  "filters_used": [
+    "Property class 3",
+    "Property class 4",
+    "Guest rating Very good 8+",
+    "Sort by price low to high"
+  ],
+  "qualifying_count": 1,
+  "picks": [
+    {
+      "tier": "lower",
+      "name": "Morino Hotel",
+      "url": "https://www.hotels.com/ho926438112/morino-hotel-kiso-japan/",
+      "stars": 3,
+      "guest_rating": 8.4,
+      "review_count": 60,
+      "room_type": "Standard Twin Room with an Extra Bed",
+      "bed": "2 Twin Beds",
+      "price_per_night": 118.0,
+      "price_per_night_includes_taxes": false,
+      "total_with_taxes": 130.0,
+      "currency": "USD",
+      "price_source": "detail",
+      "member_price": false,
+      "free_cancellation": "yes, fully refundable before Thu Feb 25",
+      "parking": "Free onsite self parking",
+      "notes": "Address 4898-8 Hiyoshi, Kiso, Nagano 399-6101. 2.4 mi from Kiso-Fukushima per the results page. Only qualifying hotel near Kiso-Fukushima, so the only pick (tier label 'lower' is nominal). Sleeps 3 (room card). Breakfast +$12, half board +$93 extra."
+    }
+  ],
+  "fallback_of": "A2",
+  "problems": "One qualifying hotel within 3 mi. Others on the filtered list are 10 mi or more away (TAOYA Kisoji 20.2 mi, Hotel Fukinomori 19.3 mi, Komagane Kogen Resort Linx 12.2 mi, Route Inn Ina 13 mi) or have under 30 reviews or under 3 stars (Kiso Mikawaya 2.5 stars). BYAKU Narai also appears at 10.1 mi. Parking was not used as a filter."
+}
