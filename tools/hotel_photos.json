@@ -1,21 +1,227 @@
 {
- "_note": "Photo paths on images.trvl-media.com/lodging/, read from each hotel's hotels.com page on 2026-11-12. front=true means the page's own image description is of the building or entrance. Hotels missing here were not reached (hotels.com bot check).",
- "ho161097": {"p": "1000000/80000/76900/76855/dfe0172b.jpg", "front": true},
- "ho1477079872": {"p": "47000000/46130000/46127500/46127496/2c56e27d.jpg", "front": true},
- "ho371924": {"p": "5000000/4200000/4191200/4191190/786b6d16.jpg", "front": true},
- "ho3041921568": {"p": "96000000/95030000/95028800/95028799/a5c29b55.jpg", "front": true},
- "ho594323": {"p": "16000000/15240000/15231600/15231511/ecaeb8f4.jpg", "front": true},
- "ho456125": {"p": "9000000/8070000/8068900/8068806/14b27e92.jpg", "front": true},
- "ho931781600": {"p": "30000000/29090000/29087000/29086925/5e47f317.jpg", "front": true},
- "ho2513385664": {"p": "79000000/78520000/78512100/78512052/d00f1d1e.jpg", "front": true},
- "ho926438112": {"p": "29000000/28920000/28920000/28919941/f475442c.jpg", "front": false, "shows": "deck"},
- "ho363010": {"p": "4000000/3980000/3970800/3970714/83a9d0b5.jpg", "front": false, "shows": "breakfast buffet"},
- "ho394423": {"p": "5000000/4660000/4651600/4651553/39bfd32c.jpg", "front": true},
- "ho394319": {"p": "18000000/17670000/17662700/17662681/02ddfbab.jpg", "front": true},
- "ho394453": {"p": "5000000/4650000/4642500/4642442/602abcbf.jpg", "front": true},
- "ho583944": {"p": "12000000/11980000/11974400/11974355/09a8c669.jpg", "front": false, "shows": "hot spring bath"},
- "ho1105509184": {"p": "35000000/34520000/34516000/34515912/d47de98b.jpg", "front": true},
- "ho647136": {"p": "17000000/16790000/16782200/16782158/d7d26f03.jpg", "front": false, "shows": "lobby"},
- "ho1250330592": {"p": "40000000/39050000/39041600/39041581/e5a3c5cb.jpg", "front": true},
- "ho378231": {"p": "5000000/4370000/4367800/4367782/d4d14ab8.jpg", "front": false, "shows": "rooftop hot tub"}
+ "_note": "Photo paths on images.trvl-media.com/lodging/, read from each hotel's hotels.com page on 2026-11-12 and 2026-11-13. front=true means the page's own image description is of the building or entrance, taken from images in the hotel's own gallery folder. When the gallery has no exterior image, the first image is used with front=false and a 'shows' label. Hotels missing here have no photo yet.",
+ "ho161097": {
+  "p": "1000000/80000/76900/76855/dfe0172b.jpg",
+  "front": true
+ },
+ "ho1477079872": {
+  "p": "47000000/46130000/46127500/46127496/2c56e27d.jpg",
+  "front": true
+ },
+ "ho371924": {
+  "p": "5000000/4200000/4191200/4191190/786b6d16.jpg",
+  "front": true
+ },
+ "ho3041921568": {
+  "p": "96000000/95030000/95028800/95028799/a5c29b55.jpg",
+  "front": true
+ },
+ "ho594323": {
+  "p": "16000000/15240000/15231600/15231511/ecaeb8f4.jpg",
+  "front": true
+ },
+ "ho456125": {
+  "p": "9000000/8070000/8068900/8068806/14b27e92.jpg",
+  "front": true
+ },
+ "ho931781600": {
+  "p": "30000000/29090000/29087000/29086925/5e47f317.jpg",
+  "front": true
+ },
+ "ho2513385664": {
+  "p": "79000000/78520000/78512100/78512052/d00f1d1e.jpg",
+  "front": true
+ },
+ "ho926438112": {
+  "p": "29000000/28920000/28920000/28919941/f475442c.jpg",
+  "front": false,
+  "shows": "deck"
+ },
+ "ho363010": {
+  "p": "4000000/3980000/3970800/3970714/83a9d0b5.jpg",
+  "front": false,
+  "shows": "breakfast buffet"
+ },
+ "ho394423": {
+  "p": "5000000/4660000/4651600/4651553/39bfd32c.jpg",
+  "front": true
+ },
+ "ho394319": {
+  "p": "18000000/17670000/17662700/17662681/02ddfbab.jpg",
+  "front": true
+ },
+ "ho394453": {
+  "p": "5000000/4650000/4642500/4642442/602abcbf.jpg",
+  "front": true
+ },
+ "ho583944": {
+  "p": "12000000/11980000/11974400/11974355/09a8c669.jpg",
+  "front": false,
+  "shows": "hot spring bath"
+ },
+ "ho1105509184": {
+  "p": "35000000/34520000/34516000/34515912/d47de98b.jpg",
+  "front": true
+ },
+ "ho647136": {
+  "p": "17000000/16790000/16782200/16782158/d7d26f03.jpg",
+  "front": false,
+  "shows": "lobby"
+ },
+ "ho1250330592": {
+  "p": "40000000/39050000/39041600/39041581/e5a3c5cb.jpg",
+  "front": true
+ },
+ "ho378231": {
+  "p": "5000000/4370000/4367800/4367782/d4d14ab8.jpg",
+  "front": false,
+  "shows": "rooftop hot tub"
+ },
+ "ho673008": {
+  "p": "18000000/17370000/17367100/17367060/b5833329.jpg",
+  "front": true
+ },
+ "ho2690734624": {
+  "p": "85000000/84060000/84054300/84054207/65be5829.jpg",
+  "front": true
+ },
+ "ho2249034464": {
+  "p": "71000000/70260000/70251100/70251077/de34d19b.jpg",
+  "front": true
+ },
+ "ho749274592": {
+  "p": "24000000/23390000/23383600/23383581/8df93750.jpg",
+  "front": true
+ },
+ "ho399449": {
+  "p": "5000000/4830000/4825200/4825128/c267c00c.jpg",
+  "front": true
+ },
+ "ho711592320": {
+  "p": "23000000/22210000/22206100/22206010/a0190246.jpg",
+  "front": false,
+  "shows": "an outdoor seating area in front of the building"
+ },
+ "ho2517718624": {
+  "p": "79000000/78650000/78647500/78647457/2459e7ce.jpg",
+  "front": true
+ },
+ "ho1701431008": {
+  "p": "54000000/53140000/53138500/53138469/50050cc2.jpg",
+  "front": true
+ },
+ "ho363023": {
+  "p": "4000000/3980000/3970700/3970669/774ce50d.jpg",
+  "front": true
+ },
+ "ho866704672": {
+  "p": "28000000/27060000/27053300/27053271/d25231fa.jpg",
+  "front": true
+ },
+ "ho602547968": {
+  "p": "19000000/18800000/18798400/18798374/07a8135f.jpg",
+  "front": false,
+  "shows": "the entrance hall, seen from inside"
+ },
+ "ho533233": {
+  "p": "10000000/9630000/9623000/9622951/1350e697.jpg",
+  "front": true
+ },
+ "ho2502809568": {
+  "p": "79000000/78190000/78181600/78181549/9a17b025.jpg",
+  "front": true
+ },
+ "ho2197415200": {
+  "p": "69000000/68640000/68638000/68637975/d86ae365.jpg",
+  "front": true
+ },
+ "ho2401979872": {
+  "p": "76000000/75040000/75030700/75030621/e9c2b5b8.jpg",
+  "front": true
+ },
+ "ho442543": {
+  "p": "7000000/6670000/6665500/6665413/a5ae5d24.jpg",
+  "front": true
+ },
+ "ho434098": {
+  "p": "7000000/6140000/6133900/6133886/71d782f3.jpg",
+  "front": true
+ },
+ "ho312324": {
+  "p": "3000000/2600000/2595900/2595880/b65b988b.jpg",
+  "front": true
+ },
+ "ho360478": {
+  "p": "4000000/3920000/3913300/3913215/7227d886.jpg",
+  "front": true
+ },
+ "ho446483": {
+  "p": "8000000/7070000/7070000/7069960/ad26ad3c.jpg",
+  "front": true
+ },
+ "ho415806": {
+  "p": "4000000/3900000/3892500/3892472/bdd54384.jpg",
+  "front": true
+ },
+ "ho367516": {
+  "p": "1000000/30000/27200/27149/c41e2064.jpg",
+  "front": true
+ },
+ "ho232132": {
+  "p": "2000000/1280000/1271500/1271416/cf5b1f69.jpg",
+  "front": true
+ },
+ "ho1118985472": {
+  "p": "35000000/34940000/34937100/34937046/w657h440x3y0-1f19b3ca.jpg",
+  "front": true
+ },
+ "ho172424": {
+  "p": "1000000/50000/46000/45930/20d45dfe.jpg",
+  "front": true
+ },
+ "ho359537": {
+  "p": "4000000/3900000/3895700/3895687/52c84a72.jpg",
+  "front": true
+ },
+ "ho183977": {
+  "p": "1000000/30000/26300/26216/d4c7f939.jpg",
+  "front": true
+ },
+ "ho535985": {
+  "p": "10000000/9780000/9777400/9777361/6c70814b.jpg",
+  "front": true
+ },
+ "ho735004448": {
+  "p": "23000000/22940000/22937700/22937639/c9eb0153.jpg",
+  "front": false,
+  "shows": "the breakfast buffet"
+ },
+ "ho534111": {
+  "p": "12000000/11650000/11643200/11643191/38ea8d53.jpg",
+  "front": true
+ },
+ "ho392560": {
+  "p": "5000000/4630000/4623300/4623283/96f69c90.jpg",
+  "front": false,
+  "shows": "the lobby"
+ },
+ "ho334919": {
+  "p": "4000000/3090000/3088100/3088054/1b20a375.jpg",
+  "front": false,
+  "shows": "the breakfast buffet"
+ },
+ "ho3549099744": {
+  "p": "111000000/110880000/110878200/110878117/fa0a23c1.jpg",
+  "front": false,
+  "shows": "a guest room"
+ },
+ "ho477775": {
+  "p": "10000000/9290000/9283500/9283474/f16dd00b.jpg",
+  "front": false,
+  "shows": "a guest room"
+ },
+ "ho460210": {
+  "p": "9000000/8310000/8308400/8308375/4bac4ed6.jpg",
+  "front": true
+ }
 }
