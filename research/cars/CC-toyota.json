@@ -1,0 +1,35 @@
+{
+  "key": "CC",
+  "company": "Toyota Rent a Car",
+  "site_url": "https://rent.toyota.co.jp/eng/",
+  "read_at": "2026-11-13T10:50:00-05:00",
+  "class_name": null,
+  "example_model": null,
+  "is_kei": null,
+  "base_price": null,
+  "one_way_fee": null,
+  "insurance": null,
+  "winter_tires": null,
+  "etc_card_rental": null,
+  "total_shown": null,
+  "total_includes": null,
+  "currency": "JPY",
+  "price_source": null,
+  "one_way_allowed_for_class": "unknown",
+  "pickup": {
+    "office": "Kyoto Station area",
+    "datetime": "2027-03-03T09:00",
+    "office_hours": "not read"
+  },
+  "return": {
+    "office": "Osaka Umeda",
+    "datetime": "2027-03-06T15:00",
+    "office_hours": "not read"
+  },
+  "page_confirms": {
+    "pickup": "not set: date not selectable",
+    "return": "not set"
+  },
+  "notes": "Toyota's Osaka Umeda and Osaka Station shops both state one-way returns are not possible at that shop (shop listing text), which matters for CA and CC.",
+  "problems": "Not bookable yet. Toyota's search calendar says reservations of up to 1 month can be made up to 3 months in advance. On 2026-11-13 the February 2027 calendar allowed pick-up only through Feb 13 (Feb 14 onward greyed out), so Feb 28 and Mar 3 cannot be selected and no priced quote exists for these dates. A generic class price list on the site (per 24 hours, no dates) was seen but not used. Retry from about 2026-11-28 for Feb 28, and 2026-12-03 for Mar 3."
+}
