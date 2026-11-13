@@ -1,0 +1,35 @@
+{
+  "key": "CB",
+  "company": "Times Car Rental",
+  "site_url": "https://www.timescar-rental.com/en/",
+  "read_at": "2026-11-13T10:55:00-05:00",
+  "class_name": null,
+  "example_model": null,
+  "is_kei": null,
+  "base_price": null,
+  "one_way_fee": null,
+  "insurance": null,
+  "winter_tires": null,
+  "etc_card_rental": null,
+  "total_shown": null,
+  "total_includes": null,
+  "currency": "JPY",
+  "price_source": null,
+  "one_way_allowed_for_class": "unknown",
+  "pickup": {
+    "office": "Osaka Umeda",
+    "datetime": "2027-02-28T10:00",
+    "office_hours": "not read"
+  },
+  "return": {
+    "office": "Osaka Umeda",
+    "datetime": "2027-03-06T15:00",
+    "office_hours": "not read"
+  },
+  "page_confirms": {
+    "pickup": "not reached",
+    "return": "not reached"
+  },
+  "notes": "",
+  "problems": "Site unavailable. Every page of timescar-rental.com/en/ redirected to its maintenance page ('The system is temporarily unavailable') on repeated tries across several hours on 2026-11-13. No search form was reachable, so nothing was read. Retry later."
+}
