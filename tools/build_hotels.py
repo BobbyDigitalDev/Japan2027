@@ -1,7 +1,8 @@
 # Builds hotels.js for the dashboard from the research files.
 # Usage: python3 tools/build_hotels.py <path to research/hotels folder> <output hotels.js>
 # Every number comes from the JSON files written during the hotels.com browser sessions; totals are summed here, never typed.
-import json, os, sys
+import json, os, re, sys
+from urllib.parse import quote
 
 src, out = sys.argv[1], sys.argv[2]
 
@@ -11,13 +12,26 @@ def load(key):
 # Detail pages re-read live in the proof pass on 2026-11-12 (prices matched). The rest were read once.
 REREAD = {'A0', 'A1', 'A2', 'A2b', 'A2c', 'A3', 'A4', 'A5', 'A6', 'B0', 'B1', 'B2', 'B3', 'B4'}
 TIERS = ['lower', 'middle', 'higher']
+PHOTOS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'hotel_photos.json'), encoding='utf-8'))
+# Town used in the Google Maps search link (hotel name + town). A search link, not a pinned place.
+TOWN = {'A0': 'Ota, Tokyo', 'A1': 'Hakone, Kanagawa', 'A2': 'Narai, Shiojiri, Nagano', 'A2b': 'Kiso, Nagano', 'A2c': 'Shiojiri, Nagano',
+        'A3': 'Gifu / Nagano', 'A4': 'Takayama, Gifu', 'A5': 'Kanazawa, Ishikawa', 'A6': 'Kyoto', 'B0': 'Umeda, Osaka', 'B1': 'Himeji, Hyogo',
+        'B2': 'Onomichi, Hiroshima', 'B3': 'Hiroshima', 'B4': 'Miyajima, Hatsukaichi, Hiroshima', 'B5': 'Kurashiki, Okayama', 'B6': 'Kobe, Hyogo',
+        'C1': 'Nara', 'C2': 'Kyoto', 'C3': 'Kinosaki Onsen, Toyooka, Hyogo', 'C4': 'Himeji, Hyogo'}
+A3_TOWN = {'Hotel Route-Inn Nakatsugawa Inter': 'Nakatsugawa, Gifu', 'TAOYA Kisoji': 'Nagiso, Nagano', 'Hotel Fukinomori': 'Nagiso, Nagano'}
 
 def night(key):
     d = load(key)
     picks = []
     for p in d['picks']:
+        hid = re.search(r'/(ho\d+)/', p['url']).group(1)
+        ph = PHOTOS.get(hid)
+        town = A3_TOWN.get(p['name']) or TOWN[d['key']]
         picks.append({
             'tier': p['tier'], 'name': p['name'],
+            'maps': 'https://www.google.com/maps/search/?api=1&query=' + quote('%s, %s, Japan' % (p['name'], town)),
+            'img': ('https://images.trvl-media.com/lodging/' + ph['p'] + '?impolicy=resizecrop&rw=598&ra=fit') if ph else '',
+            'imgFront': bool(ph and ph['front']), 'imgShows': (ph or {}).get('shows', ''),
             'url': '%s?chkin=%s&chkout=%s&rm1=a2' % (p['url'], d['check_in'], d['check_out']),
             'stars': p['stars'], 'rating': p['guest_rating'], 'reviews': p['review_count'],
             'room': p['room_type'], 'nightly': p['price_per_night'], 'total': p['total_with_taxes'],

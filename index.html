@@ -202,7 +202,17 @@ body {
 .hhead { margin: 0; font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
 .hhead b { color: var(--ink); letter-spacing: 0; font-size: 13px; }
 .hpicks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.hpicks li { display: grid; grid-template-columns: 62px 1fr; gap: 10px; min-width: 0; }
+.hpicks li { display: grid; grid-template-columns: 62px minmax(0, 1fr) 200px; gap: 10px 14px; min-width: 0; align-items: start; }
+.hphoto { margin: 0; min-width: 0; }
+.hphoto img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); }
+.hphoto figcaption { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.hphoto.none { aspect-ratio: 3 / 2; border: 1px dashed var(--line); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 12px; color: var(--muted); padding: 6px; }
+.hlinks { margin: 4px 0 0; font-size: 13px; }
+.hpicks .hlinks a { font-weight: 500; }
+@media (max-width: 640px) {
+  .hpicks li { grid-template-columns: minmax(0, 1fr) 104px; }
+  .hpicks .tier { grid-column: 1 / -1; padding-top: 0; }
+}
 .hpicks .tier { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
 .hpicks a { color: var(--stay); font-weight: 700; text-underline-offset: 3px; }
 .hpicks .hr { color: var(--muted); font-size: 13px; display: block; }
@@ -679,7 +689,12 @@ catch (e) { document.documentElement.classList.add("locked"); }
       " · " + usd(p.nightly) + " a night before taxes" + (p.member ? " · member price" : "") + "</p>" +
       '<p class="fine">' + esc(p.room) + "</p>" +
       '<p class="fine">Parking: ' + esc(p.parking) + "</p>" +
-      '<p class="fine">Free cancellation: ' + esc(p.cancel) + "</p></div></li>";
+      '<p class="fine">Free cancellation: ' + esc(p.cancel) + "</p>" +
+      '<p class="hlinks"><a href="' + esc(p.maps) + '" target="_blank" rel="noopener">Open in Google Maps</a> · <a href="' + esc(p.url) + '" target="_blank" rel="noopener">hotels.com page</a></p></div>' +
+      (p.img
+        ? '<figure class="hphoto"><a href="' + esc(p.url) + '" target="_blank" rel="noopener"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + (p.imgFront ? ", front of the building" : ", " + esc(p.imgShows)) + '" loading="lazy" referrerpolicy="no-referrer"></a>' +
+          "<figcaption>" + (p.imgFront ? "Photo: hotels.com" : "No exterior photo found on the listing; this shows the " + esc(p.imgShows) + ". Photo: hotels.com") + "</figcaption></figure>"
+        : '<div class="hphoto none">Photo not fetched yet</div>') + "</li>";
   }
   function stayBlock(s, lead) {
     if (!s) return "";
@@ -750,6 +765,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     b.addEventListener("click", function () { select(id); });
     btns[id] = b; cards.appendChild(b);
   }
+  card("none", '<span class="rn">No route</span><span class="rt">Places only</span><p class="rg">Clear the calendar and show every researched place.</p>');
   R.forEach(function (r) {
     card(r.id, '<span class="rn">' + esc(r.name) + '</span><span class="rt">' + esc(r.title) + '</span><p class="rg">' + esc(r.tagline) + "</p>" +
       '<dl class="rstats"><dd>' + hm(r.totalMin) + "</dd><dt>total driving</dt><dd>" + r.totalKm + " km</dd><dt>distance</dt><dd>" + hm(r.longestMin) + "</dd><dt>longest day</dt></dl>" +
@@ -757,7 +773,6 @@ catch (e) { document.documentElement.classList.add("locked"); }
         return '<p class="rcost">Hotels, 7 nights' + (t.label ? " (" + esc(t.label) + ")" : "") + ": <b>" + usd(t.lower) + "</b> to <b>" + usd(t.higher) + "</b></p>";
       }).join("") : ""));
   });
-  card("none", '<span class="rn">No route</span><span class="rt">Places only</span><p class="rg">Clear the calendar and show every researched place.</p>');
 
   // Costs so far: one row per route (Route A has three rows, one per choice for the Narai-juku night).
   (function () {

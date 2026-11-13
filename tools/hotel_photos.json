@@ -1,0 +1,21 @@
+{
+ "_note": "Photo paths on images.trvl-media.com/lodging/, read from each hotel's hotels.com page on 2026-11-12. front=true means the page's own image description is of the building or entrance. Hotels missing here were not reached (hotels.com bot check).",
+ "ho161097": {"p": "1000000/80000/76900/76855/dfe0172b.jpg", "front": true},
+ "ho1477079872": {"p": "47000000/46130000/46127500/46127496/2c56e27d.jpg", "front": true},
+ "ho371924": {"p": "5000000/4200000/4191200/4191190/786b6d16.jpg", "front": true},
+ "ho3041921568": {"p": "96000000/95030000/95028800/95028799/a5c29b55.jpg", "front": true},
+ "ho594323": {"p": "16000000/15240000/15231600/15231511/ecaeb8f4.jpg", "front": true},
+ "ho456125": {"p": "9000000/8070000/8068900/8068806/14b27e92.jpg", "front": true},
+ "ho931781600": {"p": "30000000/29090000/29087000/29086925/5e47f317.jpg", "front": true},
+ "ho2513385664": {"p": "79000000/78520000/78512100/78512052/d00f1d1e.jpg", "front": true},
+ "ho926438112": {"p": "29000000/28920000/28920000/28919941/f475442c.jpg", "front": false, "shows": "deck"},
+ "ho363010": {"p": "4000000/3980000/3970800/3970714/83a9d0b5.jpg", "front": false, "shows": "breakfast buffet"},
+ "ho394423": {"p": "5000000/4660000/4651600/4651553/39bfd32c.jpg", "front": true},
+ "ho394319": {"p": "18000000/17670000/17662700/17662681/02ddfbab.jpg", "front": true},
+ "ho394453": {"p": "5000000/4650000/4642500/4642442/602abcbf.jpg", "front": true},
+ "ho583944": {"p": "12000000/11980000/11974400/11974355/09a8c669.jpg", "front": false, "shows": "hot spring bath"},
+ "ho1105509184": {"p": "35000000/34520000/34516000/34515912/d47de98b.jpg", "front": true},
+ "ho647136": {"p": "17000000/16790000/16782200/16782158/d7d26f03.jpg", "front": false, "shows": "lobby"},
+ "ho1250330592": {"p": "40000000/39050000/39041600/39041581/e5a3c5cb.jpg", "front": true},
+ "ho378231": {"p": "5000000/4370000/4367800/4367782/d4d14ab8.jpg", "front": false, "shows": "rooftop hot tub"}
+}
