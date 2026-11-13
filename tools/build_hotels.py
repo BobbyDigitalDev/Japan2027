@@ -10,6 +10,7 @@ def load(key):
     return json.load(open(os.path.join(src, key + '.json'), encoding='utf-8'))
 
 # Detail pages re-read live in the proof pass on 2026-11-12 (prices matched). The rest were read once.
+# Hand-recorded from the proof pass (the research JSON has no re-read field). Edit this set if more stops are re-read.
 REREAD = {'A0', 'A1', 'A2', 'A2b', 'A2c', 'A3', 'A4', 'A5', 'A6', 'B0', 'B1', 'B2', 'B3', 'B4'}
 TIERS = ['lower', 'middle', 'higher']
 PHOTOS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'hotel_photos.json'), encoding='utf-8'))
@@ -42,12 +43,18 @@ def night(key):
             'readAt': d['read_at'][:10]}
 
 def total(keys, tier):
-    s = 0
+    """Sum of the chosen tier over the stops. If a stop has no pick in that tier (a small town with one qualifying hotel),
+    its first pick is used and the stop is returned in `subs` so the page can flag the cell. Nothing is substituted silently."""
+    s, subs = 0, []
     for k in keys:
         d = load(k)
         by = {p['tier']: p for p in d['picks']}
-        s += (by.get(tier) or d['picks'][0])['total_with_taxes']
-    return round(s)
+        pick = by.get(tier)
+        if pick is None:
+            pick = d['picks'][0]
+            subs.append(k)
+        s += pick['total_with_taxes']
+    return round(s), subs
 
 ROUTES = {
     # arrive = the Feb 27 night; nights = one key per calendar day Feb 28 .. Mar 5 (a 2-night stay repeats its key)
@@ -67,8 +74,8 @@ for rid, r in ROUTES.items():
     data[rid] = {
         'arrive': r['arrive'], 'nights': r['nights'], 'alts': r['alts'],
         'stays': {k: night(k) for k in keys},
-        'totals': [{'label': label, 'lower': total(ks, 'lower'), 'middle': total(ks, 'middle'), 'higher': total(ks, 'higher')}
-                   for label, ks in r['variants']],
+        'totals': [dict([('label', label)] + [(t, total(ks, t)[0]) for t in TIERS] +
+                        [('subs', {t: total(ks, t)[1] for t in TIERS if total(ks, t)[1]})]) for label, ks in r['variants']],
     }
     for v in data[rid]['totals']:
         print(rid, v)

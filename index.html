@@ -142,7 +142,7 @@ body {
   .day .num { font-size: 19px; }
   .day .num small { display: block; font-size: 9px; margin: 0 0 2px; text-align: center; }
   .day .tags { align-items: center; }
-  .tag { font-size: 10px; text-align: center; }
+  .tag { font-size: 11px; text-align: center; }
   .tag.open { display: none; }
   .tag .long { display: none; }
   .band { left: 4px; right: 4px; }
@@ -195,6 +195,7 @@ body {
 .ctable tbody th { font-weight: 700; }
 .ctable tbody th small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
 .ctable td.num { font-weight: 700; }
+.cfoot { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
 .ctable td.todo { color: var(--muted); font-size: 13px; }
 .findings { margin: 0; padding-left: 18px; font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
 .findings li span { color: var(--muted); }
@@ -302,6 +303,7 @@ html.locked .gate {
   body { background: #fff; }
   .day, .detail, .plist details { break-inside: avoid; }
   .filters { display: none; }
+  #map { width: 640px !important; max-width: 100%; height: 360px !important; }
   .rcard[aria-pressed="false"] { display: none; }
   .hnote > p { display: block !important; }
   .plist details > ul { display: flex !important; }
@@ -342,6 +344,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       if (ok) {
         try { localStorage.setItem("japan2027-unlocked", "1"); } catch (x) {}
         document.documentElement.classList.remove("locked");
+        if (window.mapApi && window.mapApi.resync) window.mapApi.resync();
       } else {
         err.textContent = "That password is not right. Try again.";
         pw.select();
@@ -397,7 +400,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       <p id="places-sub">Places covered in Abroad in Japan videos. Select an icon for the note and a link to that moment in the video.</p>
     </div>
     <div class="filters">
-      <div class="fgroup"><span class="flabel" id="fl-route">Route line</span><ul class="chips" id="route-chips" aria-labelledby="fl-route"></ul></div>
+      <div class="fgroup"><span class="flabel" id="fl-route">Road trip option</span><ul class="chips" id="route-chips" aria-labelledby="fl-route"></ul></div>
       <div class="fgroup"><span class="flabel" id="fl-area">Places shown</span><ul class="chips" id="area-chips" aria-labelledby="fl-area"></ul></div>
       <div class="fgroup"><span class="flabel" id="fl-kind">Place types</span><ul class="chips" id="kind-chips" aria-labelledby="fl-kind"></ul></div>
     </div>
@@ -409,6 +412,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
         <p class="sub" id="costs-sub"></p>
       </div>
       <div class="tscroll"><table class="ctable" id="ctable"></table></div>
+      <p class="cfoot" id="cfoot" hidden></p>
       <ul class="findings" id="findings"></ul>
     </div>
     <div class="rdetail" id="rdetail" hidden></div>
@@ -419,9 +423,9 @@ catch (e) { document.documentElement.classList.add("locked"); }
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="places.js"></script>
-<script src="routes.js"></script>
-<script src="hotels.js?v=20261112b"></script>
+<script src="places.js?v=20261113a"></script>
+<script src="routes.js?v=20261113a"></script>
+<script src="hotels.js?v=20261113a"></script>
 
 <script>
 (function () {
@@ -544,7 +548,8 @@ catch (e) { document.documentElement.classList.add("locked"); }
       p.m.map(function (m) { return "<li>" + esc(m.n) + ' <a href="' + esc(m.l) + '" target="_blank" rel="noopener" title="' + esc(m.t) + '">' + stamp(m.l) + "</a></li>"; }).join("") +
       "</ul>" + (p.cn ? '<p class="cn">' + esc(p.cn) + "</p>" : "") + "</div>";
   }
-  function visible(p) { return kindsOn[p.kind] && (area === "all" || p.route === area || p.route === "both"); }
+  var activeStops = {};
+  function visible(p) { return kindsOn[p.kind] && (area === "all" || p.route === area || p.route === "both" || activeStops[p.id] === 1); }
 
   var placed = P.filter(function (p) { return p.lat != null; });
   document.getElementById("places-sub").textContent = placed.length + " of " + P.length +
@@ -575,7 +580,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     fixed(HOTEL, "hotel", "H", '<h3>Hotel Hankyu Gran Respire Osaka</h3><p class="pm">Stay · March 6 to 8</p>');
     fixed(VENUE, "wed", "♥", '<h3>Wedding venue: Bleu Grace Osaka</h3><p class="pm">Sunday, March 7 at 11:00 JST</p>');
   } else {
-    el.innerHTML = '<p class="map-msg">The map could not load. The place list below still works.</p>';
+    el.innerHTML = '<p class="map-msg">The map could not load, so the place buttons below will not open anything. Reload the page to try again.</p>';
   }
 
   function refresh(fit) {
@@ -603,9 +608,10 @@ catch (e) { document.documentElement.classList.add("locked"); }
   AREAS.forEach(function (a) {
     areaBtns.push(chip(document.getElementById("area-chips"), a[1], a[0] === area, null, function () { setArea(a[0], true); }));
   });
+  var kindBtns = {};
   KINDS.forEach(function (k) {
     var n = P.filter(function (p) { return p.kind === k[0]; }).length;
-    chip(document.getElementById("kind-chips"), k[1] + " " + n, true, k[0], function (b) {
+    kindBtns[k[0]] = chip(document.getElementById("kind-chips"), k[1] + " " + n, true, k[0], function (b) {
       kindsOn[k[0]] = !kindsOn[k[0]]; b.setAttribute("aria-pressed", String(kindsOn[k[0]])); refresh(false);
     });
   });
@@ -632,18 +638,22 @@ catch (e) { document.documentElement.classList.add("locked"); }
   function focus(id) {
     var p = null; P.forEach(function (x) { if (x.id === id) p = x; });
     if (!p || p.lat == null || !map) return;
-    if (!visible(p)) { kindsOn[p.kind] = true; setArea("all", false); }
+    if (!kindsOn[p.kind]) { kindsOn[p.kind] = true; kindBtns[p.kind].setAttribute("aria-pressed", "true"); }
+    if (!visible(p)) setArea("all", false); else refresh(false);
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     map.setView([p.lat, p.lon], Math.max(map.getZoom(), 12));
     markers[p.id].openPopup();
   }
 
   // Selected road trip option: road line, numbered overnight markers, arrival marker
-  var routeLayer = null;
+  var routeLayer = null, curRoute = null;
   function showRoute(r) {
     if (!map) return;
+    var had = !!routeLayer;
     if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
-    if (!r) { setArea("all", true); return; }
+    curRoute = r || null; activeStops = {};
+    if (!r) { if (had) setArea("all", true); return; }
+    r.days.forEach(function (d) { (d.stops || []).forEach(function (id) { activeStops[id] = 1; }); });
     routeLayer = L.layerGroup();
     var lines = r.days.filter(function (d) { return d.line.length; }).map(function (d) { return d.line; });
     L.polyline(lines, { className: "route-case", interactive: false }).addTo(routeLayer);
@@ -653,17 +663,34 @@ catch (e) { document.documentElement.classList.add("locked"); }
         .bindPopup('<div class="pop">' + html + "</div>").addTo(routeLayer);
     }
     pin([r.start.lat, r.start.lon], "✈", "<h3>Arrival</h3><p class=\"pm\">" + esc(r.arrive) + "</p>");
-    var seen = {};
+    var seen = {}, order = [];
     r.days.forEach(function (d, i) {
-      if (!d.at || i === 6) return;
-      var k = d.at.join(","); if (seen[k]) return; seen[k] = 1;
-      pin(d.at, String(i + 1), "<h3>Night " + (i + 1) + ": " + esc(d.night) + "</h3><p class=\"pm\">" + esc(window.ROUTE_DATES[i]) + "</p>");
+      if (i === 6) return;
+      if (!d.at) { if (order.length) seen[order[order.length - 1]].idx.push(i); return; }
+      var k = d.at.join(",");
+      if (!seen[k]) { seen[k] = { d: d, at: d.at, idx: [] }; order.push(k); }
+      seen[k].idx.push(i);
+    });
+    order.forEach(function (k) {
+      var g = seen[k], first = g.idx[0], last = g.idx[g.idx.length - 1];
+      var label = g.idx.length > 1 ? "Nights " + (first + 1) + " to " + (last + 1) : "Night " + (first + 1);
+      var dates = g.idx.length > 1 ? window.ROUTE_DATES[first] + " to " + window.ROUTE_DATES[last + 1 < 7 ? last + 1 : last] : window.ROUTE_DATES[first];
+      pin(g.at, String(first + 1), "<h3>" + label + ": " + esc(g.d.night) + "</h3><p class=\"pm\">" + esc(dates) + "</p>");
     });
     routeLayer.addTo(map);
     setArea(r.area, false);
     map.fitBounds(L.polyline(lines).getBounds(), { padding: [30, 30] });
   }
-  window.mapApi = { focus: focus, showRoute: showRoute };
+  // Called after the password gate opens (the map was 0 x 0 while hidden) and around printing.
+  function resync(printing) {
+    if (!map) return;
+    map.invalidateSize({ animate: false });
+    if (curRoute && routeLayer) { map.fitBounds(routeLayer.getLayers()[0].getBounds(), { padding: [30, 30], animate: false }); }
+    else refresh(true);
+  }
+  window.mapApi = { focus: focus, showRoute: showRoute, resync: resync };
+  window.addEventListener("beforeprint", function () { document.documentElement.classList.add("printing"); resync(true); });
+  window.addEventListener("afterprint", function () { document.documentElement.classList.remove("printing"); resync(false); });
 
   refresh(true);
 })();
@@ -789,13 +816,19 @@ catch (e) { document.documentElement.classList.add("locked"); }
 
   // Costs so far: one row per route (Route A has three rows, one per choice for the Narai-juku night).
   (function () {
-    var rows = "";
+    var rows = "", anySub = false;
+    // A tier that has no pick at a stop (one qualifying hotel in town) reuses that stop's only pick; mark the cell.
+    function cell(t, tier) {
+      var sub = t.subs && t.subs[tier];
+      if (sub) anySub = true;
+      return '<td class="num">' + usd(t[tier]) + (sub ? ' <sup title="Includes the lower pick at ' + esc(sub.join(", ")) + '">*</sup>' : "") + "</td>";
+    }
     R.forEach(function (r) {
       var h = H[r.id]; if (!h) return;
       h.totals.forEach(function (t) {
         rows += "<tr><th scope=\"row\">" + esc(r.name) + (t.label ? "<small>" + esc(t.label) + "</small>" : "") + "</th>" +
           "<td>" + hm(r.totalMin) + " · " + r.totalKm + " km</td><td>" + hm(r.longestMin) + "</td>" +
-          '<td class="num">' + usd(t.lower) + '</td><td class="num">' + usd(t.middle) + '</td><td class="num">' + usd(t.higher) + "</td>" +
+          cell(t, "lower") + cell(t, "middle") + cell(t, "higher") +
           '<td class="todo">Not researched yet</td></tr>';
       });
     });
@@ -803,6 +836,8 @@ catch (e) { document.documentElement.classList.add("locked"); }
       "<thead><tr><th scope=\"col\">Route</th><th scope=\"col\">Driving</th><th scope=\"col\">Longest day</th>" +
       "<th scope=\"col\">Hotels, lower picks</th><th scope=\"col\">Hotels, middle picks</th><th scope=\"col\">Hotels, higher picks</th>" +
       "<th scope=\"col\">Car, tolls, fuel, flights</th></tr></thead><tbody>" + rows + "</tbody>";
+    var fn = document.getElementById("cfoot");
+    if (fn) { fn.hidden = !anySub; fn.textContent = "* The Narai-juku and Kiso-Fukushima nights have only one qualifying hotel, so the middle and higher columns reuse that lower pick for that night."; }
     document.getElementById("costs-sub").textContent = "Hotels only, for the 7 nights from Feb 27 to Mar 6, 2 adults in 1 room, US dollars with taxes. Source: " +
       (HM.source || "") + ", read " + (HM.read || "") + ". Nothing is booked. Select a route above the map to see its hotels night by night below this table.";
     function pk(rid, key, tier) { var out = null; ((H[rid] || {}).stays || {})[key] && H[rid].stays[key].picks.forEach(function (p) { if (p.tier === tier) out = p; }); return out; }
@@ -814,10 +849,13 @@ catch (e) { document.documentElement.classList.add("locked"); }
     if (kl && kh && km) f.push("<b>Route C has the least driving but is not the cheapest.</b> Two nights in Kinosaki Onsen cost " + usd(Math.min(kl.total, km.total, kh.total)) + " to " + usd(Math.max(kl.total, km.total, kh.total)) + " whichever pick you take.");
     var rc = pk("C", "C2", "higher"), ra = pk("A", "A6", "higher"), inv = [], seen = {};
     for (var rid in H) for (var key in H[rid].stays) { var hi = pk(rid, key, "higher"), mi = pk(rid, key, "middle"); if (hi && mi && hi.total < mi.total && !seen[key]) { seen[key] = 1; inv.push(esc(H[rid].stays[key].stop.split(",")[0].split(" (")[0])); } }
-    if (rc && ra) f.push("<b>The higher tier is a rating tier, not a price tier.</b> It takes the best-rated 4-star hotel, so one ryokan, " + esc(rc.name) + " in Kyoto, adds " +
+    if (rc && ra) f.push("<b>The higher tier is a rating tier, not a price tier.</b> It takes the best-rated 4-star hotel in each stop, or the best-rated 3-star where no 4-star qualified (Himeji, Onomichi and Kurashiki), so one ryokan, " + esc(rc.name) + " in Kyoto, adds " +
       usd(ra.total) + " to Route A and " + usd(rc.total) + " (two nights) to Route C." + (inv.length ? " At " + inv.join(" and ") + " the higher pick costs less than the middle one." : ""));
     f.push("<b>These are signed-in prices.</b> <span>The browser was signed in to a hotels.com account. Some room cards are labelled Member Price and others show a higher standard price struck through, so a signed-out visitor may see more.</span>");
-    f.push("<b>How well checked.</b> <span>Route A and the first five Route B stops were read twice on the same day and every price matched. The last two Route B stops and all of Route C were read once, because hotels.com then showed a bot check.</span>");
+    var twice = [], once = [], sn = {};
+    for (var q in H) for (var k2 in H[q].stays) { var st = H[q].stays[k2]; if (sn[k2]) continue; sn[k2] = 1;
+      (st.reread ? twice : once).push(esc(st.stop.split(",")[0].split(" (")[0])); }
+    f.push("<b>How well checked.</b> <span>Read twice on the same day, every price matched: " + twice.join(", ") + ". Read once, because hotels.com then showed a bot check: " + once.join(", ") + ".</span>");
     f.push("<b>Not in the totals.</b> <span>Hotel parking (500 to 2,000 yen a night where the hotel charges for it), car rental including the one-way fee for Route A, tolls, fuel and flights.</span>");
     document.getElementById("findings").innerHTML = f.map(function (x) { return "<li>" + x + "</li>"; }).join("");
   })();
