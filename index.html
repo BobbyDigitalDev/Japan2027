@@ -299,6 +299,8 @@ html.locked .gate {
 .gate button { font: inherit; font-weight: 700; color: var(--on-accent); background: var(--accent); border: 0; border-radius: 6px; padding: 10px 12px; cursor: pointer; }
 .gate .err { color: var(--sun); font-size: 13px; margin: 0; min-height: 1.4em; }
 
+/* beforeprint adds .printing while the screen layout is still in force, so Leaflet measures the print size before the page reflows. */
+html.printing #map { width: 640px !important; max-width: 100%; height: 360px !important; }
 @media print {
   body { background: #fff; }
   .day, .detail, .plist details { break-inside: avoid; }
@@ -682,9 +684,10 @@ catch (e) { document.documentElement.classList.add("locked"); }
     map.fitBounds(L.polyline(lines).getBounds(), { padding: [30, 30] });
   }
   // Called after the password gate opens (the map was 0 x 0 while hidden) and around printing.
-  function resync(printing) {
+  function resync(refit) {
     if (!map) return;
     map.invalidateSize({ animate: false });
+    if (refit === false) return;
     if (curRoute && routeLayer) { map.fitBounds(routeLayer.getLayers()[0].getBounds(), { padding: [30, 30], animate: false }); }
     else refresh(true);
   }
@@ -816,19 +819,20 @@ catch (e) { document.documentElement.classList.add("locked"); }
 
   // Costs so far: one row per route (Route A has three rows, one per choice for the Narai-juku night).
   (function () {
-    var rows = "", anySub = false;
+    var rows = "", anySub = false, subNames = {};
     // A tier that has no pick at a stop (one qualifying hotel in town) reuses that stop's only pick; mark the cell.
-    function cell(t, tier) {
+    function short(h, key) { return h.stays[key].stop.split(",")[0].split(" (")[0]; }
+    function cell(t, tier, h) {
       var sub = t.subs && t.subs[tier];
-      if (sub) anySub = true;
-      return '<td class="num">' + usd(t[tier]) + (sub ? ' <sup title="Includes the lower pick at ' + esc(sub.join(", ")) + '">*</sup>' : "") + "</td>";
+      if (sub) { anySub = true; subNames[sub.map(function (k) { return short(h, k); }).join(", ")] = 1; }
+      return '<td class="num">' + usd(t[tier]) + (sub ? ' <sup title="Includes the lower pick at ' + esc(sub.map(function (k) { return short(h, k); }).join(", ")) + '">*</sup>' : "") + "</td>";
     }
     R.forEach(function (r) {
       var h = H[r.id]; if (!h) return;
       h.totals.forEach(function (t) {
         rows += "<tr><th scope=\"row\">" + esc(r.name) + (t.label ? "<small>" + esc(t.label) + "</small>" : "") + "</th>" +
           "<td>" + hm(r.totalMin) + " · " + r.totalKm + " km</td><td>" + hm(r.longestMin) + "</td>" +
-          cell(t, "lower") + cell(t, "middle") + cell(t, "higher") +
+          cell(t, "lower", h) + cell(t, "middle", h) + cell(t, "higher", h) +
           '<td class="todo">Not researched yet</td></tr>';
       });
     });
@@ -837,7 +841,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       "<th scope=\"col\">Hotels, lower picks</th><th scope=\"col\">Hotels, middle picks</th><th scope=\"col\">Hotels, higher picks</th>" +
       "<th scope=\"col\">Car, tolls, fuel, flights</th></tr></thead><tbody>" + rows + "</tbody>";
     var fn = document.getElementById("cfoot");
-    if (fn) { fn.hidden = !anySub; fn.textContent = "* The Narai-juku and Kiso-Fukushima nights have only one qualifying hotel, so the middle and higher columns reuse that lower pick for that night."; }
+    if (fn) { fn.hidden = !anySub; fn.textContent = "* These nights have only one qualifying hotel (" + Object.keys(subNames).join("; ") + "), so the middle or higher column reuses that lower pick for that night."; }
     document.getElementById("costs-sub").textContent = "Hotels only, for the 7 nights from Feb 27 to Mar 6, 2 adults in 1 room, US dollars with taxes. Source: " +
       (HM.source || "") + ", read " + (HM.read || "") + ". Nothing is booked. Select a route above the map to see its hotels night by night below this table.";
     function pk(rid, key, tier) { var out = null; ((H[rid] || {}).stays || {})[key] && H[rid].stays[key].picks.forEach(function (p) { if (p.tier === tier) out = p; }); return out; }
@@ -847,15 +851,18 @@ catch (e) { document.documentElement.classList.add("locked"); }
       " with dinner and breakfast. Sleeping nearby instead costs " + usd(morino.total) + " in Kiso-Fukushima or from " + usd(shio.total) + " in Shiojiri, 13 to 16 miles away.");
     var kl = pk("C", "C3", "lower"), kh = pk("C", "C3", "higher"), km = pk("C", "C3", "middle");
     if (kl && kh && km) f.push("<b>Route C has the least driving but is not the cheapest.</b> Two nights in Kinosaki Onsen cost " + usd(Math.min(kl.total, km.total, kh.total)) + " to " + usd(Math.max(kl.total, km.total, kh.total)) + " whichever pick you take.");
+    var low4 = [], lseen = {};
+    for (var lr in H) for (var lk in H[lr].stays) { var lp = pk(lr, lk, "higher"); if (lp && lp.stars < 4) { var ln = short(H[lr], lk) + " " + lp.stars + " stars"; if (!lseen[ln]) { lseen[ln] = 1; low4.push(ln); } } }
     var rc = pk("C", "C2", "higher"), ra = pk("A", "A6", "higher"), inv = [], seen = {};
     for (var rid in H) for (var key in H[rid].stays) { var hi = pk(rid, key, "higher"), mi = pk(rid, key, "middle"); if (hi && mi && hi.total < mi.total && !seen[key]) { seen[key] = 1; inv.push(esc(H[rid].stays[key].stop.split(",")[0].split(" (")[0])); } }
-    if (rc && ra) f.push("<b>The higher tier is a rating tier, not a price tier.</b> It takes the best-rated 4-star hotel in each stop, or the best-rated 3-star where no 4-star qualified (Himeji, Onomichi and Kurashiki), so one ryokan, " + esc(rc.name) + " in Kyoto, adds " +
+    if (rc && ra) f.push("<b>The higher tier is a rating tier, not a price tier.</b> It takes the best-rated 4-star hotel in each stop, or the best-rated 3 or 3.5-star where no 4-star qualified (" + low4.join(", ") + "), so one ryokan, " + esc(rc.name) + " in Kyoto, adds " +
       usd(ra.total) + " to Route A and " + usd(rc.total) + " (two nights) to Route C." + (inv.length ? " At " + inv.join(" and ") + " the higher pick costs less than the middle one." : ""));
     f.push("<b>These are signed-in prices.</b> <span>The browser was signed in to a hotels.com account. Some room cards are labelled Member Price and others show a higher standard price struck through, so a signed-out visitor may see more.</span>");
-    var twice = [], once = [], sn = {};
-    for (var q in H) for (var k2 in H[q].stays) { var st = H[q].stays[k2]; if (sn[k2]) continue; sn[k2] = 1;
-      (st.reread ? twice : once).push(esc(st.stop.split(",")[0].split(" (")[0])); }
-    f.push("<b>How well checked.</b> <span>Read twice on the same day, every price matched: " + twice.join(", ") + ". Read once, because hotels.com then showed a bot check: " + once.join(", ") + ".</span>");
+    var chk = [];
+    R.forEach(function (r) { var h = H[r.id]; if (!h) return; var tw = [], on = [];
+      Object.keys(h.stays).forEach(function (k) { (h.stays[k].reread ? tw : on).push(esc(short(h, k))); });
+      chk.push(esc(r.name) + ": " + (tw.length ? "read twice, every price matched: " + tw.join(", ") : "") + (tw.length && on.length ? "; " : "") + (on.length ? "read once: " + on.join(", ") : "")); });
+    f.push("<b>How well checked.</b> <span>Each stop was read on the same day; some were read a second time. " + chk.join(". ") + ". The single reads happened after hotels.com showed a bot check.</span>");
     f.push("<b>Not in the totals.</b> <span>Hotel parking (500 to 2,000 yen a night where the hotel charges for it), car rental including the one-way fee for Route A, tolls, fuel and flights.</span>");
     document.getElementById("findings").innerHTML = f.map(function (x) { return "<li>" + x + "</li>"; }).join("");
   })();
