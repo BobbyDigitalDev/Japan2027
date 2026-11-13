@@ -228,7 +228,9 @@ body {
 .places { display: flex; flex-direction: column; gap: 12px; }
 .places-head h2 { font-family: var(--display); font-size: 20px; font-weight: 700; margin: 0; }
 .places-head p { color: var(--muted); margin: 2px 0 0; font-size: 14px; }
-.filters { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.filters { display: flex; flex-direction: column; gap: 8px; }
+.fgroup { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; min-width: 0; }
+.flabel { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); min-width: 96px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .chip { appearance: none; font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 .chip:hover { border-color: var(--muted); }
@@ -395,8 +397,9 @@ catch (e) { document.documentElement.classList.add("locked"); }
       <p id="places-sub">Places covered in Abroad in Japan videos. Select an icon for the note and a link to that moment in the video.</p>
     </div>
     <div class="filters">
-      <ul class="chips" id="area-chips" aria-label="Filter by area"></ul>
-      <ul class="chips" id="kind-chips" aria-label="Filter by type"></ul>
+      <div class="fgroup"><span class="flabel" id="fl-route">Route line</span><ul class="chips" id="route-chips" aria-labelledby="fl-route"></ul></div>
+      <div class="fgroup"><span class="flabel" id="fl-area">Places shown</span><ul class="chips" id="area-chips" aria-labelledby="fl-area"></ul></div>
+      <div class="fgroup"><span class="flabel" id="fl-kind">Place types</span><ul class="chips" id="kind-chips" aria-labelledby="fl-kind"></ul></div>
     </div>
     <div id="map" role="region" aria-label="Map of researched places"></div>
     <p class="map-note">Pin positions come from Google Places (checked Nov 12, 2026). Icons show the type of place. A dashed ring means the name is not confirmed yet. Opening days and hours have not been checked for March 2027.</p>
@@ -739,10 +742,20 @@ catch (e) { document.documentElement.classList.add("locked"); }
     return out;
   }
 
-  var cards = document.getElementById("rcards"), detail = document.getElementById("rdetail"), btns = {};
+  var cards = document.getElementById("rcards"), detail = document.getElementById("rdetail"), btns = {}, rchips = {};
+  // The same choice as the cards, repeated on the map so a route line can be switched without scrolling up.
+  function rchip(id, label) {
+    var li = document.createElement("li"), b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.setAttribute("aria-pressed", "false"); b.textContent = label;
+    b.addEventListener("click", function () { select(id); });
+    li.appendChild(b); document.getElementById("route-chips").appendChild(li); rchips[id] = b;
+  }
+  rchip("none", "None");
+  R.forEach(function (r) { rchip(r.id, r.name + ": " + r.title); });
   function select(id) {
     var r = null; R.forEach(function (x) { if (x.id === id) r = x; });
     for (var k in btns) btns[k].setAttribute("aria-pressed", String(k === (r ? r.id : "none")));
+    for (var c in rchips) rchips[c].setAttribute("aria-pressed", String(c === (r ? r.id : "none")));
     try { localStorage.setItem("japan2027-route", r ? r.id : "none"); } catch (e) {}
     if (window.dash) window.dash.setRoute(r ? dayPlans(r) : null);
     if (window.mapApi) window.mapApi.showRoute(r);
