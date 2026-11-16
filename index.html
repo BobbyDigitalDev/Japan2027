@@ -417,6 +417,14 @@ catch (e) { document.documentElement.classList.add("locked"); }
       <p class="cfoot" id="cfoot" hidden></p>
       <ul class="findings" id="findings"></ul>
     </div>
+    <div class="costs" role="region" aria-labelledby="flights-h" id="flights-box" hidden>
+      <div>
+        <h2 id="flights-h">Flights from New York</h2>
+        <p class="sub" id="flights-sub"></p>
+      </div>
+      <div class="tscroll"><table class="ctable" id="ftable"></table></div>
+      <ul class="findings" id="ffindings"></ul>
+    </div>
     <div class="rdetail" id="rdetail" hidden></div>
     <p class="map-note" id="rsource"></p>
     <h3 class="plist-h">All researched places</h3>
@@ -430,6 +438,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 <script src="hotels.js?v=20261113b"></script>
 <script src="tolls.js?v=20261115a"></script>
 <script src="fuel.js?v=20261115a"></script>
+<script src="flights.js?v=20261116a"></script>
 
 <script>
 (function () {
@@ -706,7 +715,8 @@ catch (e) { document.documentElement.classList.add("locked"); }
   var TIER = { lower: "Lower", middle: "Middle", higher: "Higher" };
   function usd(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
   function yen(n) { return "\u00a5" + Math.round(n).toLocaleString("en-US"); }
-  var T = window.TOLLS || {}, TM = window.TOLLS_META || {}, F = window.FUEL || {}, FM = window.FUEL_META || {};
+  var T = window.TOLLS || {}, TM = window.TOLLS_META || {}, F = window.FUEL || {}, FM = window.FUEL_META || {}, FL = window.FLIGHTS || {}, FLM = window.FLIGHTS_META || {};
+  function flyTxt(r) { var b = (FL.byRoute || {})[r.id]; return b ? usd(b.lo) + " to " + usd(b.hi) : ""; }
   function fuelTxt(r) { var f = F[r.id]; return f ? yen(f.yenLow) + " to " + yen(f.yenHigh) : ""; }
   function dkey(i) { return i === 0 ? "2027-02-28" : "2027-03-0" + i; }
   function tollLegs(r, i) { return ((T[r.id] || {}).legs || []).filter(function (l) { return l.date === dkey(i); }); }
@@ -823,7 +833,8 @@ catch (e) { document.documentElement.classList.add("locked"); }
         return '<p class="rcost">Hotels, 7 nights' + (t.label ? " (" + esc(t.label) + ")" : "") + ": <b>" + usd(t.lower) + "</b> to <b>" + usd(t.higher) + "</b></p>";
       }).join("") : "") +
       (T[r.id] ? '<p class="rcost">Tolls with ETC, estimate: <b>' + yen(T[r.id].etc) + "</b></p>" : '<p class="rcost">Tolls: not researched yet</p>') +
-      (F[r.id] ? '<p class="rcost">Fuel, estimate: <b>' + fuelTxt(r) + "</b></p>" : ""));
+      (F[r.id] ? '<p class="rcost">Fuel, estimate: <b>' + fuelTxt(r) + "</b></p>" : "") +
+      ((FL.byRoute || {})[r.id] ? '<p class="rcost">Flights from JFK, per person: <b>' + flyTxt(r) + "</b></p>" : ""));
   });
 
   // Costs so far: one row per route (Route A has three rows, one per choice for the Narai-juku night).
@@ -844,17 +855,18 @@ catch (e) { document.documentElement.classList.add("locked"); }
           cell(t, "lower", h) + cell(t, "middle", h) + cell(t, "higher", h) +
           (T[r.id] ? '<td class="num">' + yen(T[r.id].etc) + "<small>cheapest comparable " + yen(T[r.id].etcCheap) + "</small></td>" : '<td class="todo">Not researched yet</td>') +
           (F[r.id] ? '<td class="num">' + fuelTxt(r) + "<small>" + F[r.id].litresLow + " to " + F[r.id].litresHigh + " litres</small></td>" : '<td class="todo">Not researched yet</td>') +
+          ((FL.byRoute || {})[r.id] ? '<td class="num">' + flyTxt(r) + "<small>per person, " + esc(FL.byRoute[r.id].what) + "</small></td>" : '<td class="todo">Not researched yet</td>') +
           '<td class="todo">Not researched yet</td></tr>';
       });
     });
     document.getElementById("ctable").innerHTML =
       "<thead><tr><th scope=\"col\">Route</th><th scope=\"col\">Driving</th><th scope=\"col\">Longest day</th>" +
       "<th scope=\"col\">Hotels, lower picks</th><th scope=\"col\">Hotels, middle picks</th><th scope=\"col\">Hotels, higher picks</th>" +
-      "<th scope=\"col\">Tolls with ETC, yen, estimate</th><th scope=\"col\">Fuel, yen, estimate</th><th scope=\"col\">Car, flights</th></tr></thead><tbody>" + rows + "</tbody>";
+      "<th scope=\"col\">Tolls with ETC, yen, estimate</th><th scope=\"col\">Fuel, yen, estimate</th><th scope=\"col\">Flights from JFK, per person, USD</th><th scope=\"col\">Car rental</th></tr></thead><tbody>" + rows + "</tbody>";
     var fn = document.getElementById("cfoot");
     if (fn) { fn.hidden = !anySub; fn.textContent = "* These nights have only one qualifying hotel (" + Object.keys(subNames).join("; ") + "), so the middle or higher column reuses that lower pick for that night."; }
     document.getElementById("costs-sub").textContent = "Hotels: the 7 nights from Feb 27 to Mar 6, 2 adults in 1 room, US dollars with taxes. Source: " +
-      (HM.source || "") + ", read " + (HM.read || "") + ". Tolls and fuel are in yen and are not added to the hotel totals. Nothing is booked. Select a route above the map to see its hotels night by night below this table.";
+      (HM.source || "") + ", read " + (HM.read || "") + ". Tolls and fuel are in yen and flights are per person, so none of them is added to the hotel totals. Nothing is booked. Select a route above the map to see its hotels night by night below this table.";
     function pk(rid, key, tier) { var out = null; ((H[rid] || {}).stays || {})[key] && H[rid].stays[key].picks.forEach(function (p) { if (p.tier === tier) out = p; }); return out; }
     var f = [];
     var byaku = pk("A", "A2", "lower"), morino = pk("A", "A2b", "lower"), shio = pk("A", "A2c", "lower");
@@ -874,10 +886,30 @@ catch (e) { document.documentElement.classList.add("locked"); }
       Object.keys(h.stays).forEach(function (k) { (h.stays[k].reread ? tw : on).push(esc(short(h, k))); });
       chk.push(esc(r.name) + ": " + (tw.length ? "read twice, every price matched: " + tw.join(", ") : "") + (tw.length && on.length ? "; " : "") + (on.length ? "read once: " + on.join(", ") : "")); });
     f.push("<b>How well checked.</b> <span>Each stop was read on the same day; some were read a second time. " + chk.join(". ") + ". The single reads happened after hotels.com showed a bot check.</span>");
-    f.push("<b>Not in the totals.</b> <span>Hotel parking (500 to 2,000 yen a night where the hotel charges for it), car rental including the one-way fee for Route A, and flights.</span>");
+    f.push("<b>Not in the totals.</b> <span>Hotel parking (500 to 2,000 yen a night where the hotel charges for it), and car rental including the one-way fee for Route A. Hotels are for two people in one room; flights are per person.</span>");
     if (F.A || F.B || F.C) f.push("<b>About the fuel estimates.</b> <span>Route distance divided by the fuel economy of the Suzuki Wagon R FX (" + FM.econHigh + " km/L 2WD, " + FM.econLow + " km/L 4WD, WLTC lab figures, " + esc(FM.econSource || "") + "), times " + FM.petrol + " yen a litre (" + esc(FM.petrolWhat || "") + "; " + esc(FM.petrolSource || "") + "). " + (FM.caveats || []).map(esc).join(" ") + "</span>");
     if (T.A || T.B || T.C) f.push("<b>About the toll estimates.</b> <span>From " + esc(TM.source || "") + ", read " + esc(TM.read || "") + ", for a kei car (the site\u2019s \u201cLight vehicles\u201d class) paying with an ETC card, which the rental company supplies. Each leg is a search between two expressway interchanges chosen to match the stops, on the date of that leg. The main figure uses the first route the site lists; the smaller figure uses the cheapest route of similar length. Local roads, parking and ferries are not included, and the site does not reflect some regional discounts.</span>");
     document.getElementById("findings").innerHTML = f.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+  })();
+
+  (function () {
+    if (!FL.nonstop) return;
+    document.getElementById("flights-box").hidden = false;
+    document.getElementById("flights-sub").textContent = "Round trip, economy, price per person in US dollars. Leave New York Fri Feb 26, 2027, return Sat Mar 13. Source: " + (FLM.source || "") + ", read " + (FLM.read || "") + ". Nothing is booked.";
+    var rows = "";
+    FL.nonstop.forEach(function (o) {
+      rows += "<tr><th scope=\"row\">" + esc(o.airline) + "<small>Nonstop JFK to Tokyo Haneda</small></th><td class=\"num\">" + usd(o.pp) + "</td><td>" + o.out.map(esc).join("<br>") + "</td><td>" + o.back.map(esc).join("<br>") + "</td></tr>";
+    });
+    FL.oneStop.forEach(function (o) {
+      rows += "<tr><th scope=\"row\">" + esc(o.airline) + "<small>" + esc(o.route) + ", one stop</small></th><td class=\"num\">" + usd(o.pp) + "</td><td>Leaves " + esc(o.depart) + "<br>" + esc(o.duration) + " (" + esc(o.stop) + ")</td><td>Not checked</td></tr>";
+    });
+    document.getElementById("ftable").innerHTML = "<thead><tr><th scope=\"col\">Airline and route</th><th scope=\"col\">Per person</th><th scope=\"col\">Out, Fri Feb 26 (arrives Sat Feb 27)</th><th scope=\"col\">Back, Sat Mar 13</th></tr></thead><tbody>" + rows + "</tbody>";
+    var f = [];
+    f.push("<b>How the price per person is worked out.</b> <span>Google Flights shows each fare as a total for 2 adults including taxes and fees. The figures here are that total divided by 2, rounded to whole dollars, so they are calculated, not shown on the site.</span>");
+    f.push("<b>Nonstop only goes to Tokyo.</b> <span>" + esc(FLM.noNonstopOsaka || "") + " Route A starts at Haneda. Routes B and C start in Osaka, so the one-stop fares to Itami (Osaka\u2019s domestic airport) fit them better than a nonstop to Tokyo plus a trip to Osaka, which is not priced.</span>");
+    f.push("<b>American Airlines is left out</b> <span>as requested, including its own nonstop to Haneda. ANA and JAL flights that American or United also sell are included, because ANA or JAL operates them.</span>");
+    f.push("<b>How well checked.</b> <span>The nonstop rows were read from the flight detail, so flight numbers and times are confirmed. The one-stop rows were read from the results list only: the return flights, fare rules and baggage were not opened, so a total could include a worse return. " + esc(FLM.typical || "") + " Fares change; these are from one read on " + esc(FLM.read || "") + ".</span>");
+    document.getElementById("ffindings").innerHTML = f.map(function (x) { return "<li>" + x + "</li>"; }).join("");
   })();
 
   document.addEventListener("click", function (e) {
@@ -885,7 +917,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     if (t && window.mapApi) window.mapApi.focus(Number(t.getAttribute("data-pid")));
   });
   document.getElementById("rsource").textContent = "Drive times and road lines: " + (M.source || "") + ", fetched " + (M.fetched || "") +
-    ". They exclude traffic, breaks, ferries and parking, so real days will be longer. " + (M.checks || "") + " Tolls for all three routes are estimates; flights are not researched yet, and car rental quotes are incomplete.";
+    ". They exclude traffic, breaks, ferries and parking, so real days will be longer. " + (M.checks || "") + " Tolls, fuel and flights are estimates; car rental quotes are incomplete.";
 
   var saved = "none"; try { saved = localStorage.getItem("japan2027-route") || "none"; } catch (e) {}
   select(saved);
