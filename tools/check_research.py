@@ -125,7 +125,7 @@ for path in sorted(glob.glob(os.path.join(base, 'cars', '*.json'))):
 
 # ---------- tolls, flights (light checks) ----------
 tolls = {os.path.basename(p)[0] for p in glob.glob(os.path.join(base, 'tolls', '*.json')) if load(p) is not None}
-flights = {os.path.basename(p)[:2] for p in glob.glob(os.path.join(base, 'flights', '*.json')) if load(p) is not None}
+flights = {os.path.basename(p)[:2] for p in glob.glob(os.path.join(base, 'flights', '*.json')) if load(p) is not None and not (load(p) or {}).get('partial')}
 
 print('ERRORS (%d)' % len(errors)); [print('  ' + e) for e in errors]
 print('WARNINGS (%d)' % len(warnings)); [print('  ' + w) for w in warnings]

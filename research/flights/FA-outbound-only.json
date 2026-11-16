@@ -1,0 +1,69 @@
+{
+  "key": "FA",
+  "partial": true,
+  "scope": "Outbound only, one way. No return leg priced: Bobby has not given the return date or airport.",
+  "read_at": "2026-11-16T07:40:00-05:00",
+  "source": "Google Flights",
+  "url_note": "google.com/travel/flights, search 'JFK to Tokyo on 2027-02-26', one way, nonstop filter, 2 adults, economy, USD",
+  "page_confirms": "Fri, Feb 26 2027; New York (JFK) to Tokyo; 2 passengers; Economy; Nonstop filter on; page says prices include required taxes and fees for 2 adults",
+  "price_basis": "Total for 2 adults, one way, as the results list shows it. Fare detail and booking options were not opened.",
+  "options": [
+    {
+      "flight": "NH 109",
+      "airline": "ANA",
+      "aircraft": "Boeing 777",
+      "depart_jfk": "2027-02-26T13:05",
+      "arrive_hnd": "2027-02-27T17:40",
+      "duration": "14 hr 35 min",
+      "stops": 0,
+      "price_2_adults_usd": 1855,
+      "airports": "JFK to Haneda (HND)"
+    },
+    {
+      "flight": "NH 159",
+      "airline": "ANA",
+      "aircraft": "Boeing 777",
+      "depart_jfk": "2027-02-26T00:55",
+      "arrive_hnd": "2027-02-27T05:25",
+      "duration": "14 hr 30 min",
+      "stops": 0,
+      "price_2_adults_usd": 1855,
+      "airports": "JFK to Haneda (HND)"
+    },
+    {
+      "flight": "JL 5",
+      "airline": "Japan Airlines",
+      "aircraft": "Airbus A350",
+      "depart_jfk": "2027-02-26T12:30",
+      "arrive_hnd": "2027-02-27T16:55",
+      "duration": "14 hr 25 min",
+      "stops": 0,
+      "price_2_adults_usd": 1895,
+      "airports": "JFK to Haneda (HND)"
+    },
+    {
+      "flight": "JL 3",
+      "airline": "Japan Airlines",
+      "aircraft": "Airbus A350",
+      "depart_jfk": "2027-02-26T00:40",
+      "arrive_hnd": "2027-02-27T05:00",
+      "duration": "14 hr 20 min",
+      "stops": 0,
+      "price_2_adults_usd": 1895,
+      "airports": "JFK to Haneda (HND)"
+    }
+  ],
+  "excluded": [
+    {
+      "flight": "AA 167",
+      "airline": "American Airlines",
+      "depart_jfk": "2027-02-26T09:50",
+      "arrive_hnd": "2027-02-27T14:35",
+      "price_2_adults_usd": 1755,
+      "reason": "Bobby asked to avoid American Airlines"
+    }
+  ],
+  "notes": "Google's list labels the ANA rows 'ANA · United' and the JAL rows 'JAL · American', meaning a partner airline also sells the flight. The flight itself is operated by ANA or JAL (flight detail shows ANA NH or JAL JL). Whether to buy on the airline's own site or through the partner was not checked. JL 3 and NH 159 leave JFK just after midnight, i.e. the night of Thu Feb 25 into Fri Feb 26. No flight left in the evening of Feb 26 on this search. Prices were flagged 'currently high' by Google Flights.",
+  "no_nonstop_osaka": "Google Flights, JFK to Osaka, Feb 26 2027, nonstop filter on: 'No nonstop flights found'. So FB (Osaka arrival) cannot be nonstop.",
+  "problems": "Return flights not searched. Fare rules, baggage and the seller's own price not opened."
+}
