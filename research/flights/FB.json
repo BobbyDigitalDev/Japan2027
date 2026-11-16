@@ -4,7 +4,7 @@
   "source": "Google Flights",
   "search": "JFK to Osaka, round trip, Fri 2027-02-26 to Sat 2027-03-13, 2 adults, economy, no stop filter, USD. List view only: prices are round-trip totals for 2 adults including taxes and fees as the page states. The return legs, fare rules, baggage and booking options were NOT opened.",
   "page_confirms": "JFK to Osaka; Feb 26 - Mar 13, 2027; 2 passengers; Economy; 'Prices are currently typical'; cheapest listed from $1,753",
-  "nonstop": "None. Google Flights shows no nonstop JFK to Osaka (Feb 26) or Osaka to JFK (Mar 13).",
+  "nonstop": "None. Google Flights, one way, nonstop filter, 2 adults, Fri 2027-02-26: JFK to Osaka, Newark (EWR) to Osaka, LaGuardia (LGA) to Osaka and 'New York' (all airports) to Osaka each returned 'No nonstop flights found'. Also none Osaka to JFK on Sat 2027-03-13. Only those two dates were tested, and the page notes there may be non-daily nonstops.",
   "options": [
     {
       "airline": "ANA",
