@@ -1,0 +1,106 @@
+{
+  "key": "FB",
+  "read_at": "2026-11-16T07:40:00-05:00",
+  "source": "Google Flights",
+  "search": "JFK to Osaka, round trip, Fri 2027-02-26 to Sat 2027-03-13, 2 adults, economy, no stop filter, USD. List view only: prices are round-trip totals for 2 adults including taxes and fees as the page states. The return legs, fare rules, baggage and booking options were NOT opened.",
+  "page_confirms": "JFK to Osaka; Feb 26 - Mar 13, 2027; 2 passengers; Economy; 'Prices are currently typical'; cheapest listed from $1,753",
+  "nonstop": "None. Google Flights shows no nonstop JFK to Osaka (Feb 26) or Osaka to JFK (Mar 13).",
+  "options": [
+    {
+      "airline": "ANA",
+      "route": "JFK-ITM via HND",
+      "jfk_depart": "2027-02-26T13:05",
+      "arrive": "2027-02-27T20:20",
+      "duration": "17 hr 15 min",
+      "stops": "1 stop, 1 hr 20 min at HND",
+      "price_round_trip_2_adults_usd": 2582
+    },
+    {
+      "airline": "JAL",
+      "route": "JFK-ITM via HND",
+      "jfk_depart": "2027-02-26T00:40",
+      "arrive": "2027-02-27T07:40",
+      "duration": "17 hr",
+      "stops": "1 stop, 1 hr 30 min at HND",
+      "price_round_trip_2_adults_usd": 2693
+    },
+    {
+      "airline": "JAL",
+      "route": "JFK-ITM via HND",
+      "jfk_depart": "2027-02-26T12:30",
+      "arrive": "2027-02-27T19:45",
+      "duration": "17 hr 15 min",
+      "stops": "1 stop, 1 hr 35 min at HND",
+      "price_round_trip_2_adults_usd": 2693
+    },
+    {
+      "airline": "ANA",
+      "route": "JFK-KIX via HND",
+      "jfk_depart": "2027-02-26T00:55",
+      "arrive": "2027-02-27T14:40",
+      "duration": "23 hr 45 min",
+      "stops": "1 stop, 7 hr 50 min at HND",
+      "price_round_trip_2_adults_usd": 2588
+    },
+    {
+      "airline": "ANA (operated by ANA Wings)",
+      "route": "JFK-ITM, change of airport",
+      "jfk_depart": "2027-02-26T00:55",
+      "arrive": "2027-02-27T19:00",
+      "duration": "28 hr 5 min",
+      "stops": "1 stop, change of airport",
+      "price_round_trip_2_adults_usd": 2580
+    },
+    {
+      "airline": "Cathay Pacific",
+      "route": "JFK-KIX via HKG",
+      "jfk_depart": "2027-02-26T01:45",
+      "arrive": "2027-02-27T12:45",
+      "duration": "21 hr",
+      "stops": "1 stop, 1 hr 50 min at HKG",
+      "price_round_trip_2_adults_usd": 2533
+    },
+    {
+      "airline": "Cathay Pacific",
+      "route": "JFK-KIX via HKG",
+      "jfk_depart": "2027-02-26T09:00",
+      "arrive": "2027-02-27T21:05",
+      "duration": "22 hr 5 min",
+      "stops": "1 stop, 2 hr 35 min at HKG",
+      "price_round_trip_2_adults_usd": 2445
+    },
+    {
+      "airline": "Cathay Pacific",
+      "route": "JFK-KIX via HKG",
+      "jfk_depart": "2027-02-26T01:45",
+      "arrive": "2027-02-27T15:10",
+      "duration": "23 hr 25 min",
+      "stops": "1 stop, 4 hr 15 min at HKG",
+      "price_round_trip_2_adults_usd": 2445
+    },
+    {
+      "airline": "Philippine Airlines",
+      "route": "JFK-KIX via MNL",
+      "jfk_depart": "2027-02-26T01:45",
+      "arrive": "2027-03-01T07:55?",
+      "duration": "40 hr 10 min",
+      "stops": "1 stop, 19 hr 45 min at MNL",
+      "price_round_trip_2_adults_usd": 2360
+    },
+    {
+      "airline": "Korean Air",
+      "route": "JFK-KIX via ICN",
+      "jfk_depart": "2027-02-26T12:00",
+      "arrive": "2027-02-27T20:45",
+      "duration": "18 hr 45 min",
+      "stops": "1 stop, 1 hr 10 min at ICN",
+      "price_round_trip_2_adults_usd": 3061
+    }
+  ],
+  "excluded": [
+    "American/JAL codeshare rows at 2,589 USD (American-marketed)",
+    "Cheapest listed 1,753 USD: not seen in the first 10 rows read; not identified, probably American or a long itinerary"
+  ],
+  "notes": "Arrival times are from the list's own '+1' marks; the Philippine Airlines arrival is +2 per the page (Mar 1), shown with a question mark in this file because the date was inferred from '+2'. ITM is Itami, Osaka's domestic airport; KIX is Kansai. 'ANA' rows via HND are one ticket with a domestic connection at Haneda per the page.",
+  "problems": "Return itineraries not opened, so the round-trip totals could include a worse return (different airport or long layover). Rows read only from the first page of 12 results; 'View more flights' not opened."
+}
