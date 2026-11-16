@@ -1,0 +1,19 @@
+{
+  "read_at": "2026-11-15T22:30:00-05:00",
+  "petrol": {
+    "yen_per_litre": 169.9,
+    "what": "National average retail price of regular gasoline, cash, survey date Mon Nov 9, 2026 (previous week 170.0)",
+    "source": "Agency for Natural Resources and Energy (METI), Petroleum Product Price Survey, result summary published Wed Nov 11, 2026",
+    "source_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html",
+    "file_read": "docx/261111.docx, read in the browser, not saved",
+    "caveat": "Price on Nov 9, 2026, not March 2027. The survey is a national average; rural and expressway-service-area prices are usually higher (inference, not measured)."
+  },
+  "economy_wltc_km_per_l": {
+    "high": {"value": 24.8, "what": "Suzuki Wagon R FX, 0.66L, 2WD, 5MT"},
+    "low": {"value": 23.0, "what": "Suzuki Wagon R FX, 0.66L, 4WD"},
+    "source": "Suzuki Motor, release of Nov 13, 2023, fuel consumption rate (WLTC mode), table of Wagon R grades listed in that release",
+    "source_url": "https://www.suzuki.co.jp/release/a/2023/1113/",
+    "caveat": "Only the FX grades are in that release. The hybrid grades are not read. The rental company decides the actual car (usually listed as Wagon R or similar). WLTC is a lab test figure; real driving, with winter tyres, heater and mountain roads, is usually worse (inference)."
+  },
+  "method": "litres = route km / economy; yen = litres x yen per litre. Route km are the OSRM draft distances on the dashboard (no detours, no local driving beyond the plan). Computed by tools/build_fuel.py. Estimate, not a quote."
+}
