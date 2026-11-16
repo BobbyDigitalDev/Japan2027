@@ -1,0 +1,79 @@
+{
+  "key": "FA",
+  "read_at": "2026-11-16T07:55:00-05:00",
+  "source": "Google Flights",
+  "search": "JFK to Tokyo, round trip, depart Fri 2027-02-26, return Sat 2027-03-13, 2 adults, economy, nonstop filter, USD. Prices are the totals for 2 adults including taxes and fees as the page states; fare rules, baggage and booking options not opened.",
+  "page_confirms": "Round trip; Fri, Feb 26 to Sat, Mar 13; 2 passengers; Economy; Nonstop filter on",
+  "options": [
+    {
+      "airline": "ANA",
+      "outbound": {
+        "flight": "NH 109",
+        "jfk_depart": "2027-02-26T13:05",
+        "hnd_arrive": "2027-02-27T17:40"
+      },
+      "outbound_alt": {
+        "flight": "NH 159",
+        "jfk_depart": "2027-02-26T00:55",
+        "hnd_arrive": "2027-02-27T05:25"
+      },
+      "returns": [
+        {
+          "flight": "NH 110",
+          "hnd_depart": "2027-03-13T11:35",
+          "jfk_arrive": "2027-03-13T10:30",
+          "duration": "12 hr 55 min"
+        },
+        {
+          "flight": "NH 160",
+          "hnd_depart": "2027-03-13T22:55",
+          "jfk_arrive": "2027-03-13T21:55",
+          "duration": "13 hr"
+        }
+      ],
+      "price_round_trip_2_adults_usd": 2731,
+      "note": "Same $2,731 total with either ANA return. NH 159 outbound shows the same round-trip total in the list."
+    },
+    {
+      "airline": "Japan Airlines",
+      "outbound": {
+        "flight": "JL 5",
+        "jfk_depart": "2027-02-26T12:30",
+        "hnd_arrive": "2027-02-27T16:55"
+      },
+      "outbound_alt": {
+        "flight": "JL 3",
+        "jfk_depart": "2027-02-26T00:40",
+        "hnd_arrive": "2027-02-27T05:00"
+      },
+      "returns": [
+        {
+          "flight": "JL 6",
+          "hnd_depart": "2027-03-13T11:05",
+          "jfk_arrive": "2027-03-13T10:00",
+          "duration": "12 hr 55 min"
+        },
+        {
+          "flight": "JL 4",
+          "hnd_depart": "2027-03-13T19:45",
+          "jfk_arrive": "2027-03-13T18:40",
+          "duration": "12 hr 55 min"
+        }
+      ],
+      "price_round_trip_2_adults_usd": 2872,
+      "note": "The JAL outbound row selected was the 12:30 PM flight; the list gave $2,872 for the 12:40 AM flight too. Both JAL returns listed at $2,872."
+    }
+  ],
+  "excluded": [
+    {
+      "airline": "American Airlines",
+      "flights": "AA 167 out (1,755 one way) and AA 168 return",
+      "round_trip_2_adults_usd": 2528,
+      "reason": "Bobby asked to avoid American Airlines"
+    }
+  ],
+  "anomalies": "Mixing carriers (ANA out with a JAL or American return, or the reverse) showed totals near 24,000 to 24,255 USD. That looks like a pricing glitch or separate-ticket fares, not a usable price; not investigated.",
+  "no_nonstop": "No nonstop JFK to Osaka (Feb 26) and none Osaka to JFK (Mar 13) on Google Flights. Only Tokyo Haneda was found. Narita was not separately searched.",
+  "labels": "Google labels ANA rows 'ANA · United' and JAL rows 'JAL · American', meaning a partner also sells the flight; ANA or JAL operates them. Which seller is cheapest was not checked.",
+  "problems": "Prices were 'typical' for the round trip when read (one-way outbound had been flagged 'high'). Return leg ends in Tokyo: routes B and C finish in Osaka, so a Kansai to Tokyo trip on Mar 13 (or earlier) is not priced here."
+}
