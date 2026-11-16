@@ -1,0 +1,234 @@
+{
+  "key": "A",
+  "route": "Route A, Tokyo to Osaka through the Alps",
+  "read_at": "2026-11-15T21:55:00-05:00",
+  "calculator": "NEXCO Drive Plaza highway toll and route search (driveplaza.com/dp/SearchQuick)",
+  "calculator_url": "https://www.driveplaza.com/dp/SearchQuick",
+  "vehicle_class": "Light vehicles, etc. (the site's own label for kei cars)",
+  "payment_columns": "Regular price (cash), ETC tolls, ETC2.0 tolls, as shown by the site. Bobby will rent an ETC card with the car, so the ETC column applies.",
+  "leg_method": "Each leg was searched between two expressway interchanges chosen to match the stops, on the date that leg falls on in the plan, departing 09:00. Interchanges are my assumptions, not a recorded drive. 'Route 1' is the first route the site lists. Roads for Route 1 were read from the site's route detail.",
+  "estimate_label": "Estimate, computed by code from the site's figures. Not a quote.",
+  "pass": null,
+  "fuel": {
+    "status": "not done",
+    "reason": "No official Wagon R fuel economy figure or official petrol price retrieved yet"
+  },
+  "estimate_yen": {
+    "note": "computed by tools/build_tolls.py from the legs below"
+  },
+  "not_included": [
+    "Magome to Takayama on Mar 3, assumed to use free national roads (Routes 19 and 41) as drawn in the route plan; the site's expressway route for Nakatsugawa to Takayama Nishi is 3,530 yen ETC and 162.6 km, a long way round through the Nagoya side, and is NOT in the total",
+    "Kiso Valley day (Mar 2) and Takayama sightseeing: local roads, assumed no tolls",
+    "Local-road driving between stops (Yokohama to Kamakura, Hakone to Gotemba, Shiojiri to Narai, Takayama area, Lake Biwa shrine detour, Kyoto city driving)",
+    "Parking",
+    "Hakone toll roads (Hakone Turnpike and similar privately run roads), not priced by this site"
+  ],
+  "problems": "Legs use assumed interchanges. The Mar 3 Magome to Takayama day is set to zero tolls on an assumption (free national roads); this is not a site figure. The Lake Biwa shore route on Mar 5 uses free Route 161 for part of the way, so the real toll may be lower than the site's all-expressway figure. Kanazawa to Kyoto was searched as one leg to Kyoto Higashi, and Mar 6 starts at Kyoto Minami. Leg L2 starts at Fujisawa as a stand-in for Kamakura and ends at Odawara Nishi as a stand-in for Hakone. A flat-rate pass for foreign visitors has not been checked yet. Fuel not done.",
+  "legs": [
+    {
+      "leg": "L1",
+      "from": "Haneda Airport (Shuto Expwy, Haneda)",
+      "to": "Kamakura (Asahina IC, Yokohama-Yokosuka Rd)",
+      "from_ic_name_used": "羽田",
+      "to_ic_name_used": "朝比奈",
+      "search_date_time": "2027-02-28T09:00",
+      "roads_on_route_1": "Shuto Expwy Kanagawa 1 and 2, Yokohama Shindo, Yokohama-Yokosuka Road",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 2520,
+          "etc_toll": 1470,
+          "etc2_toll": 1470,
+          "time": "0:36",
+          "km": 37.5
+        },
+        {
+          "route": 2,
+          "regular_price": 2070,
+          "etc_toll": 1430,
+          "etc2_toll": 1430,
+          "time": "0:36",
+          "km": 38.9
+        },
+        {
+          "route": 3,
+          "regular_price": 2260,
+          "etc_toll": 1490,
+          "etc2_toll": 1490,
+          "time": "0:38",
+          "km": 41.6
+        }
+      ]
+    },
+    {
+      "leg": "L2",
+      "from": "Fujisawa (Kamakura side)",
+      "to": "Odawara Nishi IC (toward Hakone)",
+      "from_ic_name_used": "藤沢",
+      "to_ic_name_used": "小田原西",
+      "search_date_time": "2027-02-28T09:00",
+      "roads_on_route_1": "Ken-O Expwy, Tomei Expwy (short), Odawara-Atsugi Road",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1380,
+          "etc_toll": 1010,
+          "etc2_toll": 960,
+          "time": "0:45",
+          "km": 47.6
+        },
+        {
+          "route": 2,
+          "regular_price": 1460,
+          "etc_toll": 1260,
+          "etc2_toll": 1260,
+          "time": "1:24",
+          "km": 77.4
+        },
+        {
+          "route": 3,
+          "regular_price": 2110,
+          "etc_toll": 1910,
+          "etc2_toll": 1910,
+          "time": "1:33",
+          "km": 90.4
+        }
+      ]
+    },
+    {
+      "leg": "L3",
+      "from": "Gotemba IC (Hakone side)",
+      "to": "Shiojiri IC (toward Narai-juku)",
+      "from_ic_name_used": "御殿場",
+      "to_ic_name_used": "塩尻",
+      "search_date_time": "2027-03-01T09:00",
+      "roads_on_route_1": "Route 138 bypass, Higashi-Fuji-Goko Road, Chuo Expwy (Fujiyoshida and Nishinomiya lines), Nagano Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 4130,
+          "etc_toll": 4130,
+          "etc2_toll": 4130,
+          "time": "2:24",
+          "km": 173.6
+        },
+        {
+          "route": 2,
+          "regular_price": 4250,
+          "etc_toll": 4250,
+          "etc2_toll": 4250,
+          "time": "2:40",
+          "km": 209.3
+        },
+        {
+          "route": 3,
+          "regular_price": 4800,
+          "etc_toll": 4800,
+          "etc2_toll": 4680,
+          "time": "2:57",
+          "km": 235.6
+        }
+      ]
+    },
+    {
+      "leg": "L4",
+      "from": "Takayama Nishi IC",
+      "to": "Shirakawa-go IC",
+      "from_ic_name_used": "高山西",
+      "to_ic_name_used": "白川郷",
+      "search_date_time": "2027-03-04T09:00",
+      "roads_on_route_1": "Chubu-Jukan Expwy (free section), Tokai-Hokuriku Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1030,
+          "etc_toll": 700,
+          "etc2_toll": 700,
+          "time": "0:30",
+          "km": 33.6
+        }
+      ]
+    },
+    {
+      "leg": "L5",
+      "from": "Shirakawa-go IC",
+      "to": "Kanazawa Nishi IC",
+      "from_ic_name_used": "白川郷",
+      "to_ic_name_used": "金沢西",
+      "search_date_time": "2027-03-04T09:00",
+      "roads_on_route_1": "Tokai-Hokuriku Expwy, Hokuriku Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 1750,
+          "etc_toll": 1750,
+          "etc2_toll": 1750,
+          "time": "0:59",
+          "km": 73.4
+        },
+        {
+          "route": 2,
+          "regular_price": 9800,
+          "etc_toll": 8660,
+          "etc2_toll": 8660,
+          "time": "5:17",
+          "km": 408.7
+        }
+      ]
+    },
+    {
+      "leg": "L6",
+      "from": "Kanazawa Nishi IC",
+      "to": "Kyoto Higashi IC",
+      "from_ic_name_used": "金沢西",
+      "to_ic_name_used": "京都東",
+      "search_date_time": "2027-03-05T09:00",
+      "roads_on_route_1": "Hokuriku Expwy, Meishin Expwy",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 4650,
+          "etc_toll": 4650,
+          "etc2_toll": 4650,
+          "time": "2:38",
+          "km": 245.0
+        },
+        {
+          "route": 2,
+          "regular_price": 4650,
+          "etc_toll": 4650,
+          "etc2_toll": 4650,
+          "time": "3:07",
+          "km": 280.3
+        },
+        {
+          "route": 3,
+          "regular_price": 7840,
+          "etc_toll": 7720,
+          "etc2_toll": 7720,
+          "time": "3:47",
+          "km": 332.3
+        }
+      ]
+    },
+    {
+      "leg": "L7",
+      "from": "Kyoto Minami IC",
+      "to": "Osaka Umeda",
+      "from_ic_name_used": "京都南",
+      "to_ic_name_used": "梅田",
+      "search_date_time": "2027-03-06T09:00",
+      "roads_on_route_1": "Meishin Expwy, Hanshin Expwy Route 11 (Ikeda)",
+      "routes_listed_by_site": [
+        {
+          "route": 1,
+          "regular_price": 2710,
+          "etc_toll": 1590,
+          "etc2_toll": 1590,
+          "time": "0:34",
+          "km": 44.3
+        }
+      ]
+    }
+  ]
+}
