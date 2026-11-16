@@ -404,7 +404,6 @@ catch (e) { document.documentElement.classList.add("locked"); }
     </div>
     <div class="filters">
       <div class="fgroup"><span class="flabel" id="fl-route">Road trip option</span><ul class="chips" id="route-chips" aria-labelledby="fl-route"></ul></div>
-      <div class="fgroup"><span class="flabel" id="fl-area">Places shown</span><ul class="chips" id="area-chips" aria-labelledby="fl-area"></ul></div>
       <div class="fgroup"><span class="flabel" id="fl-kind">Place types</span><ul class="chips" id="kind-chips" aria-labelledby="fl-kind"></ul></div>
     </div>
     <div id="map" role="region" aria-label="Map of researched places"></div>
@@ -426,7 +425,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="places.js?v=20261113a"></script>
+<script src="places.js?v=20261116a"></script>
 <script src="routes.js?v=20261113a"></script>
 <script src="hotels.js?v=20261113b"></script>
 <script src="tolls.js?v=20261115a"></script>
@@ -536,9 +535,8 @@ catch (e) { document.documentElement.classList.add("locked"); }
   var KINDS = [["town", "Towns"], ["sight", "Sights"], ["food", "Food"], ["stay", "Stays"], ["onsen", "Onsen"], ["road", "Roads and trails"]];
   var ICON = { town: "🏘️", sight: "<svg class=\"bino\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"#2e8b57\" d=\"M5 4h4a1 1 0 0 1 1 1v3h4V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2.2l2.6 7.4A4.8 4.8 0 1 1 13.2 17v-4h-2.4v4A4.8 4.8 0 1 1 1.4 14.6L4 7.2V5a1 1 0 0 1 1-1z\"/><circle cx=\"6\" cy=\"16.6\" r=\"2.6\" fill=\"#fff\"/><circle cx=\"18\" cy=\"16.6\" r=\"2.6\" fill=\"#fff\"/></svg>", food: "🍜", stay: "🛏️", onsen: "♨️", road: "🛣️" };
   var KLABEL = { town: "Town", sight: "Sight", food: "Food", stay: "Stay", onsen: "Onsen", road: "Road or trail" };
-  var AREAS = [["all", "All places"], ["corridor", "Tokyo to Osaka corridor"], ["loop", "Osaka loop"]];
   var VENUE = { lat: 34.7060708, lon: 135.502467 }, HOTEL = { lat: 34.7018509, lon: 135.4917871 };
-  var area = "all", kindsOn = {};
+  var kindsOn = {};
   KINDS.forEach(function (k) { kindsOn[k[0]] = true; });
 
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -554,7 +552,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
       "</ul>" + (p.cn ? '<p class="cn">' + esc(p.cn) + "</p>" : "") + "</div>";
   }
   var activeStops = {};
-  function visible(p) { return kindsOn[p.kind] && (area === "all" || p.route === area || p.route === "both" || activeStops[p.id] === 1); }
+  function visible(p) { return kindsOn[p.kind]; }
 
   var placed = P.filter(function (p) { return p.lat != null; });
   document.getElementById("places-sub").textContent = placed.length + " of " + P.length +
@@ -606,13 +604,6 @@ catch (e) { document.documentElement.classList.add("locked"); }
     b.addEventListener("click", function () { fn(b); });
     li.appendChild(b); parent.appendChild(li); return b;
   }
-  var areaBtns = [];
-  function setArea(v, fit) {
-    area = v; areaBtns.forEach(function (x, i) { x.setAttribute("aria-pressed", String(AREAS[i][0] === v)); }); refresh(fit);
-  }
-  AREAS.forEach(function (a) {
-    areaBtns.push(chip(document.getElementById("area-chips"), a[1], a[0] === area, null, function () { setArea(a[0], true); }));
-  });
   var kindBtns = {};
   KINDS.forEach(function (k) {
     var n = P.filter(function (p) { return p.kind === k[0]; }).length;
@@ -644,7 +635,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     var p = null; P.forEach(function (x) { if (x.id === id) p = x; });
     if (!p || p.lat == null || !map) return;
     if (!kindsOn[p.kind]) { kindsOn[p.kind] = true; kindBtns[p.kind].setAttribute("aria-pressed", "true"); }
-    if (!visible(p)) setArea("all", false); else refresh(false);
+    refresh(false);
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     map.setView([p.lat, p.lon], Math.max(map.getZoom(), 12));
     markers[p.id].openPopup();
@@ -657,7 +648,7 @@ catch (e) { document.documentElement.classList.add("locked"); }
     var had = !!routeLayer;
     if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
     curRoute = r || null; activeStops = {};
-    if (!r) { if (had) setArea("all", true); return; }
+    if (!r) { if (had) refresh(true); return; }
     r.days.forEach(function (d) { (d.stops || []).forEach(function (id) { activeStops[id] = 1; }); });
     routeLayer = L.layerGroup();
     var lines = r.days.filter(function (d) { return d.line.length; }).map(function (d) { return d.line; });
@@ -683,7 +674,6 @@ catch (e) { document.documentElement.classList.add("locked"); }
       pin(g.at, String(first + 1), "<h3>" + label + ": " + esc(g.d.night) + "</h3><p class=\"pm\">" + esc(dates) + "</p>");
     });
     routeLayer.addTo(map);
-    setArea(r.area, false);
     map.fitBounds(L.polyline(lines).getBounds(), { padding: [30, 30] });
   }
   // Called after the password gate opens (the map was 0 x 0 while hidden) and around printing.
